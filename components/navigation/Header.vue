@@ -1,11 +1,10 @@
 
 import { NavigationLangSwitcher } from '#build/components';
 <template>
-    <header>
+    <header class="container mx-auto">
         <div class="flex justify-between">
-            <h1 class="bg-yellow-500 p-4">{{ $t('home_title') }}</h1>
+            <h1 class="bg-green-400 py-1 px-2 rounded-lg">{{ $t('home_title') }}</h1>
             <NavigationLangSwitcher />
-            
         </div>
     </header>
 </template>
