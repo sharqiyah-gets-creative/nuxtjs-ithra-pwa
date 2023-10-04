@@ -35,6 +35,7 @@ export default defineNuxtConfig({
       theme_color: "#00ff00",
       //nativeUI: true,
     },
+    
     manifest: {
       name: "Alsharqiya Gets Creative",
       short_name: "Alsharqiya Gets Creative",
