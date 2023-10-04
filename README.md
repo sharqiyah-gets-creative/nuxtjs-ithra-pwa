@@ -16,3 +16,9 @@ pnpm run preview
 ## Considerations
 
 - Try the icon generator on <https://vite-pwa-org.netlify.app/assets-generator/> to generate icons for your PWA.
+
+## Using
+
+- @vite-pwa/nuxt - <https://github.com/vite-pwa/nuxt>
+- tailwindcss - <https://tailwindcss.com/>
+- 

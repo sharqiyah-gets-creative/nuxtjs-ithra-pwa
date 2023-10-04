@@ -10,26 +10,27 @@ export default defineNuxtConfig({
   modules: ['@vite-pwa/nuxt', '@nuxtjs/i18n',],
   css: ['~/assets/css/main.css'],
   i18n: {
-    /* module options */
+    legacy: false,
+    locale: 'en',
     lazy: true,
     langDir: "locales/",
-    strategy: "prefix_except_default",
+    strategy: 'prefix_except_default',
+
     defaultLocale: "en",
-    
     locales: [
-      {
-        code: "en",
-        iso: "en-US",
-        name: "English",
-        file: "en-US.json",
-      },
-      {
-        code: "ar",
-        iso: "ar-SA",
-        name: "عربي",
-        file: "ar-SA.json",
-      },
-    ],
+        {
+          code: "en",
+          iso: "en-US",
+          name: "English",
+          file: "en-US.json",
+        },
+        {
+          code: "ar",
+          iso: "ar-SA",
+          name: "عربي",
+          file: "ar-SA.json",
+        },
+      ],
   },
   pwa: {
     registerWebManifestInRouteRules: true,

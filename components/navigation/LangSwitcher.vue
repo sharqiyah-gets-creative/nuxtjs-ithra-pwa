@@ -1,16 +1,19 @@
 
-import { localeCodes } from '#build/i18n.options.mjs';
-<script setup lang="ts">
+<script setup>
 const { locale, locales } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+const availableLocales = computed(() => {
+  return (locales.value).filter(i => i.code !== locale.value)
+})
+
 </script>
 
 <template>
     <!-- button for language switching -->
+    
     <div>
-        <button
-        v-for="lang in $i18n.locales"
-        :key="lang.code"
-        @click="$i18n.locale = lang.code"
-        class="bg-blue-500 text-white p-2">{{ lang.name }}</button>
+        <NuxtLink v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">{{
+            locale.name
+        }}</NuxtLink>
     </div>
 </template>
