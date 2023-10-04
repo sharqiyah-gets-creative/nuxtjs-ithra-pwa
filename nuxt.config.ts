@@ -3,6 +3,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  url: 'https://ithra-2023.github.io/nuxtjs-ithraa-pwa/',
   modules: ['@vite-pwa/nuxt', '@nuxtjs/i18n',],
   css: ['~/assets/css/main.css'],
   i18n: {
