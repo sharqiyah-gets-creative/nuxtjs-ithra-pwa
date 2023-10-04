@@ -32,20 +32,14 @@ export default defineNuxtConfig({
     ],
   },
   pwa: {
-    meta: {
-      title: "Title Alsharqiya Gets Creative",
-      author: "6 Degrees Technologies",
-      mobileAppIOS: true,
-      theme_color: "#00ff00",
-      //nativeUI: true,
-    },
-    
+    registerWebManifestInRouteRules: true,
+    base: isProd ? '/nuxtjs-ithraa-pwa/' : '/',
     manifest: {
       name: "Alsharqiya Gets Creative",
       short_name: "Alsharqiya Gets Creative",
       description: "Alsharqiya Gets Creative Events Calendar",
       theme_color: "#00ff00",
-      registerWebManifestInRouteRules: true,
+      
       icons: [
         {
           "src": "assets/images/icons/icon-512x512.png",
