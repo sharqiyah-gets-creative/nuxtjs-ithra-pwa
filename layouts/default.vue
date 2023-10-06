@@ -1,6 +1,5 @@
 <template>
     <main class="bg-indigo-950 min-h-screen text-white space-y-4">
-        <VitePwaManifest />
         <div class="container mx-auto">
             <div class="bg-pink-500 bg-opacity-60 p-4 rounded-b-xl">
                 <p>Notification or banner information</p>
