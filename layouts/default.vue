@@ -14,10 +14,6 @@ useHead({
   htmlAttrs: {
     dir: 'rtl',
   },
-  bodyAttrs: {
-    class: 'test'
-  },
-  script: [ { innerHTML: 'console.log(\'Hello world\')' } ]
 })
 
 </script>

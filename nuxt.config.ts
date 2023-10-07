@@ -4,12 +4,14 @@ const isProd = process.env.NODE_ENV === 'production';
 
 export default defineNuxtConfig({
   pages: true,
+  
   devtools: {
     enabled: true
   },
 
   app: {
-    baseURL: isProd ? '/nuxtjs-ithraa-pwa/' : '/',
+    baseURL: isProd ? '/' : '/',
+    
   },
 
   modules: [
@@ -38,7 +40,6 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-
   i18n: {
     langDir: "locales/",
     lazy: true,
@@ -60,15 +61,15 @@ export default defineNuxtConfig({
       },
     ],
   },
+
   ui: {
     global: true,
     icons: ['mdi', 'simple-icons']
   },
+
   tailwindcss: {
     viewer: false
   },
-
-
 
   pwa: {
     meta:{
@@ -79,14 +80,26 @@ export default defineNuxtConfig({
       lang: "ar",
       author: "6 Degrees Technologies"
     },
+    manifest:{
+      name: "Ithraa",
+      short_name: "Ithraa",
+      description: "Ithraa",
+      lang: "ar",
+      dir: "rtl",
+      useWebmanifestExtension: false,
+      background_color: "#ffffff",
+      theme_color: "#ffffff",
+      display: "standalone",
+      orientation: "portrait-primary",
+      start_url: "/",
+    },
+    },
     workbox: {
-      enabled: false
+      enabled: false,
+
     },
     icon: {
-      /* icon options */
+      
     }
   }
-
-
-
 })
