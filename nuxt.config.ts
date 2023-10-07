@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: isProd ? '/' : '/',
-    
+
   },
 
   modules: [
@@ -81,18 +81,14 @@ export default defineNuxtConfig({
       author: "6 Degrees Technologies"
     },
     manifest:{
-      name: "Ithraa",
-      short_name: "Ithraa",
-      description: "Ithraa",
+      name: "الشرقية تبدع",
+      short_name: "الشرقية تبدع",
+      description: "Ithra - Sharqiya Gets Creative 2023",
       lang: "ar",
-      dir: "rtl",
-      useWebmanifestExtension: false,
       background_color: "#ffffff",
       theme_color: "#ffffff",
       display: "standalone",
-      orientation: "portrait-primary",
       start_url: "/",
-    },
     },
     workbox: {
       enabled: false,
