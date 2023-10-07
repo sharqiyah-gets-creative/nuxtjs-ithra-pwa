@@ -31,9 +31,6 @@ devDependencies:
   '@nuxt/ui':
     specifier: ^2.9.0
     version: 2.9.0(vue@3.3.4)(webpack@5.88.2)
-  '@nuxtjs/google-analytics':
-    specifier: ^2.4.0
-    version: 2.4.0
   '@nuxtjs/i18n':
     specifier: 8.0.0-rc.5
     version: 8.0.0-rc.5(vue-router@4.2.5)(vue@3.3.4)
@@ -43,6 +40,9 @@ devDependencies:
   nuxt:
     specifier: ^3.7.4
     version: 3.7.4
+  nuxt-gtag:
+    specifier: ^1.1.1
+    version: 1.1.1
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -2002,12 +2002,6 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: true
-
-  /@nuxtjs/google-analytics@2.4.0:
-    resolution: {integrity: sha512-rDQTwHIjyjVrx8GywHPuWykJ3jRFGaHl5Iqji/y8tQWUc0yGEeHxOoR0yimzxnTS1Ph2/PubQYpgnVeEPEdL/A==}
-    dependencies:
-      vue-analytics: 5.22.1
     dev: true
 
   /@nuxtjs/i18n@8.0.0-rc.5(vue-router@4.2.5)(vue@3.3.4):
@@ -6122,6 +6116,17 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /nuxt-gtag@1.1.1:
+    resolution: {integrity: sha512-AkTK++e4vFHyoc04GcRx7dQvx9xchVLav/YAP3aM6oL/ZkZtW50M0/2re4zmPWjeu36ckbpcOHJrj+zptQIMyw==}
+    dependencies:
+      '@nuxt/kit': 3.7.4
+      defu: 6.1.2
+      pathe: 1.1.1
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /nuxt-vuefire@0.4.0(@firebase/app-types@0.9.0)(firebase@10.4.0)(vuefire@3.1.17):
     resolution: {integrity: sha512-mxiAzg51pl+BM05FQ7KW70btr/ARiIjezV9y2H39dPGxS3JcpDH3uK3gbsanyG/ebbKcIw1ZIeuvycTtCQOH/Q==}
     peerDependencies:
@@ -8409,11 +8414,6 @@ packages:
 
   /vscode-uri@3.0.7:
     resolution: {integrity: sha512-eOpPHogvorZRobNqJGhapa0JdwaxpjVvyBp0QIUMRMSf8ZAlqOdEquKuRmw9Qwu0qXtJIWqFtMkmvJjUZmMjVA==}
-    dev: true
-
-  /vue-analytics@5.22.1:
-    resolution: {integrity: sha512-HPKQMN7gfcUqS5SxoO0VxqLRRSPkG1H1FqglsHccz6BatBatNtm/Vyy8brApktZxNCfnAkrSVDpxg3/FNDeOgQ==}
-    deprecated: Sorry but vue-analytics is no longer maintained. I would suggest you switch to vue-gtag, with love, the guy who made the package.
     dev: true
 
   /vue-bundle-renderer@2.0.0:

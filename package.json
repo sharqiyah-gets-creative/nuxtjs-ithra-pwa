@@ -14,10 +14,10 @@
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "^2.9.0",
-    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/i18n": "8.0.0-rc.5",
     "@tailwindcss/typography": "^0.5.10",
     "nuxt": "^3.7.4",
+    "nuxt-gtag": "^1.1.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },

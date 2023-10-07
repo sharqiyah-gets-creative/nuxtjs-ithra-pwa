@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/i18n',
     '@kevinmarrec/nuxt-pwa',
+    'nuxt-gtag',
     'nuxt-vuefire'
   ],
 
@@ -35,19 +36,7 @@ export default defineNuxtConfig({
     },
   },
 
-  buildModules: [
-    '@nuxtjs/google-analytics'
-  ],
-
   css: ['~/assets/css/main.css'],
-  googleAnalytics: {
-    id: process.env.GOOGLE_MEASUREMENT_ID, // Use as fallback if no runtime config is provided
-  },
-  publicRuntimeConfig: {
-    googleAnalytics: {
-      id: process.env.GOOGLE_MEASUREMENT_ID
-    }
-  },
 
 
   i18n: {
