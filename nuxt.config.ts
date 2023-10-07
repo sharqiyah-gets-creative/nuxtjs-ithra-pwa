@@ -1,18 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 //import { defineNuxtConfig } from 'nuxt/config'
-const isProd = process.env.NODE_ENV === 'production';
+
 
 export default defineNuxtConfig({
   pages: true,
   
   devtools: {
-    enabled: true
+    enabled: false
   },
 
-  app: {
-    baseURL: isProd ? '/' : '/',
-
-  },
 
   modules: [
     '@nuxt/ui',
@@ -41,25 +37,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   i18n: {
-    langDir: "locales/",
-    lazy: true,
-    strategy: 'prefix_except_default',
-    defaultLocale: "ar",
-    locales: [
-      {
-        code: "en",
-        iso: "en-US",
-        name: "English",
-        file: "en-US.json",
-      },
-      {
-        code: "ar",
-        iso: "ar-SA",
-        name: "عربي",
-        file: "ar-SA.json",
-        dir: "rtl",
-      },
-    ],
+    vueI18n: './i18n.config.ts'
   },
 
   ui: {

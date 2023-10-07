@@ -27,9 +27,14 @@
 }
 
 
-
-
 html,
 body{
   overscroll-behavior-y: none;
+}
+
+*{
+  outline: yellow;
+  outline-style: solid;
+  outline-width: 0px;
+  outline-offset: 1px;
 }
