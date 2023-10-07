@@ -1,10 +1,13 @@
 
-import { NavigationLangSwitcher } from '#build/components';
 <template>
-    <header class="container mx-auto">
-        <div class="flex justify-between">
-            <h1 class="bg-green-400 py-1 px-2 rounded-lg">{{ $t('home_title') }}</h1>
-            <NavigationLangSwitcher />
-        </div>
+    <header class="container mx-auto p-6 md:px-0">
+        <h1>
+            <NuxtLink to="/" class="text-white">
+                <img src="~/assets/images/logo-white.png" height="150" class="h-14 md:h-20" alt="Alsharqiya Gets Creative" />
+                <span class="sr-only">{{ $t('home_title') }}</span>
+            </NuxtLink>
+            
+        </h1>
+        <!-- <NavigationLangSwitcher />-->
     </header>
 </template>

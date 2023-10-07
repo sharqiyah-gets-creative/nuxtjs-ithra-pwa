@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: ithra;
+  src: url(~/assets/fonts/ithra-medium.woff2) format("woff2"),url(~/assets/fonts/ithra-medium.woff) format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: ithra;
+  src: url(~/assets/fonts/ithra-light.woff2) format("woff2"),url(~/assets/fonts/ithra-light.woff) format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: ithra;
+  src: url(~/assets/fonts/ithra-bold.woff2) format("woff2"),url(~/assets/fonts/ithra-bold.woff) format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap
+}
+
+
+
+
 html,
 body{
   overscroll-behavior-y: none;
