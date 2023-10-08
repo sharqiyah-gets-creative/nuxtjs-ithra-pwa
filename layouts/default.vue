@@ -31,6 +31,7 @@ onMounted(() => {
         description: "عشان تشوف كل جديد بكل سهولة",
         icon: "i-octicon-desktop-download-24",
         timeout: 10000,
+        
         actions: [
             {
                 label: "تركيب",

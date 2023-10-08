@@ -173,10 +173,11 @@ const items = [{
         :center="center" 
         :zoom="zoom" 
         :styles="styles"
+        :control-size=20
         >
             <MarkerCluster :options="{ position: center }">
                 <div v-for="marker in locations">
-                    <MarkerList :marker="marker" />
+                    <MapsMarkerList :marker="marker" />
                 </div>
             </MarkerCluster>
         </GoogleMap>

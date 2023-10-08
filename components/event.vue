@@ -11,8 +11,24 @@
 </div>
 </template>
 
-<script>
-export default {
-    props: ['name', 'header_class', 'timing', 'location']
-};
+<script setup lang="ts">
+defineProps({
+    name: {
+    type: String,
+    required: true,
+  },
+  header_class: {
+    type: String,
+    default: 'Your name...',
+  },
+  timing: {
+    type: String,
+    default: 'Your name...',
+  },
+  location: {
+    type: String,
+    default: 'Your name...',
+  },
+})
+
 </script>

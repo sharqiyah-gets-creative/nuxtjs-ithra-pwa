@@ -1,11 +1,12 @@
-const isProd = process.env.NODE_ENV === 'production';
+import { isProduction } from './utils/helpers'
+
 export default defineAppConfig({
-    baseURL: isProd ? 'http://localhost:3000/' : 'https://ithra-dev.6degrees.com.sa/',
+    baseURL: isProduction ? 'http://localhost:3000/' : 'https://ithra-dev.6degrees.com.sa/',
     ui: {
         primary: 'violet',
         gray: 'cool',
         container: {
             constrained: "max-w-7xl"
         }
-    }
+    },
 })

@@ -1,11 +1,15 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-//import { defineNuxtConfig } from 'nuxt/config'
+import { isProduction } from './utils/helpers'
 
 export default defineNuxtConfig({
   pages: true,
 
   devtools: {
     enabled: false
+  },
+  app:{
+    head:{
+      viewport: 'initial-scale=1, viewport-fit=cover, width=device-width',
+    }
   },
 
   modules: [
@@ -15,12 +19,23 @@ export default defineNuxtConfig({
     'nuxt-gtag'
   ],
 
-  plugins: [
-    { src: '~/plugins/install-prompt.ts', mode: 'client' },
-    { src: '~/plugins/firebase.ts'}
-  ],
+  runtimeConfig: {
+    public: {
+      GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+      GOOGLE_AUTH_DOMAIN: process.env.GOOGLE_AUTH_DOMAIN,
+      GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
+      GOOGLE_STORAGE_BUCKET: process.env.GOOGLE_STORAGE_BUCKET,
+      GOOGLE_MESSAGING_SENDER_ID: process.env.GOOGLE_MESSAGING_SENDER_ID,
+      GOOGLE_APP_ID: process.env.GOOGLE_APP_ID,
+      GOOGLE_MEASUREMENT_ID: process.env.GOOGLE_MEASUREMENT_ID,
+      NUXT_PUBLIC_GTAG_ID: process.env.NUXT_PUBLIC_GTAG_ID,
+    }
+  },
+  
+
 
   css: ['~/assets/css/main.css'],
+
 
   i18n: {
     vueI18n: './i18n.config.ts'
@@ -64,7 +79,7 @@ export default defineNuxtConfig({
       short_name: process.env.npm_package_name! || "الشرقية تبدع",
       description: process.env.npm_package_description! || "Ithra - Sharqiya Gets Creative 2023",
       lang: "ar",
-      start_url: `https://ithra-def.6degrees.com.sa/?standalone=true`,
+      start_url: `/?standalone=true`,
       background_color: "#ffffff",
       
       theme_color: "#ffffff",

@@ -1,4 +1,27 @@
 
+<script setup lang="ts">
+import {
+  collection,
+  getDocs,
+  getDoc,
+  addDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  setDoc,
+  collectionGroup,
+  Timestamp,
+  Firestore
+} from "firebase/firestore";
+
+onMounted(()=>{
+    //const { $hello } = useNuxtApp()
+    const nuxtApp = useNuxtApp()
+    console.log(nuxtApp.$hello('haha'))
+})
+</script>
+
 <template>
     <div>
         <section id="x" class="md:px-0 py-4">
@@ -29,22 +52,3 @@
 </template>
 
 
-<script setup lang="ts">
-import { useNuxtApp } from '#imports'
-import { Firestore, collection, getDocs } from 'firebase/firestore/lite';
-
-const { $db } = useNuxtApp();
-
-const db = $db;
-
-
-const getEvents = async () => {
-    const eventsCollection = collection(db, 'events');
-    const eventsSnapshot = await getDocs(eventsCollection);
-    return eventsSnapshot.docs.map(doc => doc.data());
-}
-
-const events = await getEvents();
-console.log(events);
-
-</script>

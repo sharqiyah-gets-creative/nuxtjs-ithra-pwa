@@ -1,6 +1,7 @@
 {
   "name": "sharqiyah-gets-creative",
   "private": true,
+  "version": "0.0.2",
   "type": "module",
   "author": "6 Degrees Technologies",
   "scripts": {
@@ -11,6 +12,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "@iconify/json": "^2.2.125",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
     "@nuxt/devtools": "latest",
@@ -18,13 +20,17 @@
     "@nuxt/ui": "^2.9.0",
     "@nuxtjs/i18n": "8.0.0-rc.5",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/node": "^20.8.3",
     "nuxt": "^3.7.4",
     "nuxt-gtag": "^1.1.1",
+    "typescript": "4",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
     "firebase": "^10.4.0",
+    "pinia": "^2.1.6",
     "vue3-google-map": "^0.18.0"
   }
 }
