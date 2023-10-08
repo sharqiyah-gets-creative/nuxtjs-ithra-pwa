@@ -20,6 +20,7 @@ pnpm run preview
 - <https://stackoverflow.com/questions/51160348/pwa-how-to-programmatically-trigger-add-to-homescreen-on-ios-safari/51160938#51160938>
 - <https://chat.openai.com/c/e903c3c9-1b31-4fd8-b107-18f616cbdee9>
 - Flowbite - <https://flowbite.com/docs/getting-started/introduction>
+- <https://www.youtube.com/watch?v=TfKDkErJUtk&t=1031>
 
 ## Using
 
