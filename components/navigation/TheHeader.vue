@@ -1,11 +1,10 @@
 <template>
-    <header>
+    <header class="py-2 sticky top-0 border-b border-slate-600 dark:bg-[#0E091B] z-10">
         <UContainer class="flex justify-between">
-            <h1>
-                <NuxtLink to="/" class="text-white">
-                    <img src="~/assets/images/logo-white.png" height="150" class="h-12 md:h-20" alt="Alsharqiya Gets Creative" />
-                    <span class="sr-only">{{ $t("home_title") }}</span>
-                    {{ $t("home_title") }}
+            <h1 class="text-lg">
+                <NuxtLink to="/" class="text-white flex items-center">
+                    <UAvatar src="icon.png" size="sm" class="me-2"  alt="Avatar" />
+                    <span class="font-light">{{ $t("home_title") }}</span>
                 </NuxtLink>
             </h1>
 

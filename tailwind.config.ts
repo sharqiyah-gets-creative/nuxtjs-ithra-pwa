@@ -18,13 +18,12 @@ export default <Partial<Config>> {
     },
     extend: {
       colors:{
-        "primary-violet": "#2A1B51",
-        "primary-yellow": "#FDB72B",
-        "primary-pink": "#D68FBE",
-        "secondary-green": "#7AC9BE",
-        "secondary-violet": "5956A5",
-        "secondary-pink": "#BE4255",
-
+        "primary-violet":   "#2A1B51",
+        "primary-yellow":   "#FDB72B",
+        "primary-pink":     "#D68FBE",
+        "secondary-green":  "#7AC9BE",
+        "secondary-violet": "#5956A5",
+        "secondary-pink":   "#BE4255",
       }
     }
   },

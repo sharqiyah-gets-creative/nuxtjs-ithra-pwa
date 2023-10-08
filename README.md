@@ -17,6 +17,7 @@ pnpm run preview
 
 - Try the icon generator on <https://vite-pwa-org.netlify.app/assets-generator/> to generate icons for your PWA.
 - <https://web.dev/learn/pwa>
+- <https://stackoverflow.com/questions/51160348/pwa-how-to-programmatically-trigger-add-to-homescreen-on-ios-safari/51160938#51160938>
 
 ## Using
 

@@ -169,7 +169,7 @@ const items = [{
     <ClientOnly>
         <GoogleMap 
         api-key="AIzaSyBec3924PjZNJnrOv4wW5mjS1hESAEXFYo" 
-        class="rounded-xl overflow-hidden aspect-video w-full h-[25vh] md:h-[50vh] relative" 
+        class="rounded-xl text-xs overflow-hidden aspect-video w-full h-[25vh] md:h-[50vh] relative" 
         :center="center" 
         :zoom="zoom" 
         :styles="styles"
@@ -180,8 +180,10 @@ const items = [{
                 </div>
             </MarkerCluster>
         </GoogleMap>
-        <div class="h-12 my-5 bg-[url(~/assets/images/wave-pattern.png)] bg-contain bg-right -ms-12 bg-no-repeat"></div>
-        <UAccordion :items="items" />
+
+        <!-- 
+            <UAccordion :items="items" />
+
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <div v-for="marker in locations">
                 <div @click="zoomEvent(marker)">
@@ -189,5 +191,6 @@ const items = [{
                 </div>
             </div>
         </div>
+        -->
     </ClientOnly>
 </template>

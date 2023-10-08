@@ -1,38 +1,24 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 //import { defineNuxtConfig } from 'nuxt/config'
 
-
 export default defineNuxtConfig({
   pages: true,
-  
+
   devtools: {
     enabled: false
   },
-
 
   modules: [
     '@nuxt/ui',
     '@nuxtjs/i18n',
     '@kevinmarrec/nuxt-pwa',
-    'nuxt-gtag',
-    'nuxt-vuefire'
+    'nuxt-gtag'
   ],
 
-  vuefire: {
-    config: {
-      apiKey: process.env.GOOGLE_API_KEY,
-      authDomain: process.env.GOOGLE_AUTH_DOMAIN,
-      projectId: process.env.GOOGLE_PROJECT_ID,
-      storageBucket: process.env.GOOGLE_STORAGE_BUCKET,
-      messagingSenderId: process.env.GOOGLE_MESSAGING_SENDER_ID,
-      appId: process.env.GOOGLE_APP_ID,
-      measurementId: process.env.GOOGLE_MEASUREMENT_ID
-    },
-
-    auth: {
-      enabled: false
-    },
-  },
+  plugins: [
+    { src: '~/plugins/install-prompt.ts', mode: 'client' },
+    { src: '~/plugins/firebase.ts'}
+  ],
 
   css: ['~/assets/css/main.css'],
 
@@ -50,30 +36,51 @@ export default defineNuxtConfig({
   },
 
   pwa: {
-    meta:{
-      name: "Ithraa",
+    meta: {
+      name: "الشرقية تبدع",
+      author: process.env.npm_package_author_name!,
+      title: true,
+      description: process.env.npm_package_description! || "Ithra - Sharqiya Gets Creative 2023",
+      favicon: true,
+
       mobileApp: true,
       mobileAppIOS: true,
-      appleStatusBarStyle: "black-translucent",
+      appleStatusBarStyle: false,
+      ogType: 'website',
+      ogSiteName: true,
+      ogTitle: true,
+      ogDescription: true,
+      ogImage: true,
+      ogHost: undefined,
+      ogUrl: true,
+      twitterCard: 'summary',
+      twitterSite: undefined,
+      twitterCreator: undefined,
+
       lang: "ar",
-      author: "6 Degrees Technologies"
     },
-    manifest:{
-      name: "الشرقية تبدع",
-      short_name: "الشرقية تبدع",
-      description: "Ithra - Sharqiya Gets Creative 2023",
+    manifest: {
+      name: process.env.npm_package_name! || "الشرقية تبدع",
+      short_name: process.env.npm_package_name! || "الشرقية تبدع",
+      description: process.env.npm_package_description! || "Ithra - Sharqiya Gets Creative 2023",
       lang: "ar",
+      start_url: `https://ithra-def.6degrees.com.sa/?standalone=true`,
       background_color: "#ffffff",
+      
       theme_color: "#ffffff",
       display: "standalone",
-      start_url: "/",
     },
     workbox: {
       enabled: false,
 
     },
     icon: {
-      
+      maskablePadding: 0,
+      splash: {
+        backgroundColor: "#ffffaa",
+        targetDir: "splash",
+        devices: []
+      },
     }
   }
 })

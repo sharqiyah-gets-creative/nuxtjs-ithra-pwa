@@ -1,6 +1,9 @@
 <template>
     <main class="text-[#3d2674] dark:bg-[#0E091B] dark:text-white min-h-screen">
-        <slot />
+        <NavigationTheHeader />
+        <section class="page">
+            <slot />
+        </section>
         <NavigationTheFooter />
         <UNotifications />
     </main>
@@ -8,7 +11,6 @@
 
 <script setup lang="ts">
 const toast = useToast();
-
 
 useHead({
     htmlAttrs: {
@@ -18,6 +20,11 @@ useHead({
 });
 
 onMounted(() => {
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isIphone = /iPhone/i.test(navigator.userAgent);
+  const hasAcknowledged = localStorage.getItem('hasAcknowledgedPrompt');
+
+
     toast.add({
         id: "install_to_home_screen",
         title: "ركب التطبيق بجهازك",

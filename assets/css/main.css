@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: ithra;
-  src: url(~/assets/fonts/ithra-medium.woff2) format("woff2"),url(~/assets/fonts/ithra-medium.woff) format("woff");
+  src: url(~/assets/fonts/ithrav3/ithraV3-medium.woff2) format("woff2"),url(~/assets/fonts/ithrav3/ithraV3-medium.woff) format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: ithra;
-  src: url(~/assets/fonts/ithra-light.woff2) format("woff2"),url(~/assets/fonts/ithra-light.woff) format("woff");
+  src: url(~/assets/fonts/ithrav3/ithraV3-light.woff2) format("woff2"),url(~/assets/fonts/ithrav3/ithraV3-light.woff) format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap
@@ -20,16 +20,19 @@
 
 @font-face {
   font-family: ithra;
-  src: url(~/assets/fonts/ithra-bold.woff2) format("woff2"),url(~/assets/fonts/ithra-bold.woff) format("woff");
+  src: url(~/assets/fonts/ithrav3/ithraV3-bold.woff2) format("woff2"),url(~/assets/fonts/ithrav3/ithraV3-bold.woff) format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap
 }
 
-
 html,
 body{
   overscroll-behavior-y: none;
+}
+
+.page{
+  overscroll-behavior: initial;
 }
 
 *{
