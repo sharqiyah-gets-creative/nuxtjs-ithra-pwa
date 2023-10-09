@@ -3,7 +3,7 @@ import { isProduction } from './utils/helpers'
 export default defineNuxtConfig({
   pages: true,
   
-  ssr: true, // default behavior
+  ssr: false, // default behavior
   
   devtools: {
     enabled: false

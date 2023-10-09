@@ -1,6 +1,6 @@
 <template>
 
-    <UButton color="white" size="sm"  variant="transparent" @click="isOpen = true">
+    <UButton color="white" size="sm"  variant="ghost" @click="isOpen = true">
         <UAvatar icon="i-heroicons-arrow-right-on-rectangle" size="lg" class=""  alt="Avatar" @click="isOpen = true" />
     </UButton>
 
