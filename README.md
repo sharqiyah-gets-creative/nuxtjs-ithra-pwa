@@ -29,6 +29,7 @@ pnpm run preview
 - Nuxt UI - <https://ui.nuxt.com/>
 - headless ui - <https://headlessui.dev/>
 - volta - <https://volta.net/>
+- Enabled Takeover mode - <https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode>
 
 ```js
 pwa: {
@@ -96,3 +97,4 @@ pwa: {
     },
   }
   ```
+  
