@@ -21,6 +21,12 @@ pnpm run preview
 - <https://chat.openai.com/c/e903c3c9-1b31-4fd8-b107-18f616cbdee9>
 - Flowbite - <https://flowbite.com/docs/getting-started/introduction>
 - <https://www.youtube.com/watch?v=TfKDkErJUtk&t=1031>
+- Move fonts to Public folder - <https://nuxt.com/docs/getting-started/styling#working-with-fonts>
+- Consider animate.css - <https://animate.style/>
+- Transition API
+- Consider fontaine
+- Passwordless Auth - <https://firebase.google.com/docs/auth/web/email-link-auth?hl=en&authuser=0>
+- <https://www.youtube.com/watch?v=KzvK809rl3Q>
 
 ## Using
 
