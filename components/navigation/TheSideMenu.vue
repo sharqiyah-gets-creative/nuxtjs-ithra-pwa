@@ -1,5 +1,8 @@
 <template>
-    <UButton class="font-thin" icon="i-heroicons-bars-3" color="white" size="sm"  variant="ghost" @click="isOpen = true" />
+
+    <UButton color="white" size="sm"  variant="transparent" @click="isOpen = true">
+        <UAvatar icon="i-heroicons-arrow-right-on-rectangle" size="lg" class=""  alt="Avatar" @click="isOpen = true" />
+    </UButton>
 
     <USlideover dir="ltr" v-model="isOpen" side="left">
         <UCard dir="rtl" class="flex flex-col flex-1" :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">

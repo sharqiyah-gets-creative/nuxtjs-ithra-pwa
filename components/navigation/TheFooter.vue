@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-black sticky bottom-0 pb-6 pt-3 font-light">
+    <footer class="bg-black sticky bottom-0 pb-6 pt-3 font-light border-t border-t-slate-600">
         <UContainer class="grid grid-cols-3">
             <ULink to="/" class="p-1 flex flex-col gap-2 rounded-xl items-center hover:bg-white hover:bg-opacity-10 transition-all duration-300">
                 <UIcon name="i-heroicons-exclamation-circle-solid" class="text-3xl" />
