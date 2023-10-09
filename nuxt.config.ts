@@ -2,15 +2,20 @@ import { isProduction } from './utils/helpers'
 
 export default defineNuxtConfig({
   pages: true,
-
+  
+  ssr: true, // default behavior
+  
   devtools: {
     enabled: false
   },
+
   app:{
     head:{
-      viewport: 'initial-scale=1, viewport-fit=cover, width=device-width',
-    }
+      viewport: 'initial-scale=1, viewport-fit=cover, user-scalable=no, width=device-width',
+    },
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
+
   typescript: {
     shim: false
   },
@@ -21,10 +26,19 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/ui',
+    '@pinia/nuxt',
     '@nuxtjs/i18n',
     '@kevinmarrec/nuxt-pwa',
     'nuxt-gtag'
   ],
+
+  pinia: {
+    autoImports: [
+      // automatically imports `defineStore`
+      'defineStore', // import { defineStore } from 'pinia'
+      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+    ],
+  },
 
   runtimeConfig: {
     public: {
@@ -39,10 +53,7 @@ export default defineNuxtConfig({
     }
   },
   
-
-
   css: ['~/assets/css/main.css'],
-
 
   i18n: {
     vueI18n: './i18n.config.ts'
@@ -67,7 +78,7 @@ export default defineNuxtConfig({
 
       mobileApp: true,
       mobileAppIOS: true,
-      appleStatusBarStyle: false,
+      appleStatusBarStyle: "black-translucent",
       ogType: 'website',
       ogSiteName: true,
       ogTitle: true,
