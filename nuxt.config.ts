@@ -11,6 +11,13 @@ export default defineNuxtConfig({
       viewport: 'initial-scale=1, viewport-fit=cover, width=device-width',
     }
   },
+  typescript: {
+    shim: false
+  },
+
+  alias:{
+    "#pwa": "./.nuxt/types/pwa"
+  },
 
   modules: [
     '@nuxt/ui',
