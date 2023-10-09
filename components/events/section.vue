@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-
 let eventsArray: any = ref([]);
 
 onMounted(async () => {

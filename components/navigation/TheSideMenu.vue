@@ -16,12 +16,12 @@
             <ClientOnly>
                 <ul class="divide-y divide-slate-600 divide">
                     <li @click="isDark = !isDark" class="flex justify-start items-center py-4">
-                        <UIcon class="me-3" :name="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'" color="gray" variant="ghost" aria-label="Theme" />
+                        <UIcon class="me-3" :name="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'" color="gray" />
                         <span>{{ isDark ? "تشغيل الوضع النهاري" : "تشغيل الوضع الليلي" }}</span>
                     </li>
 
                     <li @click="isDark = !isDark" class="flex justify-start items-center py-4">
-                        <UIcon class="me-3" name="i-heroicons-user-solid" color="gray" variant="ghost" aria-label="Theme" />
+                        <UIcon class="me-3" name="i-heroicons-user-solid" color="gray" aria-label="Theme" />
                         <span>
                             تسجيل الدخول
                             <small class="text-slate-400 sm block">سجل دخولك لتقوم بتقييم تجاربك</small>
@@ -29,7 +29,7 @@
                     </li>
 
                     <li @click="isDark = !isDark" class="flex justify-start items-center py-4">
-                        <UIcon class="me-3" name="i-heroicons-user-solid" color="gray" variant="ghost" aria-label="Theme" />
+                        <UIcon class="me-3" name="i-heroicons-user-solid" color="gray" />
                         <span>تقييماتي</span>
                     </li>
                 </ul>
