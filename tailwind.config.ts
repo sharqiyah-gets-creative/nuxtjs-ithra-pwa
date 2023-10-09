@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin';
+
 export default <Partial<Config>> {
   content: [
     './docs/content/**/*.md',
@@ -8,6 +10,7 @@ export default <Partial<Config>> {
     "./plugins/**/*.{js,ts}",
     "./app.vue",
   ],
+
   safelist: [
     {      pattern: /bg-(primary|secondary)-(violet|green|pink|yellow)/  }
   ],
@@ -39,8 +42,11 @@ export default <Partial<Config>> {
       }
     }
   },
+
   plugins: [
     require('@tailwindcss/typography'),
-    // ...
+    plugin(function({ addVariant }) {
+      addVariant('hocus', ['&:hover', '&:focus'])
+    })
   ],
 }
