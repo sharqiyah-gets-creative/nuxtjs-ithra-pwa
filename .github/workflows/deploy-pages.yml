@@ -10,18 +10,28 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: corepack enable
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
+          cache: 'pnpm'
+        
       # Pick your own package manager and build script
-      - run: npm install
-      - run: npm run build
+      - run: pnpm install
+      
+      - run: pnpm  build
         env:
           NITRO_PRESET: github_pages
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./.output/public
+
   # Deployment job
   deploy:
     # Add a dependency to the build job
@@ -34,6 +44,7 @@ jobs:
     environment:
       name: github_pages
       url: ${{ steps.deployment.outputs.page_url }}
+    
     # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
