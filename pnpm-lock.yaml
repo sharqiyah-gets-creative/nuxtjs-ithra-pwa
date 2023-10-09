@@ -23,8 +23,8 @@ devDependencies:
     specifier: ^2.26.2
     version: 2.26.2
   '@iconify/json':
-    specifier: ^2.2.125
-    version: 2.2.125
+    specifier: ^2.2.126
+    version: 2.2.126
   '@kevinmarrec/nuxt-pwa':
     specifier: ^0.17.0
     version: 0.17.0
@@ -53,7 +53,7 @@ devDependencies:
     specifier: ^1.1.1
     version: 1.1.1
   typescript:
-    specifier: '4'
+    specifier: ^4.9.5
     version: 4.9.5
   vue:
     specifier: ^3.3.4
@@ -1553,8 +1553,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify/json@2.2.125:
-    resolution: {integrity: sha512-FtazQikTTUrM4OvaLtzu+yi8htSf1nnjsHJ7SAR501i4o2b+OcvUmjaBJ1Z6DzfoAyHXuDkuF+mjEeLy64F3wg==}
+  /@iconify/json@2.2.126:
+    resolution: {integrity: sha512-OoOu5RP3vUiYwwmY/q2KsJQKzI5XKnLeIONwbkvu5EY6+qHQVuqZ4Dry1zdGJub/V0qa6j+OU3bkdL7TgD80dw==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.1

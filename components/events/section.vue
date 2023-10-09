@@ -5,6 +5,7 @@ let eventsArray: any = ref([]);
 onMounted(async () => {
     const nuxtApp = useNuxtApp();
     const config = nuxtApp.$config;
+    
     const { events } = await getEvents(config);
     
     events.forEach((event) => {

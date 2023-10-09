@@ -1,7 +1,6 @@
 <template>
   <main
   style="-webkit-tap-highlight-color: transparent;" 
-  
   class="text-[#3d2674] dark:bg-[#0E091B] dark:text-white h-full w-full">
     <!--
     <NavigationTheHeader />
@@ -14,7 +13,7 @@
     </section>
     <!--<NavigationTheFooter />-->
 
-    <NavigationFlowbiteNav />
+    <NavsFlowbiteNav />
     <UNotifications />
   </main>
 </template>
