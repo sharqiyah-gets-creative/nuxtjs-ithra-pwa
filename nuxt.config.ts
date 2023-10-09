@@ -8,16 +8,16 @@ export default defineNuxtConfig({
   devtools: {
     enabled: false
   },
+  
+  typescript: {
+    shim: false,
+  },
 
   app:{
     head:{
       viewport: 'initial-scale=1, viewport-fit=cover, user-scalable=no, width=device-width',
     },
     pageTransition: { name: 'page', mode: 'out-in' }
-  },
-
-  alias:{
-    "#pwa": "./.nuxt/types/pwa"
   },
 
   modules: [
