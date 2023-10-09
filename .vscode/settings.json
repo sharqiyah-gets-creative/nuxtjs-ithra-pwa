@@ -21,5 +21,8 @@
         "ngClass",
         "ui"
     ],
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "nuxtr.defaultPackageManager": "pnpm",
+    "nuxtr.vueFiles.style.addStyleTag": false
 }

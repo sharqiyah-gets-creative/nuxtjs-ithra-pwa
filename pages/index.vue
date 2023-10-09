@@ -1,24 +1,16 @@
 
 <script setup lang="ts">
-import {
-  collection,
-  getDocs,
-  getDoc,
-  addDoc,
-  deleteDoc,
-  doc,
-  query,
-  where,
-  setDoc,
-  collectionGroup,
-  Timestamp,
-  Firestore
-} from "firebase/firestore";
+import { doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore";
+
 
 onMounted(()=>{
     //const { $hello } = useNuxtApp()
     const nuxtApp = useNuxtApp()
-    console.log(nuxtApp.$hello('haha'))
+    const config = nuxtApp.$config;
+
+    const { firestore } = useFirebase(config);
+
+
 })
 </script>
 

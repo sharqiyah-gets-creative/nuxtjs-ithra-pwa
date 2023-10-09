@@ -2,7 +2,7 @@
     <main class="text-[#3d2674] dark:bg-[#0E091B] dark:text-white min-h-screen">
         <NavigationTheHeader />
         <section class="page">
-            <slot />
+            <NuxtPage />
         </section>
         <NavigationTheFooter />
         <UNotifications />
