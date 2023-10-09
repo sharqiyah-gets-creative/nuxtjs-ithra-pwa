@@ -85,23 +85,20 @@ export default defineNuxtConfig({
       twitterCard: 'summary',
       twitterSite: undefined,
       twitterCreator: undefined,
-
       lang: "ar",
     },
     manifest: {
       name: process.env.npm_package_name! || "الشرقية تبدع",
-      short_name: process.env.npm_package_name! || "الشرقية تبدع",
+      short_name: "الشرقية تبدع",
       description: process.env.npm_package_description! || "Ithra - Sharqiya Gets Creative 2023",
       lang: "ar",
       start_url: `/?standalone=true`,
-      background_color: "#ffffff",
-      
-      theme_color: "#ffffff",
+      background_color: "#000000",
+      theme_color: "#2A1B51",
       display: "standalone",
     },
     workbox: {
       enabled: false,
-
     },
     icon: {
       maskablePadding: 0,
