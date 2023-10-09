@@ -4,7 +4,7 @@
         <UAvatar icon="i-heroicons-arrow-right-on-rectangle" size="lg" class=""  alt="Avatar" @click="isOpen = true" />
     </UButton>
 
-    <USlideover dir="ltr" v-model="isOpen" side="left" class="standalone:pt-6">
+    <USlideover dir="ltr" v-model="isOpen" side="left" class="standalone:pt-8">
         <UCard dir="rtl" class="flex flex-col flex-1" :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
             <template #header>
                 <div class="flex items-center justify-between flex-row-reverse">
