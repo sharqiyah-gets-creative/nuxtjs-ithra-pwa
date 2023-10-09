@@ -14,7 +14,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-          cache: 'pnpm'
 
       - uses: pnpm/action-setup@v2
         name: Install pnpm
@@ -34,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-         
-             
+
       # Pick your own package manager and build script
       - run: pnpm install
       
