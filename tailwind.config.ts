@@ -8,6 +8,10 @@ export default <Partial<Config>> {
     "./plugins/**/*.{js,ts}",
     "./app.vue",
   ],
+  safelist: [
+    {      pattern: /bg-(primary|secondary)-(violet|green|pink|yellow)/  }
+  ],
+
   theme:{
     "fontFamily": {
       "sans": ["ithra", "Roboto", "sans-serif"],
@@ -19,11 +23,19 @@ export default <Partial<Config>> {
     extend: {
       colors:{
         "primary-violet":   "#2A1B51",
-        "primary-yellow":   "#FDB72B",
-        "primary-pink":     "#D68FBE",
-        "secondary-green":  "#7AC9BE",
         "secondary-violet": "#5956A5",
+
+        "primary-yellow":   "#FDB72B",
+        "secondary-yellow": "#FDDC7F",
+
+        "primary-pink":     "#D68FBE",
         "secondary-pink":   "#BE4255",
+
+        "primary-green":    "#3E9C8E",  
+        "secondary-green":  "#7AC9BE",
+      },
+      screens:{
+        standalone: { raw: "(display-mode: standalone)" }
       }
     }
   },
