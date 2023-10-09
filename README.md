@@ -27,6 +27,7 @@ pnpm run preview
 - Consider fontaine
 - Passwordless Auth - <https://firebase.google.com/docs/auth/web/email-link-auth?hl=en&authuser=0>
 - <https://www.youtube.com/watch?v=KzvK809rl3Q>
+- custom tailwind variant `hocus` - <https://stackoverflow.com/questions/74350677/hover-or-focus-in-tailwind-css>
 
 ## Using
 

@@ -103,7 +103,7 @@ export default defineNuxtConfig({
     icon: {
       maskablePadding: 0,
       splash: {
-        backgroundColor: "#ffffaa",
+        backgroundColor: "#7AC9BE",
         targetDir: "splash",
         devices: []
       },
