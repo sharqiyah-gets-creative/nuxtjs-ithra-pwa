@@ -28,7 +28,9 @@
 
 html,
 body{
-  overscroll-behavior-y: smooth;
+  overscroll-behavior-y: none;
+  scroll-behavior: smooth;
+
 }
 
 .page{
