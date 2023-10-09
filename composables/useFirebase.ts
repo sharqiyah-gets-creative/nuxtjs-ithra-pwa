@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore } from "firebase/firestore";
 //import { getAuth } from "firebase/auth"
 //import { getAnalytics } from "firebase/analytics"
 
@@ -13,14 +13,14 @@ export const useFirebase = (config: any) => {
 			messagingSenderId: config.public.GOOGLE_MESSAGING_SENDER_ID,
 			appId: config.public.GOOGLE_APP_ID,
 			measurementId: config.public.GOOGLE_MEASUREMENT_ID,
+			
 		};
 	
 		const firebaseApp = initializeApp(firebaseConfig);
-		const firestore = getFirestore(firebaseApp, {
-			experimentalForceLongPolling: true, // this line
-			useFetchStreams: false, // and this line
-		  
+		const firestore = initializeFirestore(firebaseApp, {
+			experimentalForceLongPolling: true,
 		});
+		
 	
 		return {
 			firebaseApp,
