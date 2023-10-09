@@ -162,13 +162,14 @@ const items = [{
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.'
 }]
 
+const config = useRuntimeConfig();
 
 
 </script>
 <template>
     <ClientOnly>
         <GoogleMap 
-        api-key="AIzaSyBec3924PjZNJnrOv4wW5mjS1hESAEXFYo" 
+        :api-key="config.public.GOOGLE_API_KEY" 
         class="rounded-xl text-xs overflow-hidden aspect-video w-full h-[25vh] md:h-[50vh] relative" 
         :center="center" 
         :zoom="zoom" 

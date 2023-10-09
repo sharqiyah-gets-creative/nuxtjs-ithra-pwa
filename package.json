@@ -9,6 +9,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "live": "nuxt build && nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
