@@ -26,6 +26,16 @@
   font-display: swap
 }
 
+*{
+  outline: yellow;
+  outline-style: solid;
+  outline-width: 0px;
+  outline-offset: 1px;
+}
+html {
+  min-height: calc(100% + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
 html,
 body{
   overscroll-behavior-y: none;
@@ -37,15 +47,13 @@ body{
   overscroll-behavior: initial;
 }
 
-*{
-  outline: yellow;
-  outline-style: solid;
-  outline-width: 0px;
-  outline-offset: 1px;
-}
 
-html {
-  min-height: calc(100% + env(safe-area-inset-top));
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
 }
-
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}

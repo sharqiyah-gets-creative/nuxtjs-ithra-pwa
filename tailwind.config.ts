@@ -9,6 +9,7 @@ export default <Partial<Config>> {
     "./pages/**/*.vue",
     "./plugins/**/*.{js,ts}",
     "./app.vue",
+    "./node_modules/flowbite/**/*.{js,ts}"
   ],
 
   safelist: [
@@ -45,6 +46,8 @@ export default <Partial<Config>> {
 
   plugins: [
     require('@tailwindcss/typography'),
+    require('flowbite/plugin'),
+
     plugin(function({ addVariant }) {
       addVariant('hocus', ['&:hover', '&:focus'])
     })
