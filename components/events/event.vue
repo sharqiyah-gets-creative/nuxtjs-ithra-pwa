@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCommonStore } from '~/store/common';
+
 const { lastColor, setLastColor } = useCommonStore();
 
 let color = getEventHeaderClass();
