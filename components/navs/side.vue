@@ -15,23 +15,22 @@
             <!-- Content -->
             <ClientOnly>
                 <ul class="divide-y divide-slate-600 divide">
+                    
                     <li @click="isDark = !isDark" class="flex justify-start items-center py-4">
-                        <UIcon class="me-3" :name="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'" color="gray" />
-                        <span>{{ isDark ? "تشغيل الوضع النهاري" : "تشغيل الوضع الليلي" }}</span>
+                        <NavsSideLink :title="isDark ? 'تشغيل الوضع النهاري' :'تشغيل الوضع الليلي'" description="تقييماتك للمبادرات (يتطلب تسجيل دخول)" :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'" />
                     </li>
 
-                    <li @click="isDark = !isDark" class="flex justify-start items-center py-4">
-                        <UIcon class="me-3" name="i-heroicons-user-solid" color="gray" aria-label="Theme" />
-                        <span>
-                            تسجيل الدخول
-                            <small class="text-slate-400 sm block">سجل دخولك لتقوم بتقييم تجاربك</small>
-                        </span>
+                    <li class="flex justify-start items-center py-4">
+                        <UserLogin />
                     </li>
 
-                    <li @click="isDark = !isDark" class="flex justify-start items-center py-4">
-                        <UIcon class="me-3" name="i-heroicons-user-solid" color="gray" />
-                        <span>تقييماتي</span>
+                   
+
+                    <li class="flex justify-start items-center py-4">
+                        <NavsSideLink title="تقييماتي" description="تقييماتك للمبادرات (يتطلب تسجيل دخول)" icon="i-heroicons-user-solid" />
                     </li>
+
+
                 </ul>
                 <template #fallback>
                     <div class="w-8 h-8" />
@@ -46,10 +45,9 @@
 </template>
 
 <script setup>
+
 const isOpen = ref(false);
-
 const colorMode = useColorMode();
-
 const isDark = computed({
     get() {
         return colorMode.value === "dark";
