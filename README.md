@@ -6,12 +6,39 @@ This is a Nuxt 3 PWA project for Alsharqiya Gets Creative 2023 (Ithraa).
 
 ```bash
 # Start the development server on `http://localhost:3000`
-pnpm run dev
+pnpm dev
+
 # Build the application for production:
-pnpm run build
+pnpm build
+
 # Locally preview production build
-pnpm run preview
+pnpm preview
+
+# Clean caches and types
+pnpm clean
 ```
+
+## Features
+
+- [x] PWA
+- [ ] Offline Mode
+- [ ] Push Notifications
+- [ ] Add to Home Screen
+- [ ] Splash Screen
+- [x] Dark Mode
+
+## Technology
+
+- Nuxt 3.7 - Client Side Rendering
+- Typescript
+- @kevinmarrec/nuxt-pwa - PWA Module
+- Nuxt UI - TailwindCSS / Headless UI
+- Firebase (Auth, Firestore, Storage)
+- Google Analytics
+- GitHub - Actions / Pages
+- Pinia - State Management
+- Changesets - Versioning and Changelog
+- i18n - Internationalization
 
 ## Considerations
 
@@ -28,6 +55,8 @@ pnpm run preview
 - Passwordless Auth - <https://firebase.google.com/docs/auth/web/email-link-auth?hl=en&authuser=0>
 - <https://www.youtube.com/watch?v=KzvK809rl3Q>
 - custom tailwind variant `hocus` - <https://stackoverflow.com/questions/74350677/hover-or-focus-in-tailwind-css>
+- boot method of store - <https://stackoverflow.com/questions/72497896/how-to-implement-nuxtserverinit-action-to-load-data-from-server-side-on-the-init>
+- Override UI Settings - <https://github.com/nuxt/ui/blob/dev/src/runtime/ui.config.ts>
 
 ## Using
 
