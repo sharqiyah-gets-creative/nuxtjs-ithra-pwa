@@ -28,22 +28,21 @@ console.log('app vue loaded')
 
 import { initFlowbite } from 'flowbite'
 import { useEventsStore } from './store/events';
+import { sleep } from './utils/helpers';
 const store = useEventsStore();
 await store.boot();
 
 // wait 2 seconds then set to false and hide gradually fading out
 
-
-
-onMounted(() => {
+onMounted(async () => {
   console.log('app vue mounted')
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   const isIphone = /iPhone/i.test(navigator.userAgent);
   const hasAcknowledged = localStorage.getItem("hasAcknowledgedPrompt");
   initFlowbite();
-  setTimeout(() => {
-    showSplash.value = false;
-  }, 3000);
+  
+  await sleep(2000);
+  showSplash.value = false;
   const toast = useToast();
   
   toast.add({
@@ -82,6 +81,7 @@ useHead({
 <style>
 .fade-enter-active, .fade-leave-active {
   transition: opacity 1s;
+  animation-duration: 200ms;
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;

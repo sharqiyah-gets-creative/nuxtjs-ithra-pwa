@@ -29,7 +29,7 @@ export const useEventsStore = defineStore({
 			if (this.events) {
 				this.events = this.events.filter((event: IEvent) => event.id !== id);
 			}
-      this.updateLocalStorage();
+      		this.updateLocalStorage();
 		},
 
 		updateEvent(id: string, event: IEvent) {
@@ -42,31 +42,29 @@ export const useEventsStore = defineStore({
 
 		clearEvents() {
 			this.events = undefined;
-      this.updateLocalStorage();
+      		this.updateLocalStorage();
 		},
 
-    updateLocalStorage(){
-      window.localStorage.setItem("events", JSON.stringify(this.events));
-    },
+		updateLocalStorage(){
+			console.log('📪 Updating local storage with events data')
+			window.localStorage.setItem(SETTINGS_LOCAL_STORAGE_KEY, JSON.stringify(this.events));
+		},
 
 		async boot() {
-      
-      console.log('💚 Booting Events')
+			console.log('💚 Booting Events')
 
 			// should check store, if event exists, doesn't add it
 			if (this.events === undefined || this.events.length === 0) {
 				console.log("📪 Store empty, getting events from firebase");
-				
-        // get events from firebase
-        const { $config } = useNuxtApp()
+					
+				// get events from firebase
+				const { $config } = useNuxtApp()
 				const { events } = await getEvents($config);
 
 				this.events = events;
-        this.updateLocalStorage();
+				this.updateLocalStorage();
 			} else {
-				console.log(
-					`💯 Store not empty, ${this.events.length} events found`
-				);
+				console.log(`💯 Store not empty, ${this.events.length} events found`);
 			}
 		},
 	},

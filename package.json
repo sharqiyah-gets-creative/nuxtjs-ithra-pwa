@@ -11,7 +11,7 @@
     "preview": "nuxt preview",
     "live": "nuxt build && nuxt preview",
     "postinstall": "nuxt prepare",
-    "clean": "rm -rf node_modules/ .nuxt/ out/ && nuxt install"
+    "clean": "rm -rf node_modules/ .nuxt/ out/ && pnpm install"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",

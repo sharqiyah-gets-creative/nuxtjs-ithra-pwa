@@ -1,29 +1,30 @@
-import { FirebaseOptions, initializeApp } from "firebase/app";
-import { getFirestore, initializeFirestore } from "firebase/firestore";
-//import { getAnalytics } from "firebase/analytics"
+import { FirebaseOptions, initializeApp, getApps, FirebaseApp } from "firebase/app";
 
-export const useFirebase = (config: any) => {
-	
+export const useFirebase = () => {
+	const { $config } = useNuxtApp();
+
 	const firebaseConfig: FirebaseOptions = {
-		apiKey: config.public.GOOGLE_API_KEY,
-		authDomain: config.public.GOOGLE_AUTH_DOMAIN,
-		projectId: config.public.GOOGLE_PROJECT_ID,
-		storageBucket: config.public.GOOGLE_STORAGE_BUCKET,
-		messagingSenderId: config.public.GOOGLE_MESSAGING_SENDER_ID,
-		appId: config.public.GOOGLE_APP_ID,
-		measurementId: config.public.GOOGLE_MEASUREMENT_ID,
+		apiKey: $config.public.GOOGLE_API_KEY,
+		authDomain: $config.public.GOOGLE_AUTH_DOMAIN,
+		projectId: $config.public.GOOGLE_PROJECT_ID,
+		storageBucket: $config.public.GOOGLE_STORAGE_BUCKET,
+		messagingSenderId: $config.public.GOOGLE_MESSAGING_SENDER_ID,
+		appId: $config.public.GOOGLE_APP_ID,
+		measurementId: $config.public.GOOGLE_MEASUREMENT_ID,
 	};
 
-	const firebaseApp = initializeApp(firebaseConfig);
+	// Initialize Firebase if it hasn't been already
+	let firebaseApp: FirebaseApp;
+	
+	if(getApps().length == 0){
+		firebaseApp = initializeApp(firebaseConfig);
+	}else{
+		firebaseApp = getApps()[0];
+	}
 
-	initializeFirestore(firebaseApp, {
-		experimentalForceLongPolling: true,
-	});
-
-	const firestore = getFirestore(firebaseApp);
+	firebaseApp = initializeApp(firebaseConfig);
 
 	return {
 		firebaseApp,
-		firestore,
 	};
 };

@@ -12,6 +12,7 @@
                     <UButton color="white" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
                 </div>
             </template>
+
             <!-- Content -->
             <ClientOnly>
                 <ul class="divide-y divide-slate-600 divide">
@@ -20,11 +21,14 @@
                         <NavsSideLink :title="isDark ? 'تشغيل الوضع النهاري' :'تشغيل الوضع الليلي'" description="تقييماتك للمبادرات (يتطلب تسجيل دخول)" :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'" />
                     </li>
 
-                    <li class="flex justify-start items-center py-4">
+                    <li v-if="!user" class="flex justify-start items-center py-4">
                         <UserLogin />
                     </li>
+                    <li v-else @click="signUserOut" class="flex justify-start items-center py-4">
+                        <span class="text-xl font-bold">أهلا {{ user.name }}</span>
+                        <NavsSideLink title="تسجيل الخروج" description="" icon="i-heroicons-user-solid" />
+                    </li>
 
-                   
 
                     <li class="flex justify-start items-center py-4">
                         <NavsSideLink title="تقييماتي" description="تقييماتك للمبادرات (يتطلب تسجيل دخول)" icon="i-heroicons-user-solid" />
@@ -44,10 +48,35 @@
     </USlideover>
 </template>
 
-<script setup>
+<script setup lang="ts">
+console.countReset('👍👍👍 components/navs/side.vue');
+console.count('👍👍👍 components/navs/side.vue');
+console.count('👍👍👍 components/navs/side.vue');
+import { useUserStore } from '~/store/user';
+console.count('👍👍👍 components/navs/side.vue');
+const userStore = useUserStore();
+console.count('👍👍👍 components/navs/side.vue');
+const user = userStore.user;
+console.count('👍👍👍 components/navs/side.vue');
 
+const { signOut } = useAuth();
+
+console.count('👍👍👍 components/navs/side.vue');
 const isOpen = ref(false);
 const colorMode = useColorMode();
+console.count('👍👍👍 components/navs/side.vue');
+const signUserOut = () => {
+    signOut();
+    userStore.clearUser();
+}
+
+if(user){
+    console.log('👍👍👍 user is authenticated')
+}
+else{
+    console.log('👎👎👎 user is not authenticated')
+}
+
 const isDark = computed({
     get() {
         return colorMode.value === "dark";

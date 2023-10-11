@@ -1,36 +1,42 @@
-import { getDocs, collection } from "firebase/firestore";
-
-import { useFirebase } from "~/composables/useFirebase";
-
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	GoogleAuthProvider,
+	signInWithPopup
 } from "firebase/auth";
+
 import { useUserStore } from "~/store/user";
 
-
-export const useAuth = async (credentials: any,	method = '',  config = {}) => {
-
-  const store = useUserStore();
+export const useAuth =  () => {
+	const { firebaseApp } = useFirebase();
+	const auth = getAuth(firebaseApp);
+	console.countReset('🔥 useAuth')
+	console.count('🔥 useAuth')
+	
+  	const store = useUserStore();
+	console.count('🔥 useAuth');
 
 	const error = ref<any | null>(null);
-	const auth = getAuth();
+	
+
+	console.count('🔥 useAuth')
 
 	const registerOrLogin = async (email: string, password: string) => {
 		try {
+			
 			// Try to sign in
-			const userCredential = await signInWithEmailAndPassword(auth,credentials.email,credentials.password);
+			const userCredential = await signInWithEmailAndPassword(auth, email, password);
       
-      store.user = userCredential.user;
+      		store.setUser(userCredential.user);
 
 			return userCredential.user;
 		} catch (signInError) {
 			// If sign-in fails, try to register
 			try {
-				const userCredential = await createUserWithEmailAndPassword(auth,credentials.email,credentials.password);
+				const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-        store.user = userCredential.user;
+				store.setUser(userCredential.user);
 
 				return userCredential.user;
 
@@ -41,6 +47,33 @@ export const useAuth = async (credentials: any,	method = '',  config = {}) => {
 		}
 	};
 
-	return { registerOrLogin, error };
+	const loginWithGoogle = async () => {
+		
+		try {
+			
+			const provider = new GoogleAuthProvider();
+			const userCredential = await signInWithPopup(auth, provider);
+			console.log(userCredential.user);
+
+			store.setUser(userCredential.user);
+
+			return userCredential.user;
+		} catch (error) {
+			console.log(error);
+			return null;
+		}
+	};
+
+	const signOut = async () => {
+		try {
+			
+			await auth.signOut();
+			store.clearUser();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	return { registerOrLogin, loginWithGoogle, signOut, error };
 
 };

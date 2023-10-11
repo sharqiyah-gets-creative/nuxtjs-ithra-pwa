@@ -1,27 +1,32 @@
-import { FirebaseOptions } from "firebase/app";
-import { getDocs, collection } from "firebase/firestore";
-
-import { useFirebase } from "~/composables/useFirebase";
+import { collection, getDocs } from "firebase/firestore";
 
 export const getEvents = async (config: any) => {
+
+  const { firestore } = useFirestore();
+
+  const error = ref<any | null>(null);
+
+  const events = ref<IEvent[]>([]);
+
   try {
-    const { firestore } = useFirebase(config);
     const eventsCollectionRef = collection(firestore, "events");
     const eventsCollectionSnapshot = await getDocs(eventsCollectionRef);
-
-    const events: IEvent[] = eventsCollectionSnapshot.docs.map((doc) => {
+    
+    events.value = eventsCollectionSnapshot.docs.map((doc) => {
       return { 
         id: doc.id, 
         ...doc.data() 
       } as IEvent;
     });
 
-    return {
-      events,
-    };
-  } catch (error) {
+  } 
+  catch (error: any) {
+    error.value = error;
     console.error("Error fetching events:", error);
-    return { events: [] };
   }
+
+  return {
+    events, error
+  };
 
 };

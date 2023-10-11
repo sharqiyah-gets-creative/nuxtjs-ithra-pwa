@@ -10,7 +10,7 @@
     <UModal v-model="isOpen" fullscreen>
       <UCard
         :ui="{
-          base: 'h-full flex flex-col',
+          base: 'h-full flex flex-col space-y-2',
           rounded: '',
           divide: 'divide-y divide-gray-100 dark:divide-gray-800',
           body: {
@@ -35,22 +35,46 @@
           </div>
         </template>
 
-        <UForm :schema="schema" :state="state" @submit="submit" class="text-xl">
-          <UFormGroup size="xl" label="Email" name="email" class="mb-2">
+        <UForm
+          :schema="schema"
+          :state="state"
+          @submit="submit"
+          class="text-xl space-y-2"
+        >
+          <UFormGroup size="xl" label="Email" name="email">
             <UInput v-model="state.email" />
+          </UFormGroup>
+
+          <UFormGroup size="xl" label="Password" name="password">
             <UInput v-model="state.password" />
           </UFormGroup>
-          <UButton type="submit" class="w-full text-center" size="xl"> Submit </UButton>
+
+          <UButton type="submit" class="w-full text-center" size="xl">
+            Submit
+          </UButton>
         </UForm>
+
+        <div class="google_auth">
+          <UButton @click="loginWithGoogle"
+            icon="i-mdi-google"
+            size="lg"
+            variant="soft"
+            label="Sign in with Google"
+            class="w-full text-center"
+          />
+        </div>
       </UCard>
     </UModal>
   </div>
 </template>
 
 <script lang="ts" setup>
-const isOpen = ref(false);
+const { loginWithGoogle } = useAuth();
 import { z } from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
+import { useUserStore } from "~/store/user";
+
+const isOpen = ref(false);
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
@@ -59,16 +83,23 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>;
 
-  const state = reactive({
+const state = reactive({
   email: undefined,
-  password: undefined
+  password: undefined,
 });
 
 async function submit(event: FormSubmitEvent<Schema>) {
   // Do something with data
   console.log(event.data);
-  const { registerOrLogin, error } = await useAuth({email: });
 
-  const status = (await useAuth()).registerOrLogin
+  const { registerOrLogin, error } = useAuth();
+
+  const user = await registerOrLogin(event.data.email, event.data.password);
+
+  const store = useUserStore();
+
+  store.setUser(user);
+
+  console.log(user, error);
 }
 </script>

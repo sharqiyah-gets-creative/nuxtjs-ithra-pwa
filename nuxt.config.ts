@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   ssr: false, // default behavior
   
   devtools: {
-    enabled: false
+    enabled: true
   },
   experimental: {
     viewTransition: true
@@ -61,7 +61,7 @@ export default defineNuxtConfig({
 
   ui: {
     global: true,
-    icons: ['mdi', 'simple-icons']
+    icons: "all"
   },
 
   tailwindcss: {

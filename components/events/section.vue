@@ -8,7 +8,7 @@ onMounted(async () => {
     
     const { events } = await getEvents(config);
     
-    events.forEach((event) => {
+    events.value.forEach((event) => {
         eventsArray.value.push(event);
     });
     
