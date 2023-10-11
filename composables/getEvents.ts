@@ -1,8 +1,7 @@
+import { FirebaseOptions } from "firebase/app";
 import { getDocs, collection } from "firebase/firestore";
 
 import { useFirebase } from "~/composables/useFirebase";
-
-
 
 export const getEvents = async (config: any) => {
   try {

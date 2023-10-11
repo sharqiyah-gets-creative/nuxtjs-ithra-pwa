@@ -1,10 +1,10 @@
-import { initializeApp } from "firebase/app";
+import { FirebaseOptions, initializeApp } from "firebase/app";
 import { getFirestore, initializeFirestore } from "firebase/firestore";
-//import { getAuth } from "firebase/auth"
 //import { getAnalytics } from "firebase/analytics"
 
 export const useFirebase = (config: any) => {
-	const firebaseConfig = {
+	
+	const firebaseConfig: FirebaseOptions = {
 		apiKey: config.public.GOOGLE_API_KEY,
 		authDomain: config.public.GOOGLE_AUTH_DOMAIN,
 		projectId: config.public.GOOGLE_PROJECT_ID,

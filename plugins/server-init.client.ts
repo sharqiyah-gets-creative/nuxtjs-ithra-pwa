@@ -9,8 +9,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     console.log('🟩 server-init.server.ts')
     
 
-    const store = useEventsStore();
-    await store.boot();
-
-    
+    //const store = useEventsStore();
+    //await store.boot();
 })

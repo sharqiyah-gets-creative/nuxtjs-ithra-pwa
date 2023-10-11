@@ -38,6 +38,7 @@
         <UForm :schema="schema" :state="state" @submit="submit" class="text-xl">
           <UFormGroup size="xl" label="Email" name="email" class="mb-2">
             <UInput v-model="state.email" />
+            <UInput v-model="state.password" />
           </UFormGroup>
           <UButton type="submit" class="w-full text-center" size="xl"> Submit </UButton>
         </UForm>
@@ -53,16 +54,21 @@ import type { FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
+  password: z.string(),
 });
 
 type Schema = z.output<typeof schema>;
 
   const state = reactive({
   email: undefined,
+  password: undefined
 });
 
 async function submit(event: FormSubmitEvent<Schema>) {
   // Do something with data
   console.log(event.data);
+  const { registerOrLogin, error } = await useAuth({email: });
+
+  const status = (await useAuth()).registerOrLogin
 }
 </script>
