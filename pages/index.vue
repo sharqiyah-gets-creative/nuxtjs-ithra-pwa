@@ -6,15 +6,12 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div class="relative scroll-y overscroll-auto">
+  <div class="flex-1 relative">
     <NavsTop title="استكشف" description="فعاليات المنطقة الشرقية" />
     
     <mapsSection />
-
-    <Spacer />
-    
+    <Spacer />  
     <eventsSection />
 
-    
   </div>
 </template>

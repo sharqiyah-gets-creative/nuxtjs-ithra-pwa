@@ -8,23 +8,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-
-</script>
-<style>
-@keyframes change-bg-color {
-  0% { background-color: #FBBF24; }
-  25% { background-color: #3B82F6; }
-  50% { background-color: #10B981; }
-  75% { background-color: #EC4899; }
-  100% { background-color: #FBBF24; }
-}
-
-.animate-bg {
-  animation: change-bg-color 5s infinite;
-}
-
-</style>
-
-

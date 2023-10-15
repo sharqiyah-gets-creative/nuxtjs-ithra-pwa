@@ -3,7 +3,8 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	GoogleAuthProvider,
-	signInWithPopup
+	signInWithPopup,
+signInWithRedirect
 } from "firebase/auth";
 
 import { useUserStore } from "~/store/user";
@@ -47,17 +48,20 @@ export const useAuth =  () => {
 		}
 	};
 
-	const loginWithGoogle = async () => {
-		
+	const loginWithGoogle = async () => {	
 		try {
 			
 			const provider = new GoogleAuthProvider();
-			const userCredential = await signInWithPopup(auth, provider);
-			console.log(userCredential.user);
+			provider.addScope('profile');
+			const result = await signInWithPopup(auth, provider);
+			
+			console.log('google user', result.user);
 
-			store.setUser(userCredential.user);
+			store.setUser(result.user);
+			//navigateTo({path: "panel"})
 
-			return userCredential.user;
+
+			return result;
 		} catch (error) {
 			console.log(error);
 			return null;

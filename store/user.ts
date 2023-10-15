@@ -6,6 +6,7 @@ const defaultUser = null;
 
 const getStateUser = () => {
   const user = localStorage.getItem(SETTINGS_LOCAL_STORAGE_KEY)
+  console.log('🧑🏻 User Authenticated', user)
   return user ? JSON.parse(user) : defaultUser
 }
 
@@ -13,27 +14,27 @@ export const useUserStore = defineStore({
   id: "myUserStore",
 
   state: () => ({
-    // user is null or any
     user: getStateUser(),
-    isMenuOverlay: false,
-    isLogoutOverlay: false,
   }),
 
   actions: {
-    async getAllPosts() {
-    },
     setUser(user: any) {
-      this.updateLocalStorage();
       this.user = user;
+      this.updateLocalStorage();
+      
       
     },
     clearUser() {
-      this.updateLocalStorage();
       this.user = null;
+      this.updateLocalStorage();
+      
     },
     updateLocalStorage(){
       console.log('📪 Updating local storage with user data')
+      console.log(this.user)
       window.localStorage.setItem(SETTINGS_LOCAL_STORAGE_KEY, JSON.stringify(this.user));
+      window.location.replace("/")
+      navigateTo({path: "/", force: true})
     },
   },
 })

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @font-face {
   font-family: ithra;
   src: url(~/assets/fonts/ithrav3/ithraV3-medium.woff2) format("woff2"),url(~/assets/fonts/ithrav3/ithraV3-medium.woff) format("woff");
@@ -39,21 +41,47 @@ html {
 html,
 body{
   overscroll-behavior-y: none;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 
 }
-
 .page{
-  overscroll-behavior: initial;
+  /* overscroll-behavior: initial; */
 }
+
+main{
+  -webkit-tap-highlight-color: transparent;
+}
+
+
 
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s;
+  transition: all 1s;
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s;
+  animation-duration: 200ms;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes change-bg-color {
+  0% { background-color: #FBBF24; }
+  25% { background-color: #3B82F6; }
+  50% { background-color: #10B981; }
+  75% { background-color: #EC4899; }
+  100% { background-color: #FBBF24; }
+}
+
+.animate-bg {
+  animation: change-bg-color 5s infinite;
 }

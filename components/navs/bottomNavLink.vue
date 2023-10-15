@@ -19,7 +19,6 @@
 
 <script lang="ts" setup>
 defineProps(["title", "icon", "link"])
-
 </script>
 
 

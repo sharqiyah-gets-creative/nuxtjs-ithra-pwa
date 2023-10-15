@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen">
-    <NavsTop title="عن المبادرة" description="إعرف أكثر عن مبادرة الشرقية تبدع" />
+  <div class="flex-1">
+    <NavsTop title="عن المبادرة" description="إعرف أكثر عن مبادرة الشرقية تبدع" additional_classes="dark:bg-[#0E091B]" />
 
-    <section id="info">
+    <section id="info" class="py-6 flex-1">
       <UContainer>
         <div class="grid grid-cols-2 gap-6">
           <div class="bg-primary-pink rounded-lg border-0 p-6 col-span-2 text-lg text-slate-900">
@@ -33,7 +33,6 @@
         </div>
       </UContainer>
     </section>
-
-        
+   
   </div>
 </template>

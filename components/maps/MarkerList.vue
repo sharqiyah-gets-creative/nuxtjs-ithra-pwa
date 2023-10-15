@@ -1,5 +1,5 @@
 <script setup>
-import { CustomMarker, Marker } from 'vue3-google-map';
+import {  Marker } from 'vue3-google-map';
 
 const props = defineProps({
     marker: {
@@ -11,13 +11,6 @@ const props = defineProps({
 </script>
 
 <template>
-    <!--
-    <CustomMarker
-        :options="{ position: { lat: marker.lat, lng:  marker.lng }, anchorPoint: 'CENTER' }">
-        <img src="~/assets/images/center-pattern.png" width="50" height="50" />
-    </CustomMarker>
-    -->
-
     <Marker
         :options="{ position: { lat: marker.lat, lng:  marker.lng }, anchorPoint: 'CENTER' }">
     </Marker>

@@ -1,20 +1,12 @@
 <template>
-    <footer class="bg-black sticky bottom-0 pb-6 pt-3 font-light border-t border-t-slate-600">
-        <UContainer class="grid grid-cols-3">
-            <ULink to="/" class="p-1 flex flex-col gap-2 rounded-xl items-center hover:bg-white hover:bg-opacity-10 transition-all duration-300">
-                <UIcon name="i-heroicons-exclamation-circle-solid" class="text-3xl" />
-                <span>نبذة</span>
-            </ULink>
+  <div class="sticky bottom-0 z-30 w-full bg-white border-t border-gray-200 dark:bg-primary-violet dark:border-gray-600">
+    <div class="grid h-full max-w-lg grid-cols-3 mx-auto font-medium">
 
-            <ULink to="/" class="p-1 flex flex-col gap-2 rounded-xl items-center opacity-50 hover:opacity-100 transition-all duration-300">
-                <UIcon name="i-heroicons-calendar-solid" class="text-3xl" />
-                <span>الروزنامة</span>
-            </ULink>
+      <NavsBottomNavLink title="المبادرات" icon="i-mdi-home" link="/" />
 
-            <ULink to="/" class="p-1 flex flex-col gap-2 rounded-xl items-center opacity-50 hover:opacity-100 transition-all duration-300">
-                <UIcon name="i-heroicons-home-solid" class="text-3xl" />
-                <span>المبادرات</span>
-            </ULink>
-        </UContainer>
-    </footer>
+      <NavsBottomNavLink title="الروزنامة" icon="i-mdi-calendar" link="/calendar" />
+
+      <NavsBottomNavLink title="نبذة" icon="i-mdi-help-circle" link="/about" />
+    </div>
+  </div>
 </template>

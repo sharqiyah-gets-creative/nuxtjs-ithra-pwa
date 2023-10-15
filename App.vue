@@ -1,34 +1,11 @@
-<template>
-  <main
-    style="-webkit-tap-highlight-color: transparent;" 
-    class="text-[#3d2674] dark:bg-[#0E091B] dark:text-white max-h-screen overflow-hidden w-full">
-    
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-
-    <!-- Bottom Navigation-->
-    <NavsFlowbiteNav />
-    
-    <!-- Alerts and Notifications -->
-    <UNotifications />
-
-    <!-- Splash Screen-->
-    <Transition name="fade">
-      <Splash v-if="showSplash" />
-    </Transition>
-    
-  </main>
-</template>
-
 <script setup lang="ts">
 const showSplash = ref(true);
 
 console.log('app vue loaded')
-
 import { initFlowbite } from 'flowbite'
 import { useEventsStore } from './store/events';
 import { sleep } from './utils/helpers';
+
 const store = useEventsStore();
 await store.boot();
 
@@ -36,16 +13,15 @@ await store.boot();
 
 onMounted(async () => {
   console.log('app vue mounted')
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  const isIphone = /iPhone/i.test(navigator.userAgent);
-  const hasAcknowledged = localStorage.getItem("hasAcknowledgedPrompt");
+  
   initFlowbite();
   
-  await sleep(2000);
+  await sleep(1000);
   showSplash.value = false;
+
   const toast = useToast();
   
-  toast.add({
+  const toastOptions = {
     id: "install_to_home_screen",
     title: "ركب التطبيق بجهازك",
     description: "عشان تشوف كل جديد بكل سهولة",
@@ -58,15 +34,16 @@ onMounted(async () => {
         "size": "xl"
       }
     },
-    
-
     actions: [
       {
         label: "تركيب",
         click: () => {},
       },
     ],
-  });
+  };
+
+  // toast.add(toastOptions);
+
 
 
 });
@@ -78,14 +55,24 @@ useHead({
 });
 
 </script>
-<style>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s;
-  animation-duration: 200ms;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
 
+<template>
+  <main class="flex flex-col h-screen text-[#3d2674] dark:bg-[#0E091B] dark:text-white ">
+    
+    <NuxtLayout class="flex-1">
+      <NuxtPage />
+    </NuxtLayout>
 
-</style>
+    <!-- Bottom Navigation-->
+    <NavsBottom  />
+    
+    <!-- Alerts and Notifications -->
+    <UNotifications />
+
+    <!-- Splash Screen-->
+    <Transition name="fade">
+      <Splash v-if="showSplash" />
+    </Transition>
+    
+  </main>
+</template>

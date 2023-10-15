@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   ssr: false, // default behavior
   
   devtools: {
-    enabled: true
+    enabled: false
   },
   experimental: {
     viewTransition: true

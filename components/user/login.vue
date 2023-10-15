@@ -10,11 +10,11 @@
     <UModal v-model="isOpen" fullscreen>
       <UCard
         :ui="{
-          base: 'h-full flex flex-col space-y-2',
+          base: 'h-full flex flex-col ',
           rounded: '',
           divide: 'divide-y divide-gray-100 dark:divide-gray-800',
           body: {
-            base: 'grow',
+            base: 'grow space-y-2 standalone:pt-8',
           },
         }"
       >
@@ -49,7 +49,7 @@
             <UInput v-model="state.password" />
           </UFormGroup>
 
-          <UButton type="submit" class="w-full text-center" size="xl">
+          <UButton type="submit" class="w-full text-center !text-lg">
             Submit
           </UButton>
         </UForm>
@@ -60,7 +60,7 @@
             size="lg"
             variant="soft"
             label="Sign in with Google"
-            class="w-full text-center"
+            class="w-full text-center !text-lg"
           />
         </div>
       </UCard>

@@ -41,7 +41,11 @@ export default <Partial<Config>> {
       screens:{
         standalone: { raw: "(display-mode: standalone)" }
       }
-    }
+    },
+    variants: {
+      space: ['responsive', 'direction'],
+    },
+    
   },
 
   plugins: [

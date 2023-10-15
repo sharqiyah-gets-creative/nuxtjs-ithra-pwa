@@ -1,5 +1,5 @@
 <template>
-    <header id="title" class="md:px-0 py-4 standalone:pt-6">
+    <header id="title" class="flex-none sticky top-0 z-30 md:px-0 py-4 standalone:pt-6" :class="additional_classes">
       <UContainer class="flex justify-between">
         <h1 class="text-3xl font-black">
           {{ title }}
@@ -8,10 +8,8 @@
         <NavsSide />
       </UContainer>
     </header>
-
-
 </template>
 
 <script setup lang="ts">
-defineProps(["title", "description"])
+defineProps(["title", "description", "additional_classes"])
 </script>

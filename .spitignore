@@ -1,0 +1,14 @@
+.nuxt
+.vscode
+.editorconfig
+.env.example
+.eslintignore
+.eslintrc
+.nojekyll
+.npmrc
+tailwind.config.ts
+types/
+assets/css/main.css
+.github/workflows/deploy-pages.yml
+assets/maps/styles.json
+locales/*

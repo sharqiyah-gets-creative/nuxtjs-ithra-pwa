@@ -9,11 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-defineProps({
-  title: String,
-  description: String,
-  icon: String
-})
+defineProps(['title', 'description', 'icon'])
 </script>
 
 
