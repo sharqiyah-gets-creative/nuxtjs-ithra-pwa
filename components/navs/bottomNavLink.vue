@@ -2,7 +2,7 @@
   <NuxtLink
         :to="link"
         class="
-        pt-2 px-5 standalone:pb-6 
+        py-2 px-5 standalone:pb-8 
         inline-flex flex-col items-center justify-center 
         text-slate-800
         text:bg-purple-300 
@@ -12,8 +12,8 @@
         transition-colors duration-300
         "
       >
-        <UIcon class="text-3xl" :name="icon" />
-        <span class="text-sm">{{ title }}</span>
+        <UIcon class="text-2xl" :name="icon" />
+        <span class="text-xs">{{ title }}</span>
       </NuxtLink>
 </template>
 

@@ -12,17 +12,11 @@ import { useUserStore } from "~/store/user";
 export const useAuth =  () => {
 	const { firebaseApp } = useFirebase();
 	const auth = getAuth(firebaseApp);
-	console.countReset('🔥 useAuth')
-	console.count('🔥 useAuth')
 	
   	const store = useUserStore();
-	console.count('🔥 useAuth');
 
 	const error = ref<any | null>(null);
 	
-
-	console.count('🔥 useAuth')
-
 	const registerOrLogin = async (email: string, password: string) => {
 		try {
 			

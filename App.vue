@@ -1,10 +1,9 @@
 <script setup lang="ts">
-const showSplash = ref(true);
-
-console.log('app vue loaded')
 import { initFlowbite } from 'flowbite'
 import { useEventsStore } from './store/events';
-import { sleep } from './utils/helpers';
+
+// initial splash screen value
+const showSplash = ref(true);
 
 const store = useEventsStore();
 await store.boot();
@@ -19,33 +18,6 @@ onMounted(async () => {
   await sleep(1000);
   showSplash.value = false;
 
-  const toast = useToast();
-  
-  const toastOptions = {
-    id: "install_to_home_screen",
-    title: "ركب التطبيق بجهازك",
-    description: "عشان تشوف كل جديد بكل سهولة",
-    icon: "i-octicon-desktop-download-24",
-    timeout: 10000,
-    ui:{
-      "title": "text-lg",
-      "description": "text-base",
-      "actionButton":{
-        "size": "xl"
-      }
-    },
-    actions: [
-      {
-        label: "تركيب",
-        click: () => {},
-      },
-    ],
-  };
-
-  // toast.add(toastOptions);
-
-
-
 });
 
 useHead({
@@ -57,7 +29,7 @@ useHead({
 </script>
 
 <template>
-  <main class="flex flex-col h-screen text-[#3d2674] dark:bg-[#0E091B] dark:text-white ">
+  <main class="flex flex-col h-full min-h-screen text-[#3d2674] dark:bg-[#0E091B] dark:text-white ">
     
     <NuxtLayout class="flex-1">
       <NuxtPage />
@@ -66,12 +38,9 @@ useHead({
     <!-- Bottom Navigation-->
     <NavsBottom  />
     
-    <!-- Alerts and Notifications -->
-    <UNotifications />
-
     <!-- Splash Screen-->
-    <Transition name="fade">
-      <Splash v-if="showSplash" />
+    <Transition :duration="300" name="fade">
+      <Splash v-show="showSplash" />
     </Transition>
     
   </main>

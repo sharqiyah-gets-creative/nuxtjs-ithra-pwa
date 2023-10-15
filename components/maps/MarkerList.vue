@@ -1,17 +1,21 @@
-<script setup>
-import {  Marker } from 'vue3-google-map';
+<script setup lang="ts">
+import { InfoWindow, Marker } from "vue3-google-map";
 
 const props = defineProps({
-    marker: {
-        type: Object,
-        required: true,
-    }
+  marker: {
+    type: Object,
+    required: true,
+  },
 });
-
+computed(() => {
+  console.log(props.marker);
+});
 </script>
 
 <template>
-    <Marker
-        :options="{ position: { lat: marker.lat, lng:  marker.lng }, anchorPoint: 'CENTER' }">
-    </Marker>
+  <Marker :options="{ ...marker, anchorPoint: 'CENTER' }">
+    <InfoWindow :options="{ content: 'Hi' }">
+      <b>{{ marker.content }}</b>
+    </InfoWindow>
+  </Marker>
 </template>

@@ -66,7 +66,7 @@ pnpm clean
 - [x] custom tailwind variant `hocus` - <https://stackoverflow.com/questions/74350677/hover-or-focus-in-tailwind-css>
 - [ ] boot method of store - <https://stackoverflow.com/questions/72497896/how-to-implement-nuxtserverinit-action-to-load-data-from-server-side-on-the-init>
 - [x] Override UI Settings - <https://github.com/nuxt/ui/blob/dev/src/runtime/ui.config.ts>
-- [ ] V8 to V9 Firestore Migration - <https://fireship.io/lessons/firebase-v9-migration/>
+- [x] V8 to V9 Firestore Migration - <https://fireship.io/lessons/firebase-v9-migration/>
 
 
 ```js

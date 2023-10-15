@@ -1,33 +1,16 @@
 <script setup lang="ts">
+import { useEventsStore } from '~/store/events';
+import { storeToRefs } from 'pinia'
 
-let eventsArray: any = ref([]);
-
-onMounted(async () => {
-    const nuxtApp = useNuxtApp();
-    const config = nuxtApp.$config;
-    
-    const { events } = await getEvents(config);
-    
-    events.value.forEach((event) => {
-        eventsArray.value.push(event);
-    });
-    
-    console.log(eventsArray)
-});
+const eventsStore = useEventsStore();
+const { events } = storeToRefs(eventsStore)
 
 </script>
 
 <template>
     <section id="events" class="py-4">
         <UContainer class="space-y-8">
-            <eventsEvent 
-            v-if="eventsArray.length > 0"
-            v-for="event in eventsArray"
-            :key="event.id" 
-            :name="event.title" 
-            :location="event.location"
-            :timing="event.timing" 
-            />
+            <EventsCard v-if="events.length > 0" v-for="event in events" :key="event.id" :event="event" />
 
             <div v-else class="text-center">
                 <UCard loading :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }">

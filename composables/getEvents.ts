@@ -1,10 +1,10 @@
 import { collection, getDocs } from "firebase/firestore";
 
-export const getEvents = async (config: any) => {
+export const getEvents = async () => {
 
   const { firestore } = useFirestore();
 
-  const error = ref<any | null>(null);
+  const error: any | null = ref<any | null>(null);
 
   const events = ref<IEvent[]>([]);
 
@@ -13,9 +13,9 @@ export const getEvents = async (config: any) => {
     const eventsCollectionSnapshot = await getDocs(eventsCollectionRef);
     
     events.value = eventsCollectionSnapshot.docs.map((doc) => {
-      return { 
+      return {
         id: doc.id, 
-        ...doc.data() 
+        ...doc.data()
       } as IEvent;
     });
 
@@ -28,5 +28,4 @@ export const getEvents = async (config: any) => {
   return {
     events, error
   };
-
 };

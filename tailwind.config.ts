@@ -2,6 +2,8 @@ import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin';
 
 export default <Partial<Config>> {
+  mode: 'jit',
+
   content: [
     './docs/content/**/*.md',
     "./components/**/*.{js,vue,ts}",

@@ -1,9 +1,7 @@
 <template>
 
-    <UButton color="white" size="sm"  variant="ghost" @click="isOpen = true">
-        <UAvatar v-if="user" :src="user.photoURL" size="lg" class=""  alt="Avatar" @click="isOpen = true" />
-        <UAvatar v-else icon="i-heroicons-arrow-right-on-rectangle" size="lg" class=""  alt="Avatar" @click="isOpen = true" />
-    </UButton>
+    <UAvatar v-if="user" :src="user.photoURL" size="lg" class="cursor-pointer"  alt="Avatar" @click="isOpen = true" />
+    <UButton v-else icon="i-heroicons-ellipsis-vertical"  size="lg"  variant="link"  square @click="isOpen = true"  />
 
     <USlideover dir="ltr" v-model="isOpen" side="left" class="standalone:pt-8">
         <UCard dir="rtl" class="flex flex-col flex-1" :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
@@ -18,19 +16,19 @@
             <ClientOnly>
                 <ul class="divide-y divide-slate-600 divide">
                     
-                    <li @click="isDark = !isDark" class="flex justify-start items-center py-4">
+                    <li @click="isDark = !isDark" class="flex justify-start items-center py-4 cursor-pointer">
                         <NavsSideLink :title="isDark ? 'تشغيل الوضع النهاري' :'تشغيل الوضع الليلي'" description="تقييماتك للمبادرات (يتطلب تسجيل دخول)" :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'" />
                     </li>
 
-                    <li v-if="user" class="flex justify-start items-center py-4">
+                    <li v-if="user" class="flex justify-start items-center py-4 cursor-pointer">
                         <NavsSideLink title="تقييماتي" description="تقييماتك للمبادرات" icon="i-heroicons-user-solid" />
                     </li>
 
-                    <li v-if="user" @click="signUserOut" class="flex justify-start items-center py-4 dark:text-red-400">
+                    <li v-if="user" @click="signUserOut" class="flex justify-start items-center py-4 dark:text-red-400 cursor-pointer">
                         <NavsSideLink title="تسجيل الخروج" description="" icon="i-heroicons-user-solid" />
                     </li>
 
-                    <li v-else  class="flex justify-start items-center py-4">
+                    <li v-else  class="flex justify-start items-center py-4 cursor-pointer">
                         <UserLogin />
                     </li>
 
