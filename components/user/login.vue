@@ -63,13 +63,31 @@
             class="w-full text-center !text-lg"
           />
         </div>
+        <div class="twitter_auth">
+          <UButton @click="loginWithTwitter"
+            icon="i-mdi-twitter"
+            size="lg"
+            variant="soft"
+            label="Sign in with Twitter"
+            class="w-full text-center !text-lg"
+          />
+        </div>
+        <div class="facebook_auth">
+          <UButton @click="loginWithFacebook"
+            icon="i-mdi-facebook"
+            size="lg"
+            variant="soft"
+            label="Sign in with Facebook"
+            class="w-full text-center !text-lg"
+          />
+        </div>
       </UCard>
     </UModal>
   </div>
 </template>
 
 <script lang="ts" setup>
-const { loginWithGoogle } = useAuth();
+const { loginWithGoogle, loginWithTwitter, loginWithFacebook } = useAuth();
 import { z } from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
 import { useUserStore } from "~/store/user";

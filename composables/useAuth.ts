@@ -3,8 +3,9 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	GoogleAuthProvider,
+	TwitterAuthProvider,
+	FacebookAuthProvider,
 	signInWithPopup,
-signInWithRedirect
 } from "firebase/auth";
 
 import { useUserStore } from "~/store/user";
@@ -62,6 +63,36 @@ export const useAuth =  () => {
 		}
 	};
 
+	const loginWithTwitter = async () => {
+		try {
+			const provider = new TwitterAuthProvider();
+			const result = await signInWithPopup(auth, provider);
+
+			store.setUser(result.user);
+			//navigateTo({path: "panel"})
+
+			return result;
+		} catch (error) {
+			console.log(error);
+			return null;
+		}
+	}
+
+	const loginWithFacebook = async () => {
+		try {
+			const provider = new FacebookAuthProvider();
+			const result = await signInWithPopup(auth, provider);
+
+			store.setUser(result.user);
+			//navigateTo({path: "panel"})
+
+			return result;
+		} catch (error) {
+			console.log(error);
+			return null;
+		}
+	}
+
 	const signOut = async () => {
 		try {
 			
@@ -72,6 +103,6 @@ export const useAuth =  () => {
 		}
 	};
 
-	return { registerOrLogin, loginWithGoogle, signOut, error };
+	return { registerOrLogin, loginWithGoogle, loginWithTwitter,loginWithFacebook,  signOut, error };
 
 };
