@@ -34,6 +34,13 @@ export const useEventsStore = defineStore({
       		this.updateLocalStorage();
 		},
 
+		getEventById(id: string) {
+			if (this.events) {
+				return this.events.find((event: IEvent) => event.id === id);
+			}
+			return null;
+		},
+
 		getEventsCount() {
 			return this.events ? this.events.length : 0;
 		},

@@ -11,6 +11,7 @@ const center = ref({ lat: 26.3570737, lng: 50.1100591 });
 const config = useRuntimeConfig();
 
 defineProps(['locations'])
+
 </script>
 <template>
   <ClientOnly>

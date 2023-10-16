@@ -81,16 +81,19 @@
             class="w-full text-center !text-lg"
           />
         </div>
+        <div>
+          <Drawer /> 
+        </div>
       </UCard>
     </UModal>
   </div>
 </template>
 
 <script lang="ts" setup>
-const { loginWithGoogle, loginWithTwitter, loginWithFacebook } = useAuth();
 import { z } from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
 import { useUserStore } from "~/store/user";
+const { loginWithGoogle, loginWithTwitter, loginWithFacebook } = useAuth();
 
 const isOpen = ref(false);
 
