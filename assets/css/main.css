@@ -1,9 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-
 @font-face {
   font-family: ithra;
   src: url(~/assets/fonts/ithrav3/ithraV3-medium.woff2) format("woff2"),url(~/assets/fonts/ithrav3/ithraV3-medium.woff) format("woff");
@@ -11,7 +8,6 @@
   font-style: normal;
   font-display: swap
 }
-
 @font-face {
   font-family: ithra;
   src: url(~/assets/fonts/ithrav3/ithraV3-light.woff2) format("woff2"),url(~/assets/fonts/ithrav3/ithraV3-light.woff) format("woff");
@@ -19,7 +15,6 @@
   font-style: normal;
   font-display: swap
 }
-
 @font-face {
   font-family: ithra;
   src: url(~/assets/fonts/ithrav3/ithraV3-bold.woff2) format("woff2"),url(~/assets/fonts/ithrav3/ithraV3-bold.woff) format("woff");
@@ -42,22 +37,14 @@ html,
 body{
   overscroll-behavior-y: none;
   /* scroll-behavior: smooth; */
-
 }
-.page{
-  /* overscroll-behavior: initial; */
-}
-
 main{
   -webkit-tap-highlight-color: transparent;
 }
 
-
-
-
 .page-enter-active,
 .page-leave-active {
-  transition: all 1s;
+  transition: all 0.3s;
 }
 .page-enter-from,
 .page-leave-to {

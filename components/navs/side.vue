@@ -1,9 +1,11 @@
 <template>
 
-    <UAvatar v-if="user" :src="user.photoURL" size="lg" class="cursor-pointer"  alt="Avatar" @click="isOpen = true" />
-    <UButton v-else icon="i-heroicons-ellipsis-vertical"  size="lg"  variant="link"  square @click="isOpen = true"  />
+    <UAvatar v-if="user" :src="user.photoURL" size="xl" class="cursor-pointer"  alt="Avatar" @click="isOpen = true" />
+    <Button v-else  class="text-2xl" @click="isOpen = true">
+        <UIcon name="i-heroicons-ellipsis-vertical" />
+    </Button>
 
-    <USlideover dir="ltr" v-model="isOpen" side="left" class="standalone:pt-8">
+    <USlideover :overlay="false" dir="ltr" v-model="isOpen" side="left" class="standalone:pt-8">
         <UCard dir="rtl" class="flex flex-col flex-1" :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
             <template #header>
                 <div class="flex items-center justify-between flex-row-reverse">
