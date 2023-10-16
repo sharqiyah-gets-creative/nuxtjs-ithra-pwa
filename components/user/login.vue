@@ -1,11 +1,64 @@
 <template>
   <div>
     <NavsSideLink
-      @click="isOpen = true"
+      
       title="تسجيل الدخول"
       description="سجل دخولك لتقوم بتقييم تجاربك"
       icon="i-heroicons-user-solid"
+      data-drawer-target="drawer-login" 
+      data-drawer-toggle="drawer-login" 
+      data-drawer-placement="bottom" 
+      aria-controls="drawer-login"
+      data-drawer-backdrop="true"
     />
+
+    <Drawer contentClass="space-y-2" id="drawer-login" icon="i-heroicons-user" title="سجل دخولك معنا">
+        
+        <div class="email_auth">
+          <MyButton title="سجل دخولك بالبريد الإلكتروني" icon="i-heroicons-envelope"
+            data-drawer-target="drawer-email-login"
+            data-drawer-toggle="drawer-email-login" 
+            data-drawer-placement="bottom" 
+            aria-controls="drawer-email-login"
+            data-drawer-backdrop="false" 
+          />
+  
+          <Drawer id="drawer-email-login" icon="i-heroicons-envelope" title="تسجيل الدخول بالبريد الإلكتروني">
+            <UForm
+              :schema="schema"
+              :state="state"
+              @submit="submit"
+              class="text-xl space-y-2 flex flex-col justify-between h-full"
+            >
+              <div>
+                <UFormGroup size="xl" label="البريد الإلكتروني" name="email">
+                  <UInput v-model="state.email" />
+                </UFormGroup>
+
+                <UFormGroup size="xl" label="كلمة المرور" name="password">
+                  <UInput v-model="state.password" />
+                </UFormGroup>
+              </div>
+
+              <UButton type="submit" class="w-full text-center !text-lg">
+                إرسال
+              </UButton>
+            </UForm>
+          </Drawer>
+        </div>
+
+        <div class="google_auth">
+          <MyButton @click="loginWithGoogle" title="سجل دخولك بقوقل" icon="i-mdi-google" />
+        </div>
+
+        <div class="twitter_auth">
+          <MyButton @click="loginWithTwitter" title="سجل دخولك بتويتر" icon="i-mdi-twitter" />
+        </div>
+
+        <div class="facebook_auth">
+          <MyButton @click="loginWithFacebook" title="سجل دخولك بفيسبوك" icon="i-mdi-facebook" />
+        </div>
+      </Drawer>
 
     <UModal v-model="isOpen" fullscreen>
       <UCard
@@ -18,72 +71,9 @@
           },
         }"
       >
-        <template #header>
-          <div class="flex items-center justify-between">
-            <h3
-              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
-            >
-              Modal
-            </h3>
-            <UButton
-              color="gray"
-              variant="ghost"
-              icon="i-heroicons-x-mark-20-solid"
-              class="-my-1"
-              @click="isOpen = false"
-            />
-          </div>
-        </template>
+    
 
-        <UForm
-          :schema="schema"
-          :state="state"
-          @submit="submit"
-          class="text-xl space-y-2"
-        >
-          <UFormGroup size="xl" label="Email" name="email">
-            <UInput v-model="state.email" />
-          </UFormGroup>
-
-          <UFormGroup size="xl" label="Password" name="password">
-            <UInput v-model="state.password" />
-          </UFormGroup>
-
-          <UButton type="submit" class="w-full text-center !text-lg">
-            Submit
-          </UButton>
-        </UForm>
-
-        <div class="google_auth">
-          <UButton @click="loginWithGoogle"
-            icon="i-mdi-google"
-            size="lg"
-            variant="soft"
-            label="Sign in with Google"
-            class="w-full text-center !text-lg"
-          />
-        </div>
-        <div class="twitter_auth">
-          <UButton @click="loginWithTwitter"
-            icon="i-mdi-twitter"
-            size="lg"
-            variant="soft"
-            label="Sign in with Twitter"
-            class="w-full text-center !text-lg"
-          />
-        </div>
-        <div class="facebook_auth">
-          <UButton @click="loginWithFacebook"
-            icon="i-mdi-facebook"
-            size="lg"
-            variant="soft"
-            label="Sign in with Facebook"
-            class="w-full text-center !text-lg"
-          />
-        </div>
-        <div>
-          <Drawer /> 
-        </div>
+      
       </UCard>
     </UModal>
   </div>

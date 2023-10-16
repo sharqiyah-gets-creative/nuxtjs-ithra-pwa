@@ -30,6 +30,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@emanuele-em/nuxt-swipe": "^1.0.2",
     "@pinia/nuxt": "^0.4.11",
     "firebase": "^10.4.0",
     "flowbite": "^1.8.1",

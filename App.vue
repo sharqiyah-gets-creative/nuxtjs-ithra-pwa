@@ -1,6 +1,24 @@
 <script setup lang="ts">
 import { initFlowbite } from 'flowbite'
 import { useEventsStore } from './store/events';
+const { $bus }: any = useNuxtApp()
+const routes = ['/', '/calendar','/about']
+
+$bus.$on('swipe', (direction: string) => {
+    let indexCurrentRoute = routes.indexOf(useRoute().path)
+    console.log('swiped', direction)
+    if (direction === 'right' ) {
+      // change indexCurrentRoute to the next index inside the routes array, if reached 0, go back to the last index
+        indexCurrentRoute += 1
+    }
+    if (direction === 'left') {
+        indexCurrentRoute -= 1
+    }
+    if (indexCurrentRoute < 0) {
+      indexCurrentRoute = routes.length - 1
+    }
+    return navigateTo(routes[indexCurrentRoute])
+})
 
 // initial splash screen value
 const showSplash = ref(true);
@@ -29,10 +47,11 @@ useHead({
 </script>
 
 <template>
-  <main class="flex flex-col h-full min-h-screen text-[#3d2674] dark:bg-[#0E091B] dark:text-white ">
+  <Swipe>
+  <main class="flex flex-col h-full min-h-screen text-[#3d2674] bg-slate-100 dark:bg-[#0E091B] dark:text-white ">
     
     <NuxtLayout class="flex-1">
-      <NuxtPage />
+        <NuxtPage />
     </NuxtLayout>
 
     <!-- Bottom Navigation-->
@@ -44,4 +63,5 @@ useHead({
     </Transition>
     
   </main>
+</Swipe>
 </template>

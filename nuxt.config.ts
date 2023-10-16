@@ -29,7 +29,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/i18n',
     '@kevinmarrec/nuxt-pwa',
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@emanuele-em/nuxt-swipe'
   ],
 
   pinia: {
