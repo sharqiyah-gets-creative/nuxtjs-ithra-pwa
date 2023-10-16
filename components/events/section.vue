@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { useEventsStore } from '~/store/events';
+import { useUserStore } from '~/store/user';
 import { storeToRefs } from 'pinia'
 
 const eventsStore = useEventsStore();
-const { events } = storeToRefs(eventsStore)
+const userStore = useUserStore();
+
+let { events } = storeToRefs(eventsStore)
+
+if(userStore.position){
+    events = eventsStore.fetchEventsByPosition(userStore.position)
+}
 
 </script>
 

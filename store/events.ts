@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+import { getDistance } from "@/utils/helpers";
 const SETTINGS_LOCAL_STORAGE_KEY = 'events'
 
 const defaultEvents = ref([]);
@@ -32,6 +32,20 @@ export const useEventsStore = defineStore({
 				this.events = this.events.filter((event: IEvent) => event.id !== id);
 			}
       		this.updateLocalStorage();
+		},
+
+		fetchEventsByPosition(position: any) {
+			const events = this.events.sort((a: IEvent, b: IEvent) => {
+				const distanceToA = getDistance(position.lat, position.lng, parseFloat(a.ll.split(',')[0]), parseFloat(a.ll.split(',')[1]));
+				const distanceToB = getDistance(position.lat, position.lng, parseFloat(b.ll.split(',')[0]), parseFloat(b.ll.split(',')[1]));
+				return distanceToA - distanceToB;
+			});
+			events.map((event: IEvent) => {
+				event.distance = getDistance(position.lat, position.lng, parseFloat(event.ll.split(',')[0]), parseFloat(event.ll.split(',')[1]));
+				return event;
+			});
+			
+			return events;
 		},
 
 		getEventById(id: string) {

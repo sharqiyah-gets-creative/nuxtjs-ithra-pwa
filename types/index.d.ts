@@ -9,6 +9,7 @@ declare global {
 		start_time: Timestamp;
 		end_time: Timestamp;
 		language?: string[];
+		distance?: number;
 		city?: string;
 		area?: string;
 		ll: string;

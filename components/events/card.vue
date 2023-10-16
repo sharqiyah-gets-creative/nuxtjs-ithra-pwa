@@ -2,6 +2,7 @@
 import { Timestamp } from "firebase/firestore";
 import { useCommonStore } from "~/store/common";
 import { IEvent } from "~/types";
+import { formatDistance } from "~/utils/helpers";
 
 const { lastColor, setLastColor } = useCommonStore();
 
@@ -20,14 +21,12 @@ defineProps({
     required: true,
   },
 });
-
-
-
-
 </script>
 
 <template>
-  <NuxtLink :to="`/event/${event.id}`" class="w-full text-slate-900 rounded-lg overflow-hidden shadow-md">
+  <div class="w-full text-slate-900 rounded-lg overflow-hidden shadow-md">
+    <NuxtLink :to="`/event/${event.id}`" class="w-full">
+
     <div :class="`${color}`" class="p-2 px-4 text-lg font-bold flex justify-between" >
       <span>{{ event.title }}</span>
       <div class="badges space-x-2 rtl:space-x-reverse">
@@ -35,6 +34,7 @@ defineProps({
           :key="index" size="xs" :label="language" />
       </div>
     </div>
+
     <div class="p-2 px-4 bg-white">
       <ul class="space-y-1 font-light text-base">
         <li class="flex justify-start items-center space-x-2 rtl:space-x-reverse" >
@@ -54,7 +54,13 @@ defineProps({
           <span class="font-bold">بواسطة</span>
           <span>{{ event.entity }}</span>
         </li>
+
+        <li v-if="event.distance" class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
+          <UIcon name="i-mdi-car-hatchback" />
+          <span>تبعد عنك {{ formatDistance(event.distance) }}</span>
+        </li>
       </ul>
     </div>
   </NuxtLink>
+  </div>
 </template>
