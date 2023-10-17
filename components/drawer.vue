@@ -3,9 +3,6 @@ import { Drawer, initFlowbite } from 'flowbite';
 const { $bus }: any = useNuxtApp()
 
 const props = defineProps(['id', 'title', 'icon', 'contentClass']);
-const $drawerElement: HTMLElement | any = document.getElementById(props.id);
-const drawer = new Drawer($drawerElement);
-
 
 onMounted(async () => {
   console.log('Drawer vue mounted')
@@ -13,37 +10,31 @@ onMounted(async () => {
 });
 
 $bus.$on('swipe', (direction: string) => {
-    const $targetEl: HTMLElement = document.getElementById(props.id) as HTMLElement;
-    const element: any = $targetEl;
-
-    switch (direction) {
-        case 'left': 
-        console.log('swiped left')
-            // swiped left, do things
-            break;
-        case 'right':
-          console.log('swiped right')
-            // swiped right, do things
-            break;
-        case 'up':
-          console.log('swiped up')
-          drawer.hide();
-            // swiped up, do things
-            break;
-        case 'down':
-          console.log('swiped down')
-          //element.hide();
-            // swiped down, do things
-            break;
-        default:
-            break;
-    }
+  const $drawerElement: HTMLElement | any = document.getElementById(props.id);
+  const drawer = new Drawer($drawerElement);
+  switch (direction) {
+      case 'left': 
+      console.log('swiped left')
+          // swiped left, do things
+          break;
+      case 'right':
+        console.log('swiped right')
+          // swiped right, do things
+          break;
+      case 'up':
+        console.log('swiped up')
+        drawer.hide();
+          // swiped up, do things
+          break;
+      case 'down':
+        console.log('swiped down')
+        //element.hide();
+          // swiped down, do things
+          break;
+      default:
+          break;
+  }
 })
-
-
-
-
-
 </script>
 <template>
   <!-- drawer component -->

@@ -1,5 +1,5 @@
 <template>
-  <Button class="
+  <button class="
   py-2.5 px-5 rounded-lg 
   border border-gray-200 
   text-gray-900 
@@ -22,7 +22,7 @@
   flex items-center justify-start">
     <UIcon v-if="icon" class="me-2" :name="icon" />
     <span>{{ title }}</span>
-  </Button>
+  </button>
 </template>
 
 <script lang="ts" setup>

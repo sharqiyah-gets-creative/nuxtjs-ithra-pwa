@@ -15,15 +15,13 @@ export const useFirebase = () => {
 
 	// Initialize Firebase if it hasn't been already
 	let firebaseApp: FirebaseApp;
-	
-	if(getApps().length == 0){
-		firebaseApp = initializeApp(firebaseConfig);
-	}else{
-		firebaseApp = getApps()[0];
+	if(getApps().length === 0){
+	  firebaseApp = initializeApp(firebaseConfig);
+	} 
+	else {
+	  firebaseApp = getApps()[0];
 	}
-
-	firebaseApp = initializeApp(firebaseConfig);
-
+	
 	return {
 		firebaseApp,
 	};

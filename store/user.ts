@@ -23,7 +23,7 @@ export const useUserStore = defineStore({
 
     setPosition(position: any) {
       this.position = position;
-      setLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, this.position, true)
+      setLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, this.position, false)
     },
 
     setAlertDismissed(dismissed: boolean) {

@@ -9,7 +9,7 @@
       data-drawer-toggle="drawer-login" 
       data-drawer-placement="bottom" 
       aria-controls="drawer-login"
-      data-drawer-backdrop="true"
+      data-drawer-backdrop="false"
     />
 
     <Drawer contentClass="space-y-2" id="drawer-login" icon="i-heroicons-user" title="سجل دخولك معنا">
@@ -28,8 +28,7 @@
               :schema="schema"
               :state="state"
               @submit="submit"
-              class="text-xl space-y-2 flex flex-col justify-between h-full"
-            >
+              class="text-xl space-y-2 flex flex-col justify-between h-full">
               <div>
                 <UFormGroup size="xl" label="البريد الإلكتروني" name="email">
                   <UInput v-model="state.email" />
@@ -40,23 +39,21 @@
                 </UFormGroup>
               </div>
 
-              <UButton type="submit" class="w-full text-center !text-lg">
-                إرسال
-              </UButton>
+              <UButton type="submit" class="w-full text-center !text-lg">إرسال</UButton>
             </UForm>
           </Drawer>
         </div>
 
         <div class="google_auth">
-          <MyButton @click="loginWithGoogle" title="سجل دخولك بقوقل" icon="i-mdi-google" />
+          <MyButton @click="loginWithAuthProvider('google')" title="سجل دخولك بقوقل" icon="i-mdi-google" />
         </div>
 
         <div class="twitter_auth">
-          <MyButton @click="loginWithTwitter" title="سجل دخولك بتويتر" icon="i-mdi-twitter" />
+          <MyButton @click="loginWithAuthProvider('twitter')" title="سجل دخولك بتويتر" icon="i-mdi-twitter" />
         </div>
 
         <div class="facebook_auth">
-          <MyButton @click="loginWithFacebook" title="سجل دخولك بفيسبوك" icon="i-mdi-facebook" />
+          <MyButton @click="loginWithAuthProvider('facebook')" title="سجل دخولك بفيسبوك" icon="i-mdi-facebook" />
         </div>
       </Drawer>
 
@@ -71,9 +68,7 @@
           },
         }"
       >
-    
-
-      
+   
       </UCard>
     </UModal>
   </div>
@@ -83,7 +78,7 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "@nuxt/ui/dist/runtime/types";
 import { useUserStore } from "~/store/user";
-const { loginWithGoogle, loginWithTwitter, loginWithFacebook } = useAuth();
+const { loginWithAuthProvider } = useAuth();
 
 const isOpen = ref(false);
 

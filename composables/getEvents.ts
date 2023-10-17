@@ -4,8 +4,7 @@ export const getEvents = async () => {
 
   const { firestore } = useFirestore();
 
-  const error: any | null = ref<any | null>(null);
-
+  const error = ref<Record<string, unknown> | null>(null);
   const events = ref<IEvent[]>([]);
 
   try {

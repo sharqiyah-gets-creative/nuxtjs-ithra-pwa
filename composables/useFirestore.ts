@@ -1,13 +1,16 @@
 import { getFirestore, initializeFirestore } from "firebase/firestore";
 
+let isFirestoreInitialized = false;
+
 export const useFirestore = () => {
-
   const { firebaseApp } = useFirebase();
-  
-  initializeFirestore(firebaseApp, {
-		experimentalForceLongPolling: true,
-	});
 
+  if (!isFirestoreInitialized) {
+    initializeFirestore(firebaseApp, {
+      experimentalForceLongPolling: true,
+    });
+    isFirestoreInitialized = true;
+  }
   const firestore = getFirestore(firebaseApp);
 
   return {

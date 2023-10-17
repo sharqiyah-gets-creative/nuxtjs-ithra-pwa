@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { useCommonStore } from "@/store/common";
-import { formatDistance } from "@/utils/helpers";
+import { formatDistance, formatDate, getRandomColorClass } from "@/utils/helpers";
 
 const { lastColor, setLastColor } = useCommonStore();
 
 // if the generated color is the same as the previous one in the store, generate another
 
-let color = getEventHeaderClass();
+let color = getRandomColorClass();
 while (color === lastColor) {
-  color = getEventHeaderClass();
+  color = getRandomColorClass();
 }
 setLastColor(color);
 

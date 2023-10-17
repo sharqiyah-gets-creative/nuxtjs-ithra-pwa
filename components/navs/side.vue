@@ -1,9 +1,9 @@
 <template>
 
-    <UAvatar v-if="user" :src="user.photoURL" size="xl" class="cursor-pointer"  alt="Avatar" @click="isOpen = true" />
-    <Button v-else  class="text-2xl" @click="isOpen = true">
+    <UAvatar v-if="user" :src="user.photoURL" size="lg" class="cursor-pointer"  alt="Avatar" @click="isOpen = true" />
+    <button v-else  class="text-2xl" @click="isOpen = true">
         <UIcon name="i-heroicons-ellipsis-vertical" />
-    </Button>
+    </button>
 
     <USlideover :overlay="false" dir="ltr" v-model="isOpen" side="left" class="standalone:pt-8">
         <UCard dir="rtl" class="flex flex-col flex-1" :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
@@ -30,7 +30,7 @@
                         <NavsSideLink title="تسجيل الخروج" description="" icon="i-heroicons-user-solid" />
                     </li>
 
-                    <li v-else  class="flex justify-start items-center py-4 cursor-pointer">
+                    <li v-else class="flex justify-start items-center py-4 cursor-pointer">
                         <UserLogin />
                     </li>
 

@@ -2,7 +2,7 @@
 import { GoogleMap, MarkerCluster, Marker } from "vue3-google-map";
 import mapStyles from "@/assets/maps/styles.json";
 import { useEventsStore } from '../../store/events';
-
+import {formatDate } from '@/utils/helpers';
 
 
 const eventId = useRoute().params?.id;
