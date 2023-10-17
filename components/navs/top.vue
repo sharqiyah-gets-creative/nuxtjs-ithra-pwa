@@ -1,11 +1,17 @@
 <template>
     <header id="title" class="flex-none sticky top-0 z-30 md:px-0 py-4 standalone:pt-6" :class="additional_classes">
-      <UContainer class="flex justify-between">
-        <h1 class="text-2xl font-black">
-          {{ title }}
-          <p class="block text-lg font-light">{{ description }}</p>
-        </h1>
-        <NavsSide />
+      <UContainer class="space-y-2">
+        <div class="flex justify-between">
+          <h1 class="text-2xl font-black">
+            {{ title }}
+            <p class="block text-lg font-light">{{ description }}</p>
+          </h1>
+          <NavsSide />
+        </div>
+        
+        <div class="flex-none">
+          <slot />
+        </div>
       </UContainer>
     </header>
 </template>

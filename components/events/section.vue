@@ -2,15 +2,53 @@
 import { useEventsStore } from '~/store/events';
 import { useUserStore } from '~/store/user';
 import { storeToRefs } from 'pinia'
+import { getPosition } from '~/utils/helpers';
 
 const eventsStore = useEventsStore();
 const userStore = useUserStore();
 
-let { events } = storeToRefs(eventsStore)
+let { events, searchKeywords } = storeToRefs(eventsStore);
+
+const getLocationPermission = await window.navigator.permissions.query({ name: 'geolocation' })
+const { state } = await getLocationPermission;
+
+const isLocationAllowed = () =>{
+    if (state === 'granted') {
+        return true
+    } else if (state === 'prompt') {
+        return true
+    } else {
+        return false
+    }
+}
+
+if(isLocationAllowed()){
+    const position: any = await getPosition({enableHighAccuracy: true});
+    console.log('updating user position')
+    userStore.setPosition({lat: position.coords.latitude, lng: position.coords.longitude})
+}
+else{
+    console.log('location is not allowed')
+    if(userStore.position){
+        console.log('Last known position is', userStore.position)
+    }
+}
 
 if(userStore.position){
     events = eventsStore.getEventsByPosition(userStore.position)
 }
+
+watch(searchKeywords, (value) => {
+    console.log(value)
+    // filter events array with events containing the search keywords as a title
+    if (events.value) {
+        events.value = events.value.filter((event: IEvent) => {
+      return event.title.includes(value)
+    })
+  }
+  
+    
+})
 
 </script>
 

@@ -8,7 +8,9 @@ onMounted(()=>{
 
 <template>
   <div class="flex-1 relative">
-    <NavsTop title="استكشف" description="فعاليات المنطقة الشرقية" additional_classes="bg-slate-100 dark:bg-[#0E091B]" />
+    <NavsTop title="استكشف" description="فعاليات المنطقة الشرقية" additional_classes="bg-slate-100 dark:bg-[#0E091B]">
+      <NavsSearch />
+    </NavsTop>
     
     <MapsSection />
 

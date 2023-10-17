@@ -12,6 +12,7 @@ export const useEventsStore = defineStore({
 	state: () => ({
 		events: getLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, []),
 		eventsLastUpdated: getLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, null),
+		searchKeywords: ref(''),
 	}),
 	
 	actions: {
@@ -23,6 +24,10 @@ export const useEventsStore = defineStore({
 			}
 			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false)
 			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false)
+		},
+
+		setSearchKeywords(keywords: string) {
+			this.searchKeywords = keywords;
 		},
 
 		removeEvent(id: string) {
@@ -90,7 +95,6 @@ export const useEventsStore = defineStore({
 			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false)
 			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false)
 		},
-
 
 		async boot() {
 			try{
