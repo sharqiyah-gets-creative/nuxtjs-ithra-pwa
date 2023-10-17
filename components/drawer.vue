@@ -1,8 +1,11 @@
 <script lang="ts" setup>
-import { initFlowbite } from 'flowbite';
+import { Drawer, initFlowbite } from 'flowbite';
 const { $bus }: any = useNuxtApp()
 
 const props = defineProps(['id', 'title', 'icon', 'contentClass']);
+const $drawerElement: HTMLElement | any = document.getElementById(props.id);
+const drawer = new Drawer($drawerElement);
+
 
 onMounted(async () => {
   console.log('Drawer vue mounted')
@@ -24,6 +27,7 @@ $bus.$on('swipe', (direction: string) => {
             break;
         case 'up':
           console.log('swiped up')
+          drawer.hide();
             // swiped up, do things
             break;
         case 'down':
@@ -35,6 +39,10 @@ $bus.$on('swipe', (direction: string) => {
             break;
     }
 })
+
+
+
+
 
 </script>
 <template>
