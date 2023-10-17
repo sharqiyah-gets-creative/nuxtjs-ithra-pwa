@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import { Timestamp } from "firebase/firestore";
-import { useCommonStore } from "~/store/common";
-import { IEvent } from "~/types";
-import { formatDistance } from "~/utils/helpers";
+import { useCommonStore } from "@/store/common";
+import { formatDistance } from "@/utils/helpers";
 
 const { lastColor, setLastColor } = useCommonStore();
 
-let color = getEventHeaderClass();
-
 // if the generated color is the same as the previous one in the store, generate another
+
+let color = getEventHeaderClass();
 while (color === lastColor) {
   color = getEventHeaderClass();
 }
-
 setLastColor(color);
 
 defineProps({
@@ -21,6 +18,7 @@ defineProps({
     required: true,
   },
 });
+
 </script>
 
 <template>

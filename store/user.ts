@@ -1,70 +1,40 @@
 import { defineStore } from "pinia";
+import { getLocalStorageItem, setLocalStorageItem } from "@/utils/helpers";
 
-const SETTINGS_LOCAL_STORAGE_USER_KEY = 'user'
-const SETTINGS_LOCAL_STORAGE_POSITION_KEY = 'userPosition'
-const SETTINGS_LOCAL_STORAGE_ALERT_DISMISSED_KEY = 'positionAlertDismissed'
-
-const defaultUser = null;
-const defaultAlertDismissed = false;
-const defaultPosition = null;
-
-const getStateUser = () => {
-  const user = localStorage.getItem(SETTINGS_LOCAL_STORAGE_USER_KEY)
-  console.log('🧑🏻 User Authenticated', user)
-  return user ? JSON.parse(user) : defaultUser
-}
-
-const getUserAlertDismissed = () => {
-  const dismissed = localStorage.getItem(SETTINGS_LOCAL_STORAGE_ALERT_DISMISSED_KEY)
-  console.log('🧑🏻 User Dismissed Alert', dismissed)
-  return dismissed ? JSON.parse(dismissed) : defaultAlertDismissed
-}
-
-const getStatePosition = () => {
-  const position = localStorage.getItem(SETTINGS_LOCAL_STORAGE_POSITION_KEY)
-  console.log('🧑🏻 User Position', position)
-  return position ? JSON.parse(position) : defaultPosition
-}
+const USER_STORE_ID = 'myUserStore'
+const USER_LOCAL_STORAGE_KEY = 'user'
+const USER_POSITION_LOCAL_STORAGE_KEY = 'userPosition'
+const USER_POSITION_ALERT_DISMISSED_LOCAL_STORAGE_KEY = 'positionAlertDismissed'
 
 export const useUserStore = defineStore({
-  id: "myUserStore",
+  id: USER_STORE_ID,
 
   state: () => ({
-    user: getStateUser(),
-    position: getStatePosition(),
-    position_alert_dismissed: getUserAlertDismissed(),
+    user: getLocalStorageItem(USER_LOCAL_STORAGE_KEY, null),
+    position: getLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, null),
+    position_alert_dismissed: getLocalStorageItem(USER_POSITION_ALERT_DISMISSED_LOCAL_STORAGE_KEY, false),
   }),
 
   actions: {
     setUser(user: any) {
       this.user = user;
-      this.updateLocalStorage();
+      setLocalStorageItem(USER_LOCAL_STORAGE_KEY, this.user, true)
     },
 
     setPosition(position: any) {
       this.position = position;
-      this.updateLocalStorage();
+      setLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, this.position, true)
     },
 
     setAlertDismissed(dismissed: boolean) {
       this.position_alert_dismissed = dismissed;
-      this.updateLocalStorage();
+      setLocalStorageItem(USER_POSITION_ALERT_DISMISSED_LOCAL_STORAGE_KEY, this.position_alert_dismissed, true)
     },
     
     clearUser() {
       this.user = null;
-      this.updateLocalStorage();
-      
+      setLocalStorageItem(USER_LOCAL_STORAGE_KEY, this.user, true)
     },
-    updateLocalStorage(){
-      console.log('📪 Updating local storage with user data')
-      console.log(this.user)
-      window.localStorage.setItem(SETTINGS_LOCAL_STORAGE_USER_KEY, JSON.stringify(this.user));
-      window.localStorage.setItem(SETTINGS_LOCAL_STORAGE_POSITION_KEY, JSON.stringify(this.position));
-      window.localStorage.setItem(SETTINGS_LOCAL_STORAGE_ALERT_DISMISSED_KEY, JSON.stringify(this.position_alert_dismissed));
-    
-      window.location.replace("/")
-      navigateTo({path: "/", force: true})
-    },
+
   },
 })

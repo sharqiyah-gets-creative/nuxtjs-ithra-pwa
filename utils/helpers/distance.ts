@@ -1,11 +1,4 @@
 import { Position } from "@vue/compiler-core";
-import { Timestamp } from "firebase/firestore";
-
-export const isProduction = process.env.NODE_ENV === 'production'
-export const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
-export const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-export const isIphone = /iPhone/i.test(navigator.userAgent);
-export const hasAcknowledged = localStorage.getItem("hasAcknowledgedPrompt");
 
 export const userPosition = async () =>{
   const position = await new Promise((resolve, reject) => {
@@ -19,21 +12,6 @@ export const getPosition = (options?: PositionOptions): Promise<Position> => {
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
   );
 }
-
-export const formatDate = (timestamp: Timestamp) => {
-    const date: Date = new Date(timestamp.seconds * 1000);
-  
-    const options: Intl.DateTimeFormatOptions = {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-      calendar: "gregory",
-    };
-    return new Intl.DateTimeFormat("ar-SA", options).format(date);
-};
 
 export const sortByDistance = (items: Array<{lat: number, lon: number}>, lat: number, lon: number) => {
   items.sort((a, b) => {
@@ -59,9 +37,3 @@ export const getDistance = (lat1: number, lon1: number, lat2: number, lon2: numb
   const d = R * c; // Distance in meters
   return d;
 }
-
-export function formatDistance(distanceInMeters: number): string {
-  const distanceInKilos = distanceInMeters / 1000;
-  return `${distanceInKilos.toFixed(2)} كم`;
-}
-

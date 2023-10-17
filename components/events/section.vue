@@ -9,7 +9,7 @@ const userStore = useUserStore();
 let { events } = storeToRefs(eventsStore)
 
 if(userStore.position){
-    events = eventsStore.fetchEventsByPosition(userStore.position)
+    events = eventsStore.getEventsByPosition(userStore.position)
 }
 
 </script>
