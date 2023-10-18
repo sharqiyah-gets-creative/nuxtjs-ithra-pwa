@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
 import { getLocalStorageItem, setLocalStorageItem } from "@/utils/helpers";
+import { MapPosition } from "~/types";
 
 const USER_STORE_ID = 'myUserStore'
 const USER_LOCAL_STORAGE_KEY = 'user'
@@ -11,9 +11,15 @@ export const useUserStore = defineStore({
 
   state: () => ({
     user: getLocalStorageItem(USER_LOCAL_STORAGE_KEY, null),
-    position: getLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, undefined),
+    position: getLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, undefined) as MapPosition | undefined,
     position_alert_dismissed: getLocalStorageItem(USER_POSITION_ALERT_DISMISSED_LOCAL_STORAGE_KEY, false),
   }),
+
+  getters: {
+    getUser: (state) => state.user,
+    getPosition: (state) => state.position,
+    getPositionAlertDismissed: (state) => state.position_alert_dismissed,
+  },
 
   actions: {
     setUser(user: any) {
@@ -21,7 +27,7 @@ export const useUserStore = defineStore({
       setLocalStorageItem(USER_LOCAL_STORAGE_KEY, this.user, true)
     },
 
-    setPosition(position: any) {
+    setPosition(position: MapPosition) {
       this.position = position;
       setLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, this.position, false)
     },

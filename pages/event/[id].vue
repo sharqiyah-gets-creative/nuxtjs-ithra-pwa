@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { GoogleMap, MarkerCluster, Marker } from "vue3-google-map";
 import mapStyles from "@/assets/maps/styles.json";
-import { useEventsStore } from '../../store/events';
 import {formatDate } from '@/utils/helpers';
 
 
@@ -16,6 +15,7 @@ const config = useRuntimeConfig();
 const eventInfo = ref<IEvent>({} as IEvent)
 
 const store = useEventsStore();
+const userStore = useUserStore();
 
 eventInfo.value = store.getEventById(eventId.toString());
 console.log(eventInfo.value);
@@ -27,11 +27,16 @@ const center = {
 
 const zoom = ref(11);
 
+const event_rating = ref(3);
+
+const onRateChange = (value: number) => {
+  console.log('rating changed to ', value)
+};
 
 </script>
 
 <template>
-<div class="flex-1">
+<div class="flex-1 space-y-2">
      <NavsTop :title="eventInfo.title" :description="`بواسطة ${eventInfo.entity}`" />
 
     <section id="map">
@@ -49,7 +54,18 @@ const zoom = ref(11);
       </UContainer>
     </section>
 
-    <section id="details" class="py-4">
+    <section id="rating">
+      <UContainer>
+        <h4>قيم المبادرة إذا قمت بتجربتها</h4>
+        <UAlert v-if="userStore.user" icon="i-heroicons-command-line" color="primary" variant="soft" description="قم بتسجيل الدخول لتقييم المبادرة" />
+        <div class="text-center">
+          <van-rate @change="onRateChange" v-model="event_rating" :size="25" disabled-color="gray"  color="#ffd21e"  void-icon="star" void-color="#eee" :disabled="userStore.user ? true : false" />
+        </div>
+      </UContainer>
+
+    </section>
+
+    <section id="details" class="">
       <UContainer>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

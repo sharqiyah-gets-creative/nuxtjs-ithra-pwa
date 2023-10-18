@@ -1,5 +1,3 @@
-import {isProduction} from './utils/helpers';
-
 export default defineNuxtConfig({
 	pages: true,
 
@@ -15,6 +13,9 @@ export default defineNuxtConfig({
 	typescript: {
 		shim: false,
 	},
+	imports: {
+		dirs: ['stores']
+	},
 
 	app: {
 		head: {
@@ -23,7 +24,7 @@ export default defineNuxtConfig({
 		pageTransition: {name: 'page', mode: 'out-in'},
 	},
 
-	modules: ['@nuxt/ui', '@pinia/nuxt', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa', 'nuxt-gtag', '@emanuele-em/nuxt-swipe'],
+	modules: ['@nuxt/ui', '@pinia/nuxt', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa', 'nuxt-gtag', '@emanuele-em/nuxt-swipe', '@vant/nuxt'],
 
 	pinia: {
 		autoImports: [

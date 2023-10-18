@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { initFlowbite } from 'flowbite'
-import { useEventsStore } from './store/events';
 import { sleep } from './utils/helpers';
 const { $bus }: any = useNuxtApp()
 const routes = ['/', '/calendar','/about']

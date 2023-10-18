@@ -17,7 +17,12 @@
             <!-- Content -->
             <ClientOnly>
                 <ul class="divide-y divide-slate-600 divide">
-                    
+                    <van-cell  center title="الوضع المسائي">
+                        <template #right-icon>
+                            <van-switch active-color="ffd21e" v-model="isDark" />
+                        </template>
+                    </van-cell>
+
                     <li @click="isDark = !isDark" class="flex justify-start items-center py-4 cursor-pointer">
                         <NavsSideLink :title="isDark ? 'تشغيل الوضع النهاري' :'تشغيل الوضع الليلي'" description="تقييماتك للمبادرات (يتطلب تسجيل دخول)" :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'" />
                     </li>
@@ -52,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '~/store/user';
 const userStore = useUserStore();
 const user = ref(userStore.user);
 

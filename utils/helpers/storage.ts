@@ -4,12 +4,10 @@ export const setLocalStorageItem = (key: string, value: any, redirect: boolean) 
   if(redirect) window.location.replace("/")
 }
 
-
 export const getLocalStorageItem = (key: string, DEFAULT_RETURN: any) => {
   console.log('📪 Getting Local Storage', key)
-  const value = window.localStorage.getItem(key);
+  const value = JSON.parse(window.localStorage.getItem(key)!);
   console.log('📪 Local Storage Value', value)
 
-  return value ? JSON.parse(window.localStorage.getItem(key)!) : DEFAULT_RETURN;
+  return value ? value : DEFAULT_RETURN;
 }
-

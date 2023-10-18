@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-
 const COMMON_STORE_ID = 'myCommonStore'
 
 export const useCommonStore = defineStore({

@@ -1,3 +1,13 @@
+<script lang="ts" setup>
+	const store = useEventsStore();
+
+	const searchQuery = ref('');
+
+	watch(searchQuery, (value) => {
+		console.log(value);
+		store.setSearchKeywords(value);
+	});
+</script>
 <template>
 	<div>
 		<label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -18,14 +28,4 @@
 	</div>
 </template>
 
-<script lang="ts" setup>
-	import { useEventsStore } from '~/store/events';
-	const store = useEventsStore();
 
-	const searchQuery = ref('');
-
-	watch(searchQuery, (value) => {
-		console.log(value);
-		store.setSearchKeywords(value);
-	});
-</script>

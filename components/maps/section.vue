@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useEventsStore } from "~/store/events";
 import { storeToRefs } from "pinia";
 
 const eventsStore = useEventsStore();
@@ -10,8 +9,6 @@ const counters = {
     eventsCount: eventsStore.getEventsCount(),
     citiesCount: eventsStore.getEventsCitiesCount(),
 }
-
-
 </script>
 
 <template>
@@ -23,18 +20,18 @@ const counters = {
         </template>
         <div class="grid grid-cols-3 divide-x divide-x-reverse">
           <div class="flex flex-col justify-center items-center">
-            <div class="text-3xl font-bold">{{ counters.eventsCount }}</div>
-            <div class="text-lg">فعالية</div>
+            <div class="text-xl font-bold">{{ counters.eventsCount }}</div>
+            <div class="text-base font-light">فعالية</div>
           </div>
 
           <div class="flex flex-col justify-center items-center">
-            <div class="text-3xl font-bold">{{ counters.entitiesCount }}</div>
-            <div class="text-lg">جهة</div>
+            <div class="text-xl font-bold">{{ counters.entitiesCount }}</div>
+            <div class="text-base font-light">جهة</div>
           </div>
 
           <div class="flex flex-col justify-center items-center">
-            <div class="text-3xl font-bold">{{ counters.citiesCount }}</div>
-            <div class="text-lg">مدينة</div>
+            <div class="text-xl font-bold">{{ counters.citiesCount }}</div>
+            <div class="text-base font-light">مدينة</div>
           </div>
         </div>
       </UCard>

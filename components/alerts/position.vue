@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useUserStore } from '@/store/user'
 import { getPosition } from '@/utils/helpers';
 
 const store = useUserStore()

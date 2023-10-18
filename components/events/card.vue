@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useCommonStore } from "@/store/common";
 import { formatDistance, formatDate, getRandomColorClass } from "@/utils/helpers";
 
 const { lastColor, setLastColor } = useCommonStore();
@@ -34,7 +33,7 @@ defineProps({
     </div>
 
     <div class="p-2 px-4 bg-white">
-      <ul class="space-y-1 font-light text-base">
+      <ul class="font-light text-base">
         <li class="flex justify-start items-center space-x-2 rtl:space-x-reverse" >
           <UIcon name="i-heroicons-clock" />
           <time :datetime="event.start_time.toString()">{{ formatDate(event.start_time) }}</time>

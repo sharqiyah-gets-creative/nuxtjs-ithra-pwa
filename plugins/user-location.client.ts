@@ -17,13 +17,12 @@
  *      - if location enabled:  get the location, set it in store, watch value and update it in store every 5 minutes
  */
 
-import { useUserStore } from "~/store/user";
 import { MapPosition } from "~/types";
 import { getPosition, isLocationEnabled } from "~/utils/helpers";
 
 export default defineNuxtPlugin(async (nuxtApp) => {
 
-    const DEFAULT_CENTER_POINT = { lat: 26.3570737, lng: 50.1100591 };
+    const DEFAULT_CENTER_POINT : MapPosition = { lat: 26.3570737, lng: 50.1100591 };
     const store = useUserStore();
 
     /**
@@ -68,7 +67,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
             } else {
                 console.log('🗺 Location enabled', locationEnabled)
             // If location enabled
-                updateAndWatchLocation();
+                await updateAndWatchLocation();
             }
         } catch (error) {
             console.error('Error checking location settings', error)
@@ -97,9 +96,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
                 actions:[
                     {
                         label: 'Accept',
-                        click: () => {
+                        click: async () => {
                             console.log('🗺 Location toast accepted')
-                            updateAndWatchLocation();
+                            await updateAndWatchLocation();
                         },
                     },
                     {
@@ -127,11 +126,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         const LOCATION_REFRESH_INTERVAL = 300000; // 5 minutes
         try {
             // Get the location and set it in local storage
-            await getPositionWithHighAccuracy(true);
+            const location = await getPositionWithHighAccuracy(true);
+            console.log('🗺 Got from locations.ts', location);
             // Set an interval to update location every 5 minutes
             setInterval(async () => {
                 try {
-                    await getPositionWithHighAccuracy(true); 
+                    const location = await getPositionWithHighAccuracy(true); 
                 } 
                 catch (error) {
                     console.error('Error updating location', error);
@@ -145,9 +145,15 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     }
 
     async function getPositionWithHighAccuracy(high_accuracy: boolean){
-        console.log('🗺 Getting user position with high accuracy', high_accuracy)
-        const position: MapPosition = await getPosition({ enableHighAccuracy: high_accuracy });
-        console.log('🗺 Updating user position')
-        store.setPosition({lat: position.lat, lng: position.lng})
+        try {
+            console.log('🗺 Getting user position with high accuracy', high_accuracy)
+            const position = await getPosition({ enableHighAccuracy: high_accuracy });
+            console.log('🗺 Got user position with high accuracy', position)
+            const coords: MapPosition = { lat: position.latitude, lng: position.longitude };
+            console.log('🗺 Updating user position with ', coords)
+            store.setPosition(coords)
+        } catch (error) {
+            console.error('Error getting position with high accuracy', error)
+        }
     }
 })

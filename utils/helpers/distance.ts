@@ -1,4 +1,3 @@
-import { MapPosition } from "~/types";
 
 export const userPosition = async () =>{
   const position = await new Promise((resolve, reject) => {
@@ -7,11 +6,7 @@ export const userPosition = async () =>{
   return position
 }
 
-export const getPosition = (options?: PositionOptions): Promise<MapPosition> => {
-  return new Promise((resolve: any, reject: any) => 
-      navigator.geolocation.getCurrentPosition(resolve, reject, options)
-  );
-}
+
 
 export const sortByDistance = (items: Array<{lat: number, lon: number}>, lat: number, lon: number) => {
   items.sort((a, b) => {

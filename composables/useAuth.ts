@@ -3,8 +3,6 @@ import {
 	GoogleAuthProvider,	TwitterAuthProvider, FacebookAuthProvider, signInWithPopup,
 } from "firebase/auth";
 
-import { useUserStore } from "~/store/user";
-
 export const useAuth =  () => {
 	const { firebaseApp } = useFirebase();
 	const auth = getAuth(firebaseApp);

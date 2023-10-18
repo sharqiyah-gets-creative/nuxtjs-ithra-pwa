@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 	import { z } from 'zod';
 	import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
-	import { useUserStore } from '~/store/user';
 	const store = useUserStore();
 	const { registerOrLogin, error } = useAuth();
 
@@ -9,13 +8,15 @@
 		email: z.string().email('Invalid email'),
 		password: z.string(),
 	});
+
 	type Schema = z.output<typeof schema>;
+
 	const state = reactive({
 		email: undefined,
 		password: undefined,
 	});
 
-  async function submit(event: FormSubmitEvent<Schema>) {
+	async function submit(event: FormSubmitEvent<Schema>) {
 		// Do something with data
 		console.log('event data', event.data);
 
@@ -23,7 +24,7 @@
 
 		store.setUser(user);
 
-		console.log('user', user,'error', error);
+		console.log('user', user, 'error', error);
 	}
 </script>
 <template>
@@ -38,7 +39,7 @@
 					</UFormGroup>
 
 					<UFormGroup size="xl" label="كلمة المرور" name="password">
-						<UInput v-model="state.password" />
+						<UInput type="password" v-model="state.password" />
 					</UFormGroup>
 				</div>
 

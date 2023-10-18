@@ -1,6 +1,4 @@
 <script setup lang="ts">
-	import { useEventsStore } from '~/store/events';
-	import { useUserStore } from '~/store/user';
 	import { storeToRefs } from 'pinia';
 
 	const eventsStore = useEventsStore();
@@ -25,7 +23,7 @@
 
 <template>
 	<section id="events" class="py-4">
-		<UContainer class="space-y-8">
+		<UContainer class="space-y-2">
 			<EventsCard v-if="events.length > 0" v-for="event in events" :key="event.id" :event="event" />
 
 			<div v-else class="text-center">

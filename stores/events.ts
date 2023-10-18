@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia';
 import { getDistance, setLocalStorageItem, getLocalStorageItem } from '@/utils/helpers';
 
 const EVENTS_STORE_ID = 'myEventsStore';
