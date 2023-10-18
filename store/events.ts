@@ -1,10 +1,9 @@
-import { defineStore } from "pinia";
-import { getDistance, setLocalStorageItem, getLocalStorageItem } from "@/utils/helpers";
+import { defineStore } from 'pinia';
+import { getDistance, setLocalStorageItem, getLocalStorageItem } from '@/utils/helpers';
 
-
-const EVENTS_STORE_ID = 'myEventsStore'
-const EVENTS_LOCAL_STORAGE_KEY = 'events'
-const EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY = 'events_updated_at'
+const EVENTS_STORE_ID = 'myEventsStore';
+const EVENTS_LOCAL_STORAGE_KEY = 'events';
+const EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY = 'events_updated_at';
 
 export const useEventsStore = defineStore({
 	id: EVENTS_STORE_ID,
@@ -14,7 +13,7 @@ export const useEventsStore = defineStore({
 		eventsLastUpdated: getLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, null),
 		searchKeywords: ref(''),
 	}),
-	
+
 	actions: {
 		addEvent(event: IEvent) {
 			if (this.events) {
@@ -22,8 +21,8 @@ export const useEventsStore = defineStore({
 			} else {
 				this.events = [event];
 			}
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false)
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false)
+			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
+			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 		},
 
 		setSearchKeywords(keywords: string) {
@@ -34,8 +33,8 @@ export const useEventsStore = defineStore({
 			if (this.events) {
 				this.events = this.events.filter((event: IEvent) => event.id !== id);
 			}
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false)
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false)
+			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
+			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 		},
 
 		getEventsByPosition(position: any) {
@@ -48,7 +47,7 @@ export const useEventsStore = defineStore({
 				event.distance = getDistance(position.lat, position.lng, parseFloat(event.ll.split(',')[0]), parseFloat(event.ll.split(',')[1]));
 				return event;
 			});
-			
+
 			return events;
 		},
 
@@ -86,37 +85,36 @@ export const useEventsStore = defineStore({
 				const index = this.events.findIndex((event: IEvent) => event.id === id);
 				this.events[index] = event;
 			}
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false)
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false)
+			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
+			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 		},
 
 		clearEvents() {
 			this.events = undefined;
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false)
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false)
+			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
+			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 		},
 
 		async boot() {
-			try{
-				console.log('💚 Booting Events')
+			try {
+				console.log('💚 Booting Events');
 
 				// should check store, if event exists, doesn't add it
 				// if data is 1 day old, refresh it
-				if (this.eventsLastUpdated === null || (new Date().getTime() - parseInt(this.eventsLastUpdated)) > 86400000 ) {
-					console.log("📪 Store empty or old, getting events from firebase");
-						
+				if (this.eventsLastUpdated === null || new Date().getTime() - parseInt(this.eventsLastUpdated) > 86400000) {
+					console.log('📪 Store empty or old, getting events from firebase');
+
 					// get events from firebase
 					const { events } = await getEvents();
 
 					this.events = events;
 
-					setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false)
-					setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false)
+					setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
+					setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 				} else {
 					console.log(`💯 Store not empty, ${this.events.length} events found`);
 				}
-			}
-			catch(e) {
+			} catch (e) {
 				console.error('📪 Error booting Events', e);
 			}
 		},

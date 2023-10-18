@@ -1,0 +1,32 @@
+/* Page Transitions */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+/* splash screen animation */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s;
+  animation-duration: 200ms;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes change-bg-color {
+  0% { background-color: #FBBF24; }
+  25% { background-color: #3B82F6; }
+  50% { background-color: #10B981; }
+  75% { background-color: #EC4899; }
+  100% { background-color: #FBBF24; }
+}
+
+.animate-bg {
+  animation: change-bg-color 5s infinite;
+}

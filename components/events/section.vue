@@ -1,39 +1,38 @@
 <script setup lang="ts">
-import { useEventsStore } from '~/store/events';
-import { useUserStore } from '~/store/user';
-import { storeToRefs } from 'pinia'
+	import { useEventsStore } from '~/store/events';
+	import { useUserStore } from '~/store/user';
+	import { storeToRefs } from 'pinia';
 
-const eventsStore = useEventsStore();
-const userStore = useUserStore();
+	const eventsStore = useEventsStore();
+	const userStore = useUserStore();
 
-let { events, searchKeywords } = storeToRefs(eventsStore);
+	let { events, searchKeywords } = storeToRefs(eventsStore);
 
-if(userStore.position){
-    events = eventsStore.getEventsByPosition(userStore.position)
-}
+	if (userStore.position) {
+		events = eventsStore.getEventsByPosition(userStore.position);
+	}
 
-watch(searchKeywords, (value) => {
-    console.log(value)
-    // filter events array with events containing the search keywords as a title
-    if (events.value) {
-        events.value = events.value.filter((event: IEvent) => {
-      return event.title.includes(value)
-    })
-  }
-})
-
+	watch(searchKeywords, (value) => {
+		console.log(value);
+		// filter events array with events containing the search keywords as a title
+		if (events.value) {
+			events.value = events.value.filter((event: IEvent) => {
+				return event.title.includes(value);
+			});
+		}
+	});
 </script>
 
 <template>
-    <section id="events" class="py-4">
-        <UContainer class="space-y-8">
-            <EventsCard v-if="events.length > 0" v-for="event in events" :key="event.id" :event="event" />
+	<section id="events" class="py-4">
+		<UContainer class="space-y-8">
+			<EventsCard v-if="events.length > 0" v-for="event in events" :key="event.id" :event="event" />
 
-            <div v-else class="text-center">
-                <UCard loading :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }">
-                    <h2 class="text-3xl font-black">جاري جلب الفعاليات</h2>
-                </UCard> 
-            </div>
-        </UContainer>
-    </section>
+			<div v-else class="text-center">
+				<UCard loading :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }">
+					<h2 class="text-3xl font-black">جاري جلب الفعاليات</h2>
+				</UCard>
+			</div>
+		</UContainer>
+	</section>
 </template>
