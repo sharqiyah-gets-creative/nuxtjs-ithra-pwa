@@ -11,19 +11,6 @@ const counters = {
     citiesCount: eventsStore.getEventsCitiesCount(),
 }
 
-const locations = 
-    events.value.map((event: IEvent) => {
-        return {
-            position: {
-                lat: parseFloat(event.ll.split(",")[0]) + Math.random() / 100000,
-                lng: parseFloat(event.ll.split(",")[1]) + Math.random() / 100000
-            },
-            content: event.title,
-        };
-    })
-
-console.log(locations);
-
 
 </script>
 
@@ -32,7 +19,7 @@ console.log(locations);
     <UContainer>
       <UCard :ui="{ header: { padding: 'p-0 sm:p-0' } }">
         <template #header>
-          <MapsMap :locations="locations" />
+          <MapsMap :locations="events" />
         </template>
         <div class="grid grid-cols-3 divide-x divide-x-reverse">
           <div class="flex flex-col justify-center items-center">

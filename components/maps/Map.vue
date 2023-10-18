@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { GoogleMap, MarkerCluster, Marker } from "vue3-google-map";
 import mapStyles from "@/assets/maps/styles.json";
+import { useUserStore } from "~/store/user";
 
 const styles = ref(mapStyles);
 
 const zoom = ref(9);
 
-const center = ref({ lat: 26.3570737, lng: 50.1100591 });
+// will be changed to get value from store for user location
+const store = useUserStore();
+const center = ref(store.position);
 
 const config = useRuntimeConfig();
 

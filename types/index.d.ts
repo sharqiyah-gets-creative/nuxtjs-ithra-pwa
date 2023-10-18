@@ -16,4 +16,9 @@ declare global {
 	}
 }
 
-export { IEvent };
+interface MapPosition {
+	lat: number;
+	lng: number;
+}
+
+export { IEvent, MapPosition };

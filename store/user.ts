@@ -11,7 +11,7 @@ export const useUserStore = defineStore({
 
   state: () => ({
     user: getLocalStorageItem(USER_LOCAL_STORAGE_KEY, null),
-    position: getLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, null),
+    position: getLocalStorageItem(USER_POSITION_LOCAL_STORAGE_KEY, undefined),
     position_alert_dismissed: getLocalStorageItem(USER_POSITION_ALERT_DISMISSED_LOCAL_STORAGE_KEY, false),
   }),
 

@@ -7,6 +7,9 @@ export const setLocalStorageItem = (key: string, value: any, redirect: boolean) 
 
 export const getLocalStorageItem = (key: string, DEFAULT_RETURN: any) => {
   console.log('📪 Getting Local Storage', key)
-  return window.localStorage.getItem(key) ? JSON.parse(window.localStorage.getItem(key)!) : DEFAULT_RETURN;
+  const value = window.localStorage.getItem(key);
+  console.log('📪 Local Storage Value', value)
+
+  return value ? JSON.parse(window.localStorage.getItem(key)!) : DEFAULT_RETURN;
 }
 
