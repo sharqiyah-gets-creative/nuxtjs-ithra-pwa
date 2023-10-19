@@ -1,16 +1,11 @@
-import { getDistance, setLocalStorageItem, getLocalStorageItem } from '@/utils/helpers';
+import { defineStore } from 'pinia';
+import { getDistance } from '@/utils/helpers';
 
-const EVENTS_STORE_ID = 'myEventsStore';
-const EVENTS_LOCAL_STORAGE_KEY = 'events';
-const EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY = 'events_updated_at';
-
-export const useEventsStore = defineStore({
-	id: EVENTS_STORE_ID,
-
+export const useEventsStore = defineStore('EVENTS_STORE', {
 	state: () => ({
-		events: getLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, []),
-		eventsLastUpdated: getLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, null),
-		searchKeywords: ref(''),
+		events: [] as IEvent[],
+		eventsLastUpdated: null,
+		searchKeywords: '',
 	}),
 
 	actions: {
@@ -20,8 +15,6 @@ export const useEventsStore = defineStore({
 			} else {
 				this.events = [event];
 			}
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 		},
 
 		setSearchKeywords(keywords: string) {
@@ -32,8 +25,6 @@ export const useEventsStore = defineStore({
 			if (this.events) {
 				this.events = this.events.filter((event: IEvent) => event.id !== id);
 			}
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 		},
 
 		getEventsByPosition(position: any) {
@@ -84,14 +75,10 @@ export const useEventsStore = defineStore({
 				const index = this.events.findIndex((event: IEvent) => event.id === id);
 				this.events[index] = event;
 			}
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 		},
 
 		clearEvents() {
-			this.events = undefined;
-			setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
-			setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
+			this.events.length = 0;
 		},
 
 		async boot() {
@@ -107,9 +94,6 @@ export const useEventsStore = defineStore({
 					const { events } = await getEvents();
 
 					this.events = events;
-
-					setLocalStorageItem(EVENTS_LOCAL_STORAGE_KEY, this.events, false);
-					setLocalStorageItem(EVENTS_LAST_UPDATED_LOCAL_STORAGE_KEY, new Date().getTime().toString(), false);
 				} else {
 					console.log(`💯 Store not empty, ${this.events.length} events found`);
 				}
@@ -118,4 +102,5 @@ export const useEventsStore = defineStore({
 			}
 		},
 	},
+	persist: true,
 });

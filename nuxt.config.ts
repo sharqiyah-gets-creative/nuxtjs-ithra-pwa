@@ -3,19 +3,11 @@ export default defineNuxtConfig({
 
 	ssr: false, // default behavior
 
-	devtools: {
-		enabled: false,
-	},
-	experimental: {
-		viewTransition: true,
-	},
+	devtools:  {enabled: false,	},
+	experimental: { viewTransition: true, },
 
-	typescript: {
-		shim: false,
-	},
-	imports: {
-		dirs: ['stores']
-	},
+	typescript: { shim: false, },
+	imports: { dirs: ['stores']	},
 
 	app: {
 		head: {
@@ -24,15 +16,20 @@ export default defineNuxtConfig({
 		pageTransition: {name: 'page', mode: 'out-in'},
 	},
 
-	modules: ['@nuxt/ui', '@pinia/nuxt', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa', 'nuxt-gtag', '@emanuele-em/nuxt-swipe', '@vant/nuxt'],
+	modules: ['@nuxt/ui', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@nuxtjs/i18n', '@kevinmarrec/nuxt-pwa', 'nuxt-gtag', '@emanuele-em/nuxt-swipe', '@vant/nuxt'],
 
 	pinia: {
-		autoImports: [
-			// automatically imports `defineStore`
-			'defineStore', // import { defineStore } from 'pinia'
-			['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
-		],
+	
 	},
+	devServer:{
+		port: 1523,
+	},
+
+	piniaPersistedstate: {
+		storage: 'localStorage',
+		debug:true
+	},
+	
 
 	runtimeConfig: {
 		public: {

@@ -49,6 +49,9 @@ devDependencies:
   '@nuxtjs/i18n':
     specifier: 8.0.0-rc.5
     version: 8.0.0-rc.5(vue-router@4.2.5)(vue@3.3.4)
+  '@pinia-plugin-persistedstate/nuxt':
+    specifier: ^1.1.2
+    version: 1.1.2(@pinia/nuxt@0.4.11)(pinia@2.1.6)
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.3)
@@ -2511,6 +2514,21 @@ packages:
       '@parcel/watcher-win32-x64': 2.3.0
     dev: true
 
+  /@pinia-plugin-persistedstate/nuxt@1.1.2(@pinia/nuxt@0.4.11)(pinia@2.1.6):
+    resolution: {integrity: sha512-3deRNiIlFoFGO/K8Sz+yc53ayMzElR8ack7RnGka80zBgp6Fs9GWjoLJiy+ToIc7qVa6wrQcoLDsxcnvzX4T0g==}
+    peerDependencies:
+      '@pinia/nuxt': ^0.4.4
+    dependencies:
+      '@nuxt/kit': 3.7.4
+      '@pinia/nuxt': 0.4.11(typescript@4.9.5)(vue@3.3.4)
+      defu: 6.1.2
+      pinia-plugin-persistedstate: 3.2.0(pinia@2.1.6)
+    transitivePeerDependencies:
+      - pinia
+      - rollup
+      - supports-color
+    dev: true
+
   /@pinia/nuxt@0.4.11(typescript@4.9.5)(vue@3.3.4):
     resolution: {integrity: sha512-bhuNFngJpmBCdAqWguezNJ/oJFR7wvKieqiZrmmdmPR07XjsidAw8RLXHMZE9kUm32M9E6T057OBbG/22jERTg==}
     dependencies:
@@ -2522,7 +2540,6 @@ packages:
       - supports-color
       - typescript
       - vue
-    dev: false
 
   /@pkgjs/parseargs@0.11.0:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -7756,6 +7773,14 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /pinia-plugin-persistedstate@3.2.0(pinia@2.1.6):
+    resolution: {integrity: sha512-tZbNGf2vjAQcIm7alK40sE51Qu/m9oWr+rEgNm/2AWr1huFxj72CjvpQcIQzMknDBJEkQznCLAGtJTIcLKrKdw==}
+    peerDependencies:
+      pinia: ^2.0.0
+    dependencies:
+      pinia: 2.1.6(typescript@4.9.5)(vue@3.3.4)
+    dev: true
+
   /pinia@2.1.6(typescript@4.9.5)(vue@3.3.4):
     resolution: {integrity: sha512-bIU6QuE5qZviMmct5XwCesXelb5VavdOWKWaB17ggk++NUwQWWbP5YnsONTk3b752QkW9sACiR81rorpeOMSvQ==}
     peerDependencies:
@@ -7772,7 +7797,6 @@ packages:
       typescript: 4.9.5
       vue: 3.3.4
       vue-demi: 0.14.6(vue@3.3.4)
-    dev: false
 
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
