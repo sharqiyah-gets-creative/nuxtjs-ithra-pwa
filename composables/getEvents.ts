@@ -1,17 +1,17 @@
 import { collection, getDocs } from "firebase/firestore";
+import { IGetEvents } from "~/types";
 
-export const getEvents = async () => {
-
+export const getEvents = async (): Promise<IGetEvents> => {
   const { firestore } = useFirestore();
 
-  const error = ref<Record<string, unknown> | null>(null);
-  const events = ref<IEvent[]>([]);
+  const error = null;
+  let events: IEvent[] = [];
 
   try {
     const eventsCollectionRef = collection(firestore, "events");
     const eventsCollectionSnapshot = await getDocs(eventsCollectionRef);
     
-    events.value = eventsCollectionSnapshot.docs.map((doc) => {
+    events = eventsCollectionSnapshot.docs.map((doc) => {
       return {
         id: doc.id, 
         ...doc.data()

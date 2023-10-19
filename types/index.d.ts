@@ -17,8 +17,13 @@ declare global {
 }
 
 interface MapPosition {
-	lat: number;
-	lng: number;
+	lat?: number;
+	lng?: number;
 }
 
-export { IEvent, MapPosition };
+interface IGetEvents {
+	events: IEvent[];
+	error: Record<string, unknown> | null;
+  }
+
+export { IEvent, MapPosition, IGetEvents };
