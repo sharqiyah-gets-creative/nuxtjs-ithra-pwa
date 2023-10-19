@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-start items-start">
-    <UIcon class="me-3" :name="icon" color="gray" aria-label="Theme" />
+    <UIcon class="me-3" :name="icon" aria-label="Theme" />
     <span class="inline-block">
         {{ title }}
         <small v-if="description" class="text-slate-400 sm block">{{ description }}</small>

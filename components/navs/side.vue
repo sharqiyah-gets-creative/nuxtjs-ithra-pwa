@@ -10,7 +10,7 @@
             <template #header>
                 <div class="flex items-center justify-between flex-row-reverse">
                     <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">مرحباً بك</h3>
-                    <UButton color="white" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+                    <UButton  icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
                 </div>
             </template>
 

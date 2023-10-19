@@ -27,8 +27,7 @@ defineProps({
     <div :class="`${color}`" class="p-2 px-4 text-lg font-bold flex justify-between" >
       <span>{{ event.title }}</span>
       <div class="badges space-x-2 rtl:space-x-reverse">
-        <UBadge variant="solid" color="black" v-for="(language, index) of event.language"
-          :key="index" size="xs" :label="language" />
+        <UBadge variant="solid" v-for="(language, index) of event.language" :key="index" size="xs" :label="language" />
       </div>
     </div>
 

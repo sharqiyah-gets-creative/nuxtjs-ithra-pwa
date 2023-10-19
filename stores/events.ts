@@ -17,14 +17,14 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			}
 		},
 
-		setSearchKeywords(keywords: string) {
-			this.searchKeywords = keywords;
-		},
-
 		removeEvent(id: string) {
 			if (this.events) {
 				this.events = this.events.filter((event: IEvent) => event.id !== id);
 			}
+		},
+
+		setSearchKeywords(keywords: string) {
+			this.searchKeywords = keywords;
 		},
 
 		getEventsByPosition(position: any) {
@@ -41,9 +41,10 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			return events;
 		},
 
-		getEventById(id: string) {
+		getEventById(id: string): IEvent | null {
 			if (this.events) {
-				return this.events.find((event: IEvent) => event.id === id);
+				const event = this.events.find((event: IEvent) => event.id === id) as IEvent;
+				return event;
 			}
 			return null;
 		},

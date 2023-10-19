@@ -48,6 +48,7 @@ pnpm clean
 - headless ui - <https://headlessui.dev/>
 - volta - <https://volta.net/>
 - Enabled Takeover mode - <https://vuejs.org/guide/typescript/overview.html#volar-takeover-mode>
+- Custom Tailwind Colors - <https://uicolors.app/create>
 
 ## TODO
 
