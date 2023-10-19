@@ -5,7 +5,7 @@
     <section id="info" class="py-6 flex-1">
       <UContainer>
         <div class="grid grid-cols-2 gap-6">
-          <div class="bg-primary-pink rounded-lg border-0 p-6 col-span-2 text-lg text-slate-900">
+          <div class="bg-pink-primary-700 rounded-lg border-0 p-6 col-span-2 text-lg text-slate-900">
             الإبداع هو لغة العصر والأداة التي تسمح للمبدعين
             والصنّاع برسم خريطة
             المستقبل عبر سواعد
@@ -26,7 +26,7 @@
             <span>جهة</span>
           </div> 
 
-          <div class="bg-primary-yellow rounded-lg border-0 p-6 col-span-2 text-3xl text-white flex flex-col items-center">
+          <div class="bg-yellow-primary-400 rounded-lg border-0 p-6 col-span-2 text-3xl text-white flex flex-col items-center">
             <span>20</span>
             <span>شريك إستراتيجي</span>
           </div> 
