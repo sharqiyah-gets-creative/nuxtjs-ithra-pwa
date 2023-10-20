@@ -3,22 +3,23 @@
 	import mapStyles from '@/assets/maps/styles.json';
 	import { formatDate } from '@/utils/helpers';
 
-	const eventsStore = useEventsStore();
-	const userStore = useUserStore();
+	const { getEventById } = useEventsStore();
+	const { user } = useUserStore();
 
 	const zoom = ref(11);
 	const event_rating = ref(3);
 	const event_review = ref('');
 
 	const eventInfo = ref<IEvent | any>({} as IEvent);
-	const config = useRuntimeConfig();
-	const eventId = useRoute().params?.id;
+	const { public: { GOOGLE_API_KEY } } = useRuntimeConfig();
+	
+    const { params: { id= 'no_id' }  }  = useRoute();
 
-	if (!eventId) {
+	if (!id) {
 		throw new Error('Wrong Page');
 	}
 
-	eventInfo.value = eventsStore.getEventById(eventId.toString());
+	eventInfo.value = getEventById(id.toString());
 	console.log(eventInfo.value);
 
 	const center = {
@@ -39,7 +40,7 @@
 			<UContainer>
 				<ClientOnly>
 					<GoogleMap
-						:api-key="config.public.GOOGLE_API_KEY"
+						:api-key="GOOGLE_API_KEY"
 						class="w-full h-[25vh] md:h-[50vh] relative rounded-md overflow-hidden"
 						:center="center"
 						:zoom="zoom"
@@ -59,9 +60,9 @@
 		<section id="rating">
 			<UContainer>
 				<h4>قيم المبادرة إذا قمت بتجربتها</h4>
-				<UAlert v-if="!userStore.user" icon="i-heroicons-command-line"  title="" description="قم بتسجيل الدخول لتقييم المبادرة" />
+				<UAlert v-if="!user" icon="i-heroicons-command-line"  title="" description="قم بتسجيل الدخول لتقييم المبادرة" />
 				<div class="text-center">
-					<van-rate @change="onRateChange" v-model="event_rating" :size="25" disabled-color="#555555" color="#ffd21e" void-icon="star" void-color="#eee" :disabled="!userStore.user ? true : false" />
+					<van-rate @change="onRateChange" v-model="event_rating" :size="25" disabled-color="#555555" color="#ffd21e" void-icon="star" void-color="#eee" :disabled="!user ? true : false" />
 				</div>
 			</UContainer>
 		</section>

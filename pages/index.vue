@@ -1,24 +1,40 @@
 <script setup lang="ts">
+    import { isIphone } from '@/utils/helpers'
 
-console.log('index vue loaded')
-onMounted(()=>{
-  console.log('index vue mounted')
-})
+	const { events, searchKeywords, getEventsByDistance, getCounters, getEventsGroupedByLocation } = useEventsStore();
+	const { position } = useUserStore();
+
+    const events_grouped_by_location = getEventsGroupedByLocation(events)
+
+    let positions_by_distance = events;
+
+    if (position) {
+		positions_by_distance = getEventsByDistance(position);
+	}
+
+	console.log('pages/index.vue', 'loaded');
+	onMounted(() => {
+		console.log('pages/index.vue', 'mounted');
+	});
 </script>
 
 <template>
-  <div class="flex-1 relative">
-    <NavsTop title="استكشف" description="فعاليات المنطقة الشرقية" additional_classes="bg-slate-100 dark:bg-[#0E091B]">
-      <NavsSearch />
-    </NavsTop>
-    
-    <MapsSection />
+	<div class="flex flex-col h-full text-white ">
+		<NavsTop :title="$t('explore')" :description="$t('explore_subtitle')" additional_classes="bg-slate-100 dark:bg-violet-primary-950">
+		</NavsTop>
 
-    <Spacer /> 
-     
-    <EventsSection />
+        <div class="flex-[1] overflow-auto">
+            <MapsSection :events_grouped_by_location="events_grouped_by_location" :counters="getCounters" />
 
-    <AlertsPosition />
+		    <EventsSection :events="positions_by_distance" />
+        </div>
 
-  </div>
+		
+        <AlertsAddToHome v-if="isIphone" />
+
+        <!-- Bottom Navigation-->
+        <NavsBottom />
+
+		<AlertsPosition />
+	</div>
 </template>

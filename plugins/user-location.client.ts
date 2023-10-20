@@ -1,89 +1,61 @@
-/**
- *  Nuxt Plugin to handle user location
- *  @module defineNuxtPlugin
- * 
- *  Psuedo code for this plugin:
- *  - Default state for location would be a point in Sharqiyah which will be the center for google maps
- *  - On Init, if the state value doesn't exist, set this value in store
- * 
- *  - check if the user has location enabled
- *      - if location not enabled: check if they dismessed alert from store
- *          - if alert dismissed: just use the existing value in state
- *          - if alert not dismissed: prompt them to enable it through a modal or alert
- *              - if modal accepted: prompt them through the native browser api,
- *                  - if native accepted: get the location, set it in store, watch value and update it in store every 5 minutes
- *                  - if native rejected: set a state dismessed so that the prompt doesn't open again
- *              - if modal reject, set a state dismessed so that the prompt doesn't open again
- *      - if location enabled:  get the location, set it in store, watch value and update it in store every 5 minutes
- */
-
 import { MapPosition } from "~/types";
-import { getPosition, isLocationEnabled } from "~/utils/helpers";
+import { getDistance, getPosition, isLocationEnabled } from "~/utils/helpers";
+import { useUserStore } from '~/stores/user'
 
-export default defineNuxtPlugin(async (nuxtApp) => {
+export default defineNuxtPlugin(async () => {
 
     const DEFAULT_CENTER_POINT : MapPosition = { lat: 26.3570737, lng: 50.1100591 };
-    const store = useUserStore();
+    const { position, setPosition, position_alert_dismissed, setAlertDismissed } = useUserStore();
 
-    /**
-   * Initialize default state for location
-   * Check if state already exists in local storage, if not set it
-   */
+    // Initialize default state for location, Check if state already exists in local storage, if not set it
     initState();
-    /**
-     * Check user's location settings and act accordingly
-     */
+
+    // Check user's location settings and act accordingly
     await checkUserLocationSettings();
 
-    /**
-     * Initialize the location state if it doesn't exist
-     */
+    // Initialize the location state if it doesn't exist
     function initState() {
         // Check local storage for existing state
         // If state exists, return
-        if(store.position) {
-            console.log('🗺 User location already exists', store.position)
+        if(position) {
+            console.log('user-location.cliehnt.ts', '🗺 User location already exists', position)
             return;
         }
         else {
             // Set default location
             console.log('🗺 Initializing user location with default center point')
-            store.setPosition(DEFAULT_CENTER_POINT);
+            setPosition(DEFAULT_CENTER_POINT);
         }
     }
 
-    /**
-     * Check if user has location services enabled and handle scenarios
-     */
+    // Check if user has location services enabled and handle scenarios
     async function checkUserLocationSettings() {
-        console.log('🗺 Checking user location settings')
+        console.log('user-location.cliehnt.ts', '🗺 Checking user location settings')
         try {
             const locationEnabled = await isLocationEnabled();
             
             // If location not enabled
             if (!locationEnabled) {
-                console.log('🗺 Location not enabled')
+                console.log('user-location.cliehnt.ts', '🗺 Location not enabled')
                 await handleLocationDisabled();
             } else {
-                console.log('🗺 Location enabled', locationEnabled)
+                console.log('user-location.cliehnt.ts', '🗺 Location enabled', locationEnabled)
             // If location enabled
                 await updateAndWatchLocation();
             }
         } catch (error) {
-            console.error('Error checking location settings', error)
+            console.error('user-location.cliehnt.ts', 'Error checking location settings', error)
         }
     }
 
-    /**
-     * Handle scenarios where location is disabled
-     */
+    // Handle scenarios where location is disabled
     async function handleLocationDisabled() {
-        console.log('🗺 Handling location disabled')
+        console.log('user-location.cliehnt.ts', '🗺 Handling location disabled')
         // Check local storage if alert dismissed  
-        const alertDismissed = store.position_alert_dismissed;
+        const alertDismissed = position_alert_dismissed;
         // If alert not dismissed
         if (!alertDismissed) {
-            console.log('🗺 Location alert not dismissed')
+            console.log('user-location.cliehnt.ts', '🗺 Location alert not dismissed')
             // Show modal to prompt for enabling location
             const toast = useToast();
             
@@ -97,15 +69,15 @@ export default defineNuxtPlugin(async (nuxtApp) => {
                     {
                         label: 'Accept',
                         click: async () => {
-                            console.log('🗺 Location toast accepted')
+                            console.log('user-location.cliehnt.ts', '🗺 Location toast accepted')
                             await updateAndWatchLocation();
                         },
                     },
                     {
                         label: 'Dismiss',
                         click: () => {
-                            console.log('🗺 Location toast dismissed')
-                            setDismissed();
+                            console.log('user-location.cliehnt.ts', '🗺 Location toast dismissed')
+                            setAlertDismissed(true);
                         }
                     }
                 ] 
@@ -113,47 +85,53 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         }
     }
 
-    function setDismissed(){
-        store.setAlertDismissed(true);
-    }
-
-    /**
-     * Get, set, and periodically update the location in the state
-     */
-    
+    // Get, set, and periodically update the location in the state  
     async function updateAndWatchLocation() {
-        console.log('🗺 Updating and watching user location')
+        console.log('user-location.cliehnt.ts', '🗺 Updating and watching user location')
         const LOCATION_REFRESH_INTERVAL = 300000; // 5 minutes
         try {
             // Get the location and set it in local storage
             const location = await getPositionWithHighAccuracy(true);
-            console.log('🗺 Got from locations.ts', location);
+            console.log('user-location.cliehnt.ts', '🗺 Got', location);
             // Set an interval to update location every 5 minutes
             setInterval(async () => {
                 try {
                     const location = await getPositionWithHighAccuracy(true); 
                 } 
                 catch (error) {
-                    console.error('Error updating location', error);
+                    console.error('user-location.cliehnt.ts', 'Error updating location', error);
                 }
             }, LOCATION_REFRESH_INTERVAL);
     
         } catch (error) {
             // Handle error, possibly use a default mechanism
-            console.error('Error getting location', error)
+            console.error('user-location.cliehnt.ts', 'Error getting location', error)
         }
     }
 
     async function getPositionWithHighAccuracy(high_accuracy: boolean){
         try {
-            console.log('🗺 Getting user position with high accuracy', high_accuracy)
+            console.log('user-location.cliehnt.ts', '🗺 Getting user position with high accuracy', high_accuracy)
+            
             const position = await getPosition({ enableHighAccuracy: high_accuracy });
-            console.log('🗺 Got user position with high accuracy', position)
+            console.log('user-location.cliehnt.ts', '🗺 Got user position with high accuracy', position)
+            
             const coords: MapPosition = { lat: position.latitude, lng: position.longitude };
-            console.log('🗺 Updating user position with ', coords)
-            store.setPosition(coords)
+            console.log('user-location.cliehnt.ts', '🗺 Updating user position with high accuracy', coords)
+            
+            // if user location is more than 100 km from the default center point, set it to the default center point
+            const distance = getDistance(coords.lat, coords.lng, DEFAULT_CENTER_POINT.lat, DEFAULT_CENTER_POINT.lng);
+            
+            if(distance > 100000) {
+                console.log('user-location.cliehnt.ts', '🗺 User location is more than 100 km from the default center point, setting it to the default center point')
+                setPosition(DEFAULT_CENTER_POINT);
+                return DEFAULT_CENTER_POINT;
+            }
+
+            setPosition(coords)
+            return coords;
         } catch (error) {
-            console.error('Error getting position with high accuracy', error)
+            console.error('user-location.cliehnt.ts', 'Error getting position with high accuracy', error)
         }
     }
 })

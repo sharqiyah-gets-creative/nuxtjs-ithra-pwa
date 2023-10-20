@@ -1,46 +1,37 @@
 <script lang="ts" setup>
-import { getPosition } from '@/utils/helpers';
+	import { getPosition } from '@/utils/helpers';
 
-const store = useUserStore()
+	const { position, position_alert_dismissed, setAlertDismissed, setPosition } = useUserStore();
+    console.log('alerts/position.vue', 'userDismissedModal', position_alert_dismissed);
 
-const isOpen = ref(true)
+	const isOpen = ref(true);
 
-const userDismissedModal = store.position_alert_dismissed;
-const userPosition = store.position;
-console.log('userDismissedModal', userDismissedModal)
+	const dismiss = () => {
+		setAlertDismissed(true);
+		isOpen.value = false;
+	};
 
-const dismiss = () => {
-  store.setAlertDismissed(true);
-  isOpen.value = false
-}
-
-const getLocation = async () => {
-  const position: any = await getPosition({enableHighAccuracy: true});
-  store.setPosition({lat: position.coords.latitude, lng: position.coords.longitude})
-  console.log(position);
-  isOpen.value = false
-}
-
+	const getLocation = async () => {
+		const position: GeolocationCoordinates = await getPosition({ enableHighAccuracy: true });
+		setPosition({ lat: position.latitude, lng: position.longitude } as MapPosition);
+		console.log('alerts/position.vue', 'position', position);
+		isOpen.value = false;
+	};
 </script>
 
 <template>
-  <div>
-    <UModal v-if="!userDismissedModal && !userPosition" v-model="isOpen">
-      <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-        <template #header>
-          تفعيل الموقع
-        </template>
-        قم بتفعيل الموقع لتتمكن من الحصول على معلومات أدق عن المبادرات حولك
-        <template #footer>
-          <div class="flex justify-start space-x-2">
-            <UButton size="xl" label="تفعيل" @click="getLocation" />
-            <UButton size="xl" label="إخفاء" variant="ghost" @click="dismiss" />
-          </div>
-        </template>
-      </UCard>
-    </UModal>
-  </div>
+	<div>
+		<UModal v-if="!position_alert_dismissed && !position" v-model="isOpen">
+			<UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+				<template #header> {{  $t('position.alert.title') }} </template>
+				{{ $t('position.alert.message') }}}
+				<template #footer>
+					<div class="flex justify-start space-x-2">
+						<UButton size="xl" label="{{ $t('position.alert.actions.activate') }}" @click="getLocation" />
+						<UButton size="xl" label="{{ $t('position.alert.actions.dismiss') }}" variant="ghost" @click="dismiss" />
+					</div>
+				</template>
+			</UCard>
+		</UModal>
+	</div>
 </template>
-
-
-

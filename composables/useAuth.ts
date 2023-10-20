@@ -1,28 +1,25 @@
-import {
-	getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-	GoogleAuthProvider,	TwitterAuthProvider, FacebookAuthProvider, signInWithPopup,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, TwitterAuthProvider, FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
 
-export const useAuth =  () => {
+export const useAuth = () => {
 	const { firebaseApp } = useFirebase();
 	const auth = getAuth(firebaseApp);
-	
-  	const store = useUserStore();
+
+	const { setUser, clearUser } = useUserStore();
 	const error = ref<Record<string, unknown> | null>(null);
-	
+
 	const registerOrLogin = async (email: string, password: string) => {
-		try {	
+		try {
 			// Try to sign in
 			const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      		store.setUser(userCredential.user);
+			setUser(userCredential.user);
 			return userCredential.user;
-		} catch (signInError) {
+		} 
+        catch (signInError) {
 			// If sign-in fails, try to register
 			try {
 				const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-				store.setUser(userCredential.user);
+				setUser(userCredential.user);
 				return userCredential.user;
-
 			} catch (registerError: any) {
 				error.value = registerError;
 				return null;
@@ -33,44 +30,45 @@ export const useAuth =  () => {
 	const loginWithProvider = async (provider: any) => {
 		try {
 			const result = await signInWithPopup(auth, provider);
-			store.setUser(result.user);
+			setUser(result.user);
 			return result;
-		} catch (error) {
+		} 
+        catch (error) {
 			console.log(error);
 			return null;
 		}
-	}
+	};
 
-	const loginWithAuthProvider = (provider: string) =>{
+	const loginWithAuthProvider = (provider: string) => {
 		switch (provider) {
 			case 'google':
 				const provider = new GoogleAuthProvider();
 				provider.addScope('profile');
 				loginWithProvider(provider);
 				break;
+
 			case 'twitter':
 				loginWithProvider(new TwitterAuthProvider());
 				break;
+
 			case 'facebook':
 				loginWithProvider(new FacebookAuthProvider());
 				break;
+
 			default:
 				break;
 		}
-		
-
-	}
+	};
 
 	const signOut = async () => {
 		try {
 			await auth.signOut();
-			store.clearUser();
+			clearUser();
 		} 
-		catch (error) {
+        catch (error) {
 			console.log(error);
 		}
 	};
 
-	return { registerOrLogin, loginWithAuthProvider,  signOut, error };
-
+	return { registerOrLogin, loginWithAuthProvider, signOut, error };
 };

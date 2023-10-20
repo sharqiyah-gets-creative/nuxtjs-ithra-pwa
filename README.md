@@ -52,23 +52,22 @@ pnpm clean
 
 ## TODO
 
-- [ ] Try the icon generator on <https://vite-pwa-org.netlify.app/assets-generator/> to generate icons for your PWA.
 - [ ] <https://web.dev/learn/pwa>
-- [ ] <https://stackoverflow.com/questions/51160348/pwa-how-to-programmatically-trigger-add-to-homescreen-on-ios-safari/51160938#51160938>
-- [ ] <https://chat.openai.com/c/e903c3c9-1b31-4fd8-b107-18f616cbdee9>
-- [x] Flowbite - <https://flowbite.com/docs/getting-started/introduction>
 - [ ] <https://www.youtube.com/watch?v=TfKDkErJUtk&t=1031>
-- [ ] Move fonts to Public folder - <https://nuxt.com/docs/getting-started/styling#working-with-fonts>
 - [ ] Consider animate.css - <https://animate.style/>
-- [x] Transition API
-- [ ] Consider fontaine
-- [ ] Passwordless Auth - <https://firebase.google.com/docs/auth/web/email-link-auth?hl=en&authuser=0>
-- [ ] <https://www.youtube.com/watch?v=KzvK809rl3Q>
-- [x] custom tailwind variant `hocus` - <https://stackoverflow.com/questions/74350677/hover-or-focus-in-tailwind-css>
-- [ ] boot method of store - <https://stackoverflow.com/questions/72497896/how-to-implement-nuxtserverinit-action-to-load-data-from-server-side-on-the-init>
+- [x] 8 Tips to Make Your Website Feel Like an iOS App - <https://www.youtube.com/watch?v=KzvK809rl3Q>
+- [x] boot method of store - <https://stackoverflow.com/questions/72497896/how-to-implement-nuxtserverinit-action-to-load-data-from-server-side-on-the-init>
 - [x] Override UI Settings - <https://github.com/nuxt/ui/blob/dev/src/runtime/ui.config.ts>
 - [x] V8 to V9 Firestore Migration - <https://fireship.io/lessons/firebase-v9-migration/>
-
+- [x] custom tailwind variant `hocus` - <https://stackoverflow.com/questions/74350677/hover-or-focus-in-tailwind-css>
+- [x] Transition API
+- [x] Consider fontaine
+- [x] Move fonts to Public folder - <https://nuxt.com/docs/getting-started/styling#working-with-fonts>
+- [x] Flowbite - <https://flowbite.com/docs/getting-started/introduction>
+- [x] [canceled] Try the icon generator on <https://vite-pwa-org.netlify.app/assets-generator/> to generate icons for your PWA.
+- [x] [canceled] Passwordless Auth - <https://firebase.google.com/docs/auth/web/email-link-auth?hl=en&authuser=0>
+- [x] <https://chat.openai.com/c/e903c3c9-1b31-4fd8-b107-18f616cbdee9>
+- [x] <https://stackoverflow.com/questions/51160348/pwa-how-to-programmatically-trigger-add-to-homescreen-on-ios-safari/51160938#51160938>
 
 ```js
 pwa: {

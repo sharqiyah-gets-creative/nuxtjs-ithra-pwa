@@ -1,35 +1,41 @@
 <script setup lang="ts">
-import { GoogleMap, MarkerCluster, Marker } from "vue3-google-map";
-import mapStyles from "@/assets/maps/styles.json";
+	import { GoogleMap, MarkerCluster, Marker } from 'vue3-google-map';
+	import mapStyles from '@/assets/maps/styles.json';
 
-const DEFAULT_ZOOM = ref(9);
+    const { public: { GOOGLE_API_KEY } } = useRuntimeConfig();
 
-// will be changed to get value from store for user location
-const store = useUserStore();
+    const { getPosition, } = useUserStore();
 
-console.log('center to be set on map', toRaw(store.getPosition))
+    const mapRef = ref(null);
 
-const config = useRuntimeConfig();
+    const DEFAULT_ZOOM = ref(9);
 
-defineProps(['locations'])
+	console.log('maps/map.vue', 'center to be set on map', toRaw(getPosition));
+
+	const props = defineProps(['events', 'specialClass', 'responsive_map']);
+
+    const local_events : IEvent[] = props.events;
+    
+    console.log('maps/map.vue', 'local_locations', local_events)
 
 </script>
 <template>
-  <ClientOnly>
-    <GoogleMap
-      :api-key="config.public.GOOGLE_API_KEY"
-      class="w-full h-[20vh] md:h-[50vh] relative"
-      :center="toRaw(store.getPosition)"
-      :zoom="DEFAULT_ZOOM"
-      :styles="mapStyles"
-      :control-size="20"
-      :street-view-control="false"
-      :map-type-control="false"
-      :gesture-handling="'cooperative'"
-    >
-      <MarkerCluster>
-        <Marker v-for="(location, i) in locations" :options="{ position: location.position }" :key="i" />
-      </MarkerCluster>
-    </GoogleMap>
-  </ClientOnly>
+	<ClientOnly>
+		<GoogleMap
+			ref="mapRef"
+			:api-key="GOOGLE_API_KEY"
+			:class="specialClass"
+			:center="getPosition"
+			:zoom="DEFAULT_ZOOM"
+			:styles="mapStyles"
+			:control-size="20"
+			:street-view-control="false"
+			:map-type-control="false"
+			:gesture-handling="responsive_map || 'cooperative'">
+
+			<MarkerCluster>
+				<MapsMarkerList v-for="(location, index) in local_events" :marker="location" :key="index" />
+			</MarkerCluster>
+		</GoogleMap>
+	</ClientOnly>
 </template>

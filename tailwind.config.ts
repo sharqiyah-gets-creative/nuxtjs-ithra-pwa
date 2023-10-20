@@ -6,7 +6,7 @@ export default <Partial<Config>>{
 
 	content: ['./docs/content/**/*.md', './components/**/*.{js,vue,ts}', './layouts/**/*.vue', './pages/**/*.vue', './plugins/**/*.{js,ts}', './app.vue', './node_modules/flowbite/**/*.{js,ts}'],
 
-	safelist: [{ pattern: /bg-(violet|green|pink|yellow)-(primary|secondary)-(400|500|600|700)/ }],
+	safelist: [{ pattern: /^bg-/ }, { pattern: /^text-/}],
 
 	theme: {
 		fontFamily: {

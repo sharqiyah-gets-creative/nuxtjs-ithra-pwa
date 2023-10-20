@@ -1,24 +1,9 @@
 <script setup lang="ts">
-	import { storeToRefs } from 'pinia';
 
-	const eventsStore = useEventsStore();
-	const userStore = useUserStore();
+    const props = defineProps(['events'])
 
-	let { events, searchKeywords } = storeToRefs(eventsStore);
+    // TODO: Add search functionality    
 
-	if (userStore.position) {
-		events = eventsStore.getEventsByPosition(userStore.position);
-	}
-
-	watch(searchKeywords, (value) => {
-		console.log(value);
-		// filter events array with events containing the search keywords as a title
-		if (events.value) {
-			events.value = events.value.filter((event: IEvent) => {
-				return event.title.includes(value);
-			});
-		}
-	});
 </script>
 
 <template>
@@ -28,7 +13,7 @@
 
 			<div v-else class="text-center">
 				<UCard loading :loading-state="{ icon: 'i-heroicons-arrow-path-20-solid', label: 'Loading...' }">
-					<h2 class="text-3xl font-black">جاري جلب الفعاليات</h2>
+					<h2 class="text-3xl font-black">{{ $t('events.loading') }}</h2>
 				</UCard>
 			</div>
 		</UContainer>

@@ -4,8 +4,8 @@ import { getDistance } from '@/utils/helpers';
 export const useEventsStore = defineStore('EVENTS_STORE', {
 	state: () => ({
 		events: [] as IEvent[],
-		eventsLastUpdated: null,
-		searchKeywords: '',
+		eventsLastUpdated: null as string | null,
+		searchKeywords: ref(null) as Ref<string | null>,
 	}),
 
 	actions: {
@@ -27,7 +27,7 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			this.searchKeywords = keywords;
 		},
 
-		getEventsByPosition(position: any) {
+		getEventsByDistance(position: any) {
 			const events = this.events.sort((a: IEvent, b: IEvent) => {
 				const distanceToA = getDistance(position.lat, position.lng, parseFloat(a.ll.split(',')[0]), parseFloat(a.ll.split(',')[1]));
 				const distanceToB = getDistance(position.lat, position.lng, parseFloat(b.ll.split(',')[0]), parseFloat(b.ll.split(',')[1]));
@@ -41,6 +41,19 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			return events;
 		},
 
+        getEventsGroupedByLocation(events: IEvent[]) {
+            const response = events.reduce((acc: any, event: IEvent) => {
+                if (acc[event.ll]) {
+                    acc[event.ll].push(event);
+                } else {
+                    acc[event.ll] = [event];
+                }
+                return acc;
+            }, {});
+
+            return response;
+        },
+
 		getEventById(id: string): IEvent | null {
 			if (this.events) {
 				const event = this.events.find((event: IEvent) => event.id === id) as IEvent;
@@ -49,26 +62,12 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			return null;
 		},
 
-		getEventsCount() {
-			return this.events ? this.events.length : 0;
-		},
-
-		// getEventsEntitiesUnique Count
-		getEventsEntitiesCount() {
-			if (this.events) {
-				const entities = this.events.map((event: IEvent) => event.entity);
-				return [...new Set(entities)].length;
-			}
-			return 0;
-		},
-
-		// getEventsCitiesCount
-		getEventsCitiesCount() {
-			if (this.events) {
-				const cities = this.events.map((event: IEvent) => event.city);
-				return [...new Set(cities)].length;
-			}
-			return 0;
+		getCounters() {
+			return {
+				events: this.events ? this.events.length : 0,
+				entities: this.events ? [...new Set(this.events.map((event: IEvent) => event.entity))].length : 0,
+				cities: this.events ? [...new Set(this.events.map((event: IEvent) => event.city))].length : 0,
+			};
 		},
 
 		updateEvent(id: string, event: IEvent) {
@@ -84,22 +83,22 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 
 		async boot() {
 			try {
-				console.log('💚 Booting Events');
+				console.log('stores/events.ts', '💚 Booting Events');
 
-				// should check store, if event exists, doesn't add it
-				// if data is 1 day old, refresh it
+				// if events are not in store or old, get them from firebase
 				if (this.eventsLastUpdated === null || new Date().getTime() - parseInt(this.eventsLastUpdated) > 86400000) {
-					console.log('📪 Store empty or old, getting events from firebase');
+					console.log('stores/events.ts', '📪 Store empty or old, getting events from firebase');
 
 					// get events from firebase
 					const { events } = await getEvents();
 
 					this.events = events;
+                    this.eventsLastUpdated = new Date().getTime().toString();
 				} else {
-					console.log(`💯 Store not empty, ${this.events.length} events found`);
+					console.log('stores/events.ts', `💯 Store not empty, ${this.events.length} events found`);
 				}
 			} catch (e) {
-				console.error('📪 Error booting Events', e);
+				console.error('stores/events.ts', '📪 Error booting Events', e);
 			}
 		},
 	},

@@ -1,4 +1,5 @@
-import { Timestamp } from "firebase/firestore";
+import { Timestamp } from 'firebase/firestore';
+import { z } from 'zod';
 
 declare global {
 	interface IEvent {
@@ -14,16 +15,25 @@ declare global {
 		area?: string;
 		ll: string;
 	}
-}
+	interface MapPosition {
+		lat?: number;
+		lng?: number;
+	}
+	interface IGetEvents {
+		events: IEvent[];
+		error: Record<string, unknown> | null;
+	}
 
-interface MapPosition {
-	lat?: number;
-	lng?: number;
-}
+    type IUser = {
+        id: string;
+        email: string;
+        name: string;
+        photoURL?: string;
+    } & {
+        [prop: string]: string;
+    } & UserCredential;
 
-interface IGetEvents {
-	events: IEvent[];
-	error: Record<string, unknown> | null;
-  }
+    type Schema = z.output<typeof schema>;
+}
 
 export { IEvent, MapPosition, IGetEvents };
