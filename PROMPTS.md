@@ -9,5 +9,5 @@ The app is going to be called "الشرقية تبدع" for meta tags and PWA
 
 I would like to separate configs into app.config.ts, i18n.config.ts, nuxt.config.ts
 I want also to use pnpm as a package manager, and changeset to track changes
-the website is going to be hosted on https://ithra-dev.6degrees.com.sa/ during development
+the website is going to be hosted on <https://ithra.6degrees.com.sa/> during development
 would you walk me through it  ?
