@@ -37,7 +37,7 @@ export const useUserStore = defineStore('USER_STORE', {
 
 		clearUser() {
 			this.user = null;
-            navigateTo('/', )
+            window.location.reload();
 		},
 	},
 	persist: true,

@@ -23,7 +23,7 @@
                     <MyButton @click="loginWithAuthProvider('twitter')" title="سجل دخولك بتويتر" icon="i-mdi-twitter" />
                 </div>
 
-                <div class="facebook_auth">
+                <div class="facebook_auth hidden">
                     <MyButton @click="loginWithAuthProvider('facebook')" title="سجل دخولك بفيسبوك" icon="i-mdi-facebook" />
                 </div>
             </div>

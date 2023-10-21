@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
 import { IGetEvents } from '~/types';
 
 export const getEvents = async (): Promise<IGetEvents> => {
@@ -27,3 +27,25 @@ export const getEvents = async (): Promise<IGetEvents> => {
 		error,
 	};
 };
+
+export const reviewEvent = async (eventId: string, userId:string,  rating: number, review: string): Promise<void> => {
+    const { firestore } = useFirestore();
+
+    try {
+        const eventRef = doc(firestore, 'events', eventId);
+
+        const ratingObject = {
+            rating: rating,
+            review: review,
+        }
+
+        console.log(ratingObject);
+        
+        await updateDoc(eventRef, {
+            [`reviews.${userId}`]: ratingObject
+        });
+
+    } catch (error: any) {
+        console.error('useEvents.ts', 'Error rating event:', error);
+    }
+}

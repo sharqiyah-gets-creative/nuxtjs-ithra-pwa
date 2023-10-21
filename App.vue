@@ -45,6 +45,10 @@
 		htmlAttrs: {
 			dir: 'rtl',
 		},
+        titleTemplate: (titleChunk) => {
+            return titleChunk ? `${titleChunk} - الشرقية تبدع` : 'الشرقية تبدع';
+        }
+
 	});
 </script>
 
