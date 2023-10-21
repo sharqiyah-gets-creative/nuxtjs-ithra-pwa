@@ -49,7 +49,7 @@
             
 			<div class="mb-2 p-3 flex-1">
                 <van-config-provider :theme="$colorMode.preference">
-                    <van-cell-group :theme="isDark">
+                    <van-cell-group :theme="$colorMode.preference">
                         <van-cell center :title="$t('settings.darkmode')">
                             <template #right-icon>
                                 <van-switch active-color="ffd21e" v-model="isDark" />
@@ -70,4 +70,5 @@
 			</div>
 		</div>
 	</USlideover>
+
 </template>
