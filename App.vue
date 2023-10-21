@@ -2,31 +2,23 @@
 	import { initFlowbite } from 'flowbite';
 	import { sleep } from './utils/helpers';
 	const { $bus }: any = useNuxtApp();
-	const routes = ['/', '/calendar', '/about'];
+	const routes = ['/', '/about'];
+
+    const SPLASH_SCREEN_DURATION = 1000; 
 
 	$bus.$on('swipe', (direction: string) => {
 		let indexCurrentRoute = routes.indexOf(useRoute().path);
+
 		console.log('swiped', direction);
-        
-        switch(direction){
-            case 'left':
-                indexCurrentRoute -= 1;
-                if (indexCurrentRoute < 0) {
-                    indexCurrentRoute = routes.length - 1;
-                }
-                return navigateTo(routes[indexCurrentRoute]);
-            case 'right':
-                indexCurrentRoute += 1;
-                if (indexCurrentRoute < 0) {
-                    indexCurrentRoute = routes.length - 1;
-                }
-                return navigateTo(routes[indexCurrentRoute]);
-        }
+
+        indexCurrentRoute += direction === 'right' ? 1 : -1;
+        indexCurrentRoute = (indexCurrentRoute + routes.length) % routes.length;  // Loop over
+
+        navigateTo(routes[indexCurrentRoute]);
 	});
 
 	// initial splash screen value
 	const showSplash = ref(true);
-
 	const store = useEventsStore();
 	await store.boot();
 
@@ -37,24 +29,21 @@
 
 		initFlowbite();
 
-		await sleep(1000);
+		await sleep(SPLASH_SCREEN_DURATION);
 		showSplash.value = false;
 	});
 
 	useHead({
-		htmlAttrs: {
-			dir: 'rtl',
-		},
+		htmlAttrs: { dir: 'rtl', },
         titleTemplate: (titleChunk) => {
             return titleChunk ? `${titleChunk} - الشرقية تبدع` : 'الشرقية تبدع';
         }
-
 	});
 </script>
 
 <template>
 	<Swipe>
-		<main class="h-screen !font-sans text-violet-primary-600 bg-slate-100 dark:bg-violet-primary-950 dark:text-white">
+		<main class="h-screen !font-sans text-violet-primary-900 bg-slate-100 dark:bg-violet-primary-950 dark:text-white">
 			<NuxtLayout>
 				<NuxtPage />
 			</NuxtLayout>

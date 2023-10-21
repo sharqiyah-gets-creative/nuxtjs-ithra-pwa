@@ -3,12 +3,12 @@
 </script>
 
 <template>
-	<header id="title" class="min-h-min md:px-0 py-1 standalone:pt-6" :class="additional_classes">
+	<header id="title" class="min-h-min lg:px-0 py-1 standalone:pt-6" :class="additional_classes">
 		<UContainer class="space-y-2">
 			<div class="flex justify-between">
 				<h1 class="text-2xl font-black">
 					{{ title }}
-					<p class="block text-lg font-light">{{ description }}</p>
+					<p class="block text-lg font-normal">{{ description }}</p>
 				</h1>
 				<NavsSide />
 			</div>

@@ -1,4 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, TwitterAuthProvider, FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
+import { FirebaseError } from '@firebase/util'
 
 export const useAuth = () => {
 	const { firebaseApp } = useFirebase();
@@ -10,18 +11,47 @@ export const useAuth = () => {
 	const registerOrLogin = async (email: string, password: string) => {
 		try {
 			// Try to sign in
+            console.log('useAuth.ts', 'Trying to sign in')
 			const userCredential = await signInWithEmailAndPassword(auth, email, password);
-			setUser(userCredential.user);
+            console.log('useAuth.ts', 'User signed in:', userCredential.user)
+			await setUser(userCredential.user);
+            
 			return userCredential.user;
 		} 
-        catch (signInError) {
+        catch (loginError) {
+            if (loginError instanceof FirebaseError) {
+                console.log('useAuth.ts', 'FirebaseError:', loginError.code)
+                if(loginError.code === 'auth/invalid-login-credentials') {
+                    console.log('useAuth.ts', 'Invalid login credentials')
+                }
+             }
+          
+            console.log('useAuth.ts', 'Failed to sign in:', error)
 			// If sign-in fails, try to register
 			try {
+                console.log('useAuth.ts', 'Trying to register')
 				const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-				setUser(userCredential.user);
+                console.log('useAuth.ts', 'User registered:', userCredential.user)
+				await setUser(userCredential.user);
 				return userCredential.user;
 			} catch (registerError: any) {
+                if (error instanceof FirebaseError) {
+                    console.log('useAuth.ts', 'FirebaseError:', error.code)
+                    
+                    if(error.code === 'auth/email-already-exists') {
+                        console.log('useAuth.ts', 'Email already exists')
+                        showFailToast({
+                            message: 'البريد الإلكتروني مستخدم من قبل',
+                            forbidClick: true,
+                        });
+                        throw new Error('Email already exists');
+                        return;
+                    }
+                    
+                 }
+                console.log('useAuth.ts', 'Failed to register:', registerError)
 				error.value = registerError;
+                throw new Error(registerError.code);
 				return null;
 			}
 		}
@@ -30,7 +60,7 @@ export const useAuth = () => {
 	const loginWithProvider = async (provider: any) => {
 		try {
 			const result = await signInWithPopup(auth, provider);
-			setUser(result.user);
+			await setUser(result.user);
 			return result;
 		} 
         catch (error) {

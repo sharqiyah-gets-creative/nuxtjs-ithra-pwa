@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 	import { z } from 'zod';
 	import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
+    import { showLoadingToast } from 'vant';
+
 
     const show = ref(false);
 	const { setUser } = useUserStore();
@@ -11,28 +13,48 @@
 		password: z.string(),
 	});
 
-
 	const state = reactive({
 		email: undefined,
 		password: undefined,
 	});
 
 	async function submit(event: FormSubmitEvent<Schema>) {
-		// Do something with data
-		console.log('user/emailLogin.vue', 'event data', event.data);
+        try {
+            showLoadingToast({
+                message: 'جاري التسجيل...',
+                forbidClick: true,
+            });
 
-		const user = await registerOrLogin(event.data.email, event.data.password);
-		setUser(user);
 
-		console.log('user/emailLogin.vue', 'user', user, 'error', error);
+            // Do something with data
+            console.log('user/emailLogin.vue', 'event data', event.data);
+
+            const user = await registerOrLogin(event.data.email, event.data.password);
+            await setUser(user);
+
+            console.log('user/emailLogin.vue', 'user', user, 'error', error);
+            closeToast();
+        } catch (error) {
+            closeToast();
+            console.log('user/emailLogin.vue', 'error', error);
+            console.log(error)
+            if(error == "Error: auth/email-already-in-use"){
+                console.log('user/emailLogin.vue', error);
+                showFailToast({ message: 'معلومات تسجيل الدخول خاطئة', wordBreak: 'break-word' });
+            }
+            else{
+                showFailToast({ message: 'حدث خطأ أثناء تسجيلك', wordBreak: 'break-word' });
+            }  
+        }
+
 	}
 </script>
 <template>
 	<div>
 
-        <MyButton title="سجل دخولك بالبريد الإلكتروني" icon="i-heroicons-envelope" @click="show = true" />
+        <MyButton outline="true" title="سجل دخولك بالبريد الإلكتروني" icon="i-heroicons-envelope" @click="show = true" />
 
-        <van-action-sheet class="!bg-slate-900" theme="dark" v-model:show="show" title="تسجيل الدخول بالبريد الإلكتروني">
+        <van-action-sheet class="!bg-white !dark:bg-slate-900" :theme="$colorMode.preference" v-model:show="show" title="تسجيل الدخول بالبريد الإلكتروني">
             <div class="p-4 space-y-2 max-w-md mx-auto">
                 <UForm :schema="schema" :state="state" @submit="submit" class="text-xl space-y-2 flex flex-col justify-between h-full">
 				<div>

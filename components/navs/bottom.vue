@@ -1,10 +1,10 @@
 <template>
   <div class="sticky bottom-0 z-30 w-full bg-white border-t border-gray-200 dark:bg-violet-primary-500 dark:border-gray-600">
-    <div class="grid h-full max-w-lg grid-cols-3 mx-auto font-medium">
+    <div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium">
 
       <NavsBottomNavLink :title="$t('activity', 0)" icon="i-mdi-home" link="/" />
 
-      <NavsBottomNavLink :title="$t('calendar')" icon="i-mdi-calendar" link="/calendar" />
+      <!--<NavsBottomNavLink :title="$t('calendar')" icon="i-mdi-calendar" link="/calendar" />-->
 
       <NavsBottomNavLink :title="$t('about')" icon="i-mdi-help-circle" link="/about" />
       

@@ -4,7 +4,14 @@ import plugin from 'tailwindcss/plugin';
 export default <Partial<Config>>{
 	mode: 'jit',
 
-	content: ['./docs/content/**/*.md', './components/**/*.{js,vue,ts}', './layouts/**/*.vue', './pages/**/*.vue', './plugins/**/*.{js,ts}', './app.vue', './node_modules/flowbite/**/*.{js,ts}'],
+	content: [
+        './docs/content/**/*.md', 
+        './components/**/*.{js,vue,ts}', 
+        './layouts/**/*.vue', 
+        './pages/**/*.vue', 
+        './plugins/**/*.{js,ts}', 
+        './app.vue', 
+        './node_modules/flowbite/**/*.{js,ts}'],
 
 	safelist: [{ pattern: /^bg-/ }, { pattern: /^text-/}],
 

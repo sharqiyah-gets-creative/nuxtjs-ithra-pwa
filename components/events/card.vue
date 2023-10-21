@@ -1,16 +1,23 @@
 <script setup lang="ts">
-	import { formatDistance, formatDate, getRandomColorClass } from '@/utils/helpers';
+	import { formatDistance, formatDate, getRandomColorClass, formatTime } from '@/utils/helpers';
 
     let color = '';
 	color = getRandomColorClass(color);
-    
 
-	defineProps({
+    const average_reviews = ref(0);
+
+	const props = defineProps({
 		event: {
 			type: Object as PropType<IEvent>,
 			required: true,
 		},
 	});
+
+    // Getting Reviews
+    if(props.event.reviews){
+        average_reviews.value = getAverageReviews(props.event.reviews);
+    }
+	
 </script>
 
 <template>
@@ -25,11 +32,23 @@
 
 			<div class="p-2 px-4 bg-white">
 				<ul class="font-light text-base">
+                    
+                    <li v-if="average_reviews" class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
+						<van-rate v-model="average_reviews" color="#ffd21e" :size="18" void-icon="star" readonly />
+					</li>
+
 					<li class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
 						<UIcon name="i-heroicons-clock" />
-						<time :datetime="event.start_time.toString()">{{ formatDate(event.start_time) }}</time>
+						<time :datetime="event.start_time.toString()">{{ formatDate(event.start_date) }}</time> 
+                        <b class="font-bold">إلى</b>
+                         <time :datetime="event.end_time.toString()">{{ formatDate(event.end_date) }}</time>
+					</li>
+
+                    <li class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
+						<UIcon name="i-heroicons-clock" />
+						<time :datetime="event.start_time.toString()">{{ formatTime(event.start_time) }}</time>
 						<b class="font-bold">إلى</b>
-						<time :datetime="event.end_time.toString()">{{ formatDate(event.end_time) }}</time>
+						<time :datetime="event.end_time.toString()">{{ formatTime(event.end_time) }}</time>
 					</li>
 
 					<li class="flex justify-start items-center">

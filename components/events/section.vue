@@ -2,7 +2,7 @@
 
     const props = defineProps(['events'])
 
-    // TODO: Add search functionality    
+    // TODO: Add search functionality
 
 </script>
 

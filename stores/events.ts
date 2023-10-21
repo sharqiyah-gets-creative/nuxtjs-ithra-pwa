@@ -54,6 +54,16 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
             return response;
         },
 
+        getEventsCities(events: IEvent[]) {
+            const cities = [...new Set(events.map((event: IEvent) => event.city))];
+            return cities;
+        },
+
+        getEventsByCity(city: string) {
+            const events = this.events.filter((event: IEvent) => event.city === city);
+            return events;
+        },
+
 		getEventById(id: string): IEvent | null {
 			if (this.events) {
 				const event = this.events.find((event: IEvent) => event.id === id) as IEvent;
@@ -80,6 +90,21 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 		clearEvents() {
 			this.events.length = 0;
 		},
+
+        // refresh storage
+        async refreshEvents() {
+            try {
+                console.log('stores/events.ts', '📪 Updating events from firebase');
+
+                // get events from firebase
+                const { events } = await getEvents();
+
+                this.events = events;
+                this.eventsLastUpdated = new Date().getTime().toString();
+            } catch (e) {
+                console.error('stores/events.ts', '📪 Error updating Events', e);
+            }
+        },
 
 		async boot() {
 			try {

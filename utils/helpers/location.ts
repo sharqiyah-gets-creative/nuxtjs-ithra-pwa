@@ -1,4 +1,4 @@
-import { MapPosition } from '~/types';
+export const DEFAULT_CENTER_POINT  = { lat: 26.3570737, lng: 50.1100591 };
 
 /**
  * Check if location services are enabled in the browser.
@@ -7,7 +7,7 @@ import { MapPosition } from '~/types';
  */
 export const isLocationEnabled = async (): Promise<boolean> => {
 	const { state } = await navigator.permissions.query({ name: 'geolocation' });
-	return state === 'granted' || state === 'prompt';
+	return state === 'granted';
 };
 
 // not used anymore

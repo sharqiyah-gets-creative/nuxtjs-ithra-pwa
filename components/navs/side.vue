@@ -31,11 +31,11 @@
 
 <template>
 	
-    <button v-if="user" class="text-2xl text-slate-700 dark:text-slate-100" @click="isOpen = true">
+    <button v-if="user" class="text-2xl text-slate-700 dark:text-slate-100 cursor-pointer" @click="isOpen = true">
 		<UAvatar size="lg" :src="user.photoURL!" class="cursor-pointer" alt="Avatar" />
 	</button>
 	
-    <button v-else class="text-2xl text-slate-700 dark:text-slate-100" @click="isOpen = true">
+    <button v-else class="text-2xl text-slate-700 dark:text-slate-100 cursor-pointer" @click="isOpen = true">
 		<UIcon name="i-heroicons-ellipsis-vertical" />
 	</button>
 
@@ -47,7 +47,6 @@
 				<UButton icon="i-heroicons-x-mark-20-solid" color="white" variant="ghost" class="-my-1" @click="isOpen = false" />
 			</div>
             
-
 			<div class="mb-2 p-3 flex-1">
                 <van-config-provider :theme="$colorMode.preference">
                     <van-cell-group :theme="isDark">

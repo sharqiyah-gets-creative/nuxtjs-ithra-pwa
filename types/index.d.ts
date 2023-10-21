@@ -7,14 +7,23 @@ declare global {
 		title: string;
 		entity?: string;
 		category?: string;
-		start_time: Timestamp;
-		end_time: Timestamp;
+        start_date: Timestamp;
+        end_date: Timestamp;
+		start_time: string;
+		end_time: string;
 		language?: string[];
+        reviews?: IReview[];
 		distance?: number;
 		city?: string;
 		area?: string;
 		ll: string;
 	}
+
+    interface IReview {
+        rating: number;
+        review?: string;
+    }
+
 	interface MapPosition {
 		lat?: number;
 		lng?: number;

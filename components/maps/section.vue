@@ -1,5 +1,6 @@
 <script setup lang="ts">
-    defineProps(['events_grouped_by_location', 'counters'])
+    const props = defineProps(['events_grouped_by_location', 'counters'])
+    console.log('components/maps/section.vue', 'counters', props.counters());
     
 	const goToMapPage = () => {
 		navigateTo('/map');
@@ -12,24 +13,13 @@
 			<UCard :ui="{ header: { padding: 'p-0 sm:p-0' } }">
 				<template #header>
 					<div @click="goToMapPage()">
-						<MapsMap responsive_map="none" specialClass="w-full h-[25vh] md:h-[40vh] relative" :events="events_grouped_by_location" />
+						<MapsMap :responsive="false" specialClass="w-full h-[20vh] lg:h-[30vh] relative" :events="events_grouped_by_location" />
 					</div>
 				</template>
 				<div class="grid grid-cols-3 divide-x divide-x-reverse">
-					<div class="flex flex-col justify-center items-center">
-						<div class="text-xl font-bold">{{ counters.events }}</div>
-						<div class="text-base font-light">{{ $t('activity') }}</div>
-					</div>
-
-					<div class="flex flex-col justify-center items-center">
-						<div class="text-xl font-bold">{{ counters.entities }}</div>
-						<div class="text-base font-light">{{ $t('entity') }}</div>
-					</div>
-
-					<div class="flex flex-col justify-center items-center">
-						<div class="text-xl font-bold">{{ counters.cities }}</div>
-						<div class="text-base font-light">{{ $t('city') }}</div>
-					</div>
+                    <MapsCounter :title="$t('activity')" :value="counters().events" />
+                    <MapsCounter :title="$t('entity')" :value="counters().entities" />
+                    <MapsCounter :title="$t('city')" :value="counters().cities" />
 				</div>
 			</UCard>
 		</UContainer>

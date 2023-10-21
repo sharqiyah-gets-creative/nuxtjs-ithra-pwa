@@ -12,7 +12,9 @@ const closed = () => {
 	<van-notice-bar @close="closed()" v-if="!add_to_home_screen_dismissed"
 		ref="noticeBarRef"
 		mode="closeable"
-		text="لتجربة أفضل، إضغط زر المشاركة ومن ثم إضافة للرئيسية."
+        :scrollable="false"
+        wrapable 
+		text="لتجربة أفضل، إضغط زر المشاركة ومن ثم إضافة للرئيسية لتركيب التطبيق"
 		color="#1989fa"
 		background="#ecf9ff"
 		left-icon="info-o" />

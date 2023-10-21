@@ -1,11 +1,13 @@
 <script setup lang="ts">
 	import { InfoWindow, Marker } from 'vue3-google-map';
 
-	const props = defineProps(['marker']);
+	const props = defineProps(['marker', 'responsive']);
+    const isResponsive = ref(props.responsive || false);
 
     const local_marker  = props.marker;
 
     const markerOptions = {
+        clickable: isResponsive.value,
         position: {
             lat: parseFloat(local_marker[0].ll?.split(',')[0]),
             lng: parseFloat(local_marker[0].ll.split(',')[1]),
