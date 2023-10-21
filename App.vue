@@ -6,16 +6,17 @@
 
     const SPLASH_SCREEN_DURATION = 1000; 
 
-	$bus.$on('swipe', (direction: string) => {
-		let indexCurrentRoute = routes.indexOf(useRoute().path);
+    // * Very Sensitive on mobile
+	// $bus.$on('swipe', (direction: string) => {
+	// 	let indexCurrentRoute = routes.indexOf(useRoute().path);
 
-		console.log('swiped', direction);
+	// 	console.log('swiped', direction);
 
-        indexCurrentRoute += direction === 'right' ? 1 : -1;
-        indexCurrentRoute = (indexCurrentRoute + routes.length) % routes.length;  // Loop over
+    //     indexCurrentRoute += direction === 'right' ? 1 : -1;
+    //     indexCurrentRoute = (indexCurrentRoute + routes.length) % routes.length;  // Loop over
 
-        navigateTo(routes[indexCurrentRoute]);
-	});
+    //     navigateTo(routes[indexCurrentRoute]);
+	// });
 
 	// initial splash screen value
 	const showSplash = ref(true);
