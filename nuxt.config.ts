@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
-			viewport: 'initial-scale=1, viewport-fit=cover, user-scalable=no, width=device-width',
+			viewport: 'initial-scale=1, viewport-fit=cover, width=device-width',
 		},
 		pageTransition: {name: 'page', mode: 'out-in'},
 	},

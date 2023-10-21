@@ -2,20 +2,27 @@
 	import { initFlowbite } from 'flowbite';
 	import { sleep } from './utils/helpers';
 	const { $bus }: any = useNuxtApp();
+	const { $colorMode } = useNuxtApp();
 	const routes = ['/', '/about'];
 
-    const SPLASH_SCREEN_DURATION = 1000; 
+	const SPLASH_SCREEN_DURATION = 1000;
 
-    // * Very Sensitive on mobile
+    $colorMode.preference = $colorMode.preference === 'dark' ? 'dark' : 'light';
+
+    const colorMode = computed(() => {
+        return $colorMode.preference === 'dark' ? 'dark' : 'light';
+    });
+
+	// * Very Sensitive on mobile
 	// $bus.$on('swipe', (direction: string) => {
 	// 	let indexCurrentRoute = routes.indexOf(useRoute().path);
 
 	// 	console.log('swiped', direction);
 
-    //     indexCurrentRoute += direction === 'right' ? 1 : -1;
-    //     indexCurrentRoute = (indexCurrentRoute + routes.length) % routes.length;  // Loop over
+	//     indexCurrentRoute += direction === 'right' ? 1 : -1;
+	//     indexCurrentRoute = (indexCurrentRoute + routes.length) % routes.length;  // Loop over
 
-    //     navigateTo(routes[indexCurrentRoute]);
+	//     navigateTo(routes[indexCurrentRoute]);
 	// });
 
 	// initial splash screen value
@@ -35,24 +42,26 @@
 	});
 
 	useHead({
-		htmlAttrs: { dir: 'rtl', },
-        titleTemplate: (titleChunk) => {
-            return titleChunk ? `${titleChunk} - الشرقية تبدع` : 'الشرقية تبدع';
-        }
+		htmlAttrs: { dir: 'rtl' },
+		titleTemplate: (titleChunk) => {
+			return titleChunk ? `${titleChunk} - الشرقية تبدع` : 'الشرقية تبدع';
+		},
 	});
 </script>
 
 <template>
 	<Swipe>
-		<main class="h-screen !font-sans text-violet-primary-900 bg-slate-100 dark:bg-violet-primary-950 dark:text-white">
-			<NuxtLayout>
-				<NuxtPage />
-			</NuxtLayout>
+		<van-config-provider safe-area-inset-bottom safe-area-inset-top :theme="colorMode">
+			<main class="h-screen !font-sans text-violet-primary-900 bg-slate-100 dark:bg-violet-primary-950 dark:text-white">
+				<NuxtLayout>
+					<NuxtPage />
+				</NuxtLayout>
 
-			<!-- Splash Screen-->
-			<Transition :duration="300" name="fade">
-				<Splash v-show="showSplash" />
-			</Transition>
-		</main>
+				<!-- Splash Screen-->
+				<Transition :duration="300" name="fade">
+					<Splash v-show="showSplash" />
+				</Transition>
+			</main>
+		</van-config-provider>
 	</Swipe>
 </template>

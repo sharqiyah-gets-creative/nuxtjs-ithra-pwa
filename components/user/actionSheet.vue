@@ -1,18 +1,16 @@
 <script lang="ts" setup>
 	const { loginWithAuthProvider } = useAuth();
 	const showLogin = ref(false);
-    const toggleLogin = () => {
-        console.log('toggling login', showLogin.value, 'to', !showLogin.value)
-        showLogin.value = !showLogin.value;
-    }
-
+	const toggleLogin = () => {
+		console.log('toggling login', showLogin.value, 'to', !showLogin.value);
+		showLogin.value = !showLogin.value;
+	};
 </script>
 <template>
-    <div>
-        <van-config-provider :theme="$colorMode.preference">
-        <div class="cursor-pointer" @click="toggleLogin">
-            <slot />
-        </div>
+	<div>
+		<div class="cursor-pointer" @click="toggleLogin">
+			<slot />
+		</div>
 		<van-action-sheet class="!bg-white !dark:bg-slate-900" :theme="$colorMode.preference" v-model:show="showLogin" title="تسجيل الدخول">
 			<div class="p-4 space-y-2 max-w-md mx-auto">
 				<div class="email_auth">
@@ -32,6 +30,5 @@
 				</div>
 			</div>
 		</van-action-sheet>
-    </van-config-provider>
-    </div>
+	</div>
 </template>
