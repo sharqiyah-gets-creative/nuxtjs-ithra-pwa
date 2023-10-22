@@ -98,7 +98,7 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 		<div class="space-y-2 flex-[1] overflow-auto py-4">
 			<section id="details" class="mb-2">
 				<UContainer>
-					<table class="w-full rounded overflow-hidden text-sm text-right text-gray-500 dark:text-gray-400">
+					<table class="w-full rounded overflow-hidden text-base text-right text-gray-500 dark:text-gray-400">
 						<tbody class="bg-white bg-opacity-60 dark:bg-opacity-60 dark:bg-gray-800 dark:border-gray-700">
 							<!-- loop through eventInfo data, key is teh first td, value is the second -->
 							<UiEventTr title="تصنيف الفعالية">

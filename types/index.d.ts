@@ -45,4 +45,4 @@ declare global {
     type Schema = z.output<typeof schema>;
 }
 
-export { IEvent, MapPosition, IGetEvents };
+export { IEvent, MapPosition, IGetEvents, };

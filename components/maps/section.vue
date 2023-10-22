@@ -8,7 +8,7 @@
 </script>
 
 <template>
-	<section id="map" class="py-4">
+	<section id="map">
 		<UContainer>
 			<UCard :ui="{ header: { padding: 'p-0 sm:p-0' } }">
 				<template #header>

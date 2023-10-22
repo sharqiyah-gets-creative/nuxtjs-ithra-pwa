@@ -39,8 +39,8 @@
 		<UIcon name="i-heroicons-ellipsis-vertical" />
 	</button>
 
-	<USlideover :overlay="false" dir="ltr" v-model="isOpen" side="left" class="standalone:pt-8 h-full">
-		<div dir="rtl" class="flex flex-col h-full">
+	<USlideover safe-area-inset-top :overlay="false" dir="ltr" v-model="isOpen" side="left" class="h-full">
+		<div dir="rtl" class="flex flex-col h-full text-base">
 			<div class="p-3 flex items-center justify-between flex-row-reverse mb-2">
 				<h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">الإعدادات</h3>
 				<UButton icon="i-heroicons-x-mark-20-solid" color="white" variant="ghost" class="-my-1" @click="isOpen = false" />
@@ -53,8 +53,6 @@
 							<van-switch active-color="ffd21e" v-model="isDark" />
 						</template>
 					</van-cell>
-
-					<van-cell v-if="user" title="تقييماتي" />
 
 					<van-cell v-if="user" @click="signUserOut" :title="$t('settings.logout')" description="" />
 

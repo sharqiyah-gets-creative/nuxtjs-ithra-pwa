@@ -2,30 +2,4 @@
 @use 'fonts' as *;
 @use 'responsiveness' as *;
 @use 'animations' as *;
-
-*{
-    scrollbar-width: 3px;
-    scrollbar-color: red yellow;
-
-}
-
-:root:root{
-    --van-base-font: 'ithra', sans-serif;
-    --van-cell-background: inherit;
-    --van-cell-group-background: inherit;
-    --van-background-2: inherit;
-}
-
-@supports (bottom: env(safe-area-inset-bottom)) {
-    #app {
-        --van-safe-area-bottom: constant(safe-area-inset-bottom);
-        --van-safe-area-bottom: env(safe-area-inset-bottom);
-    }
-}
-
-@supports (top: env(safe-area-inset-top)) {
-    #app {
-        --van-safe-area-top: constant(safe-area-inset-top);
-        --van-safe-area-top: env(safe-area-inset-top);
-    }
-}
+@use 'vant_overrides' as *;

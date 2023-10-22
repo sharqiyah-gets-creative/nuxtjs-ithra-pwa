@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
+import colors from "tailwindcss/colors";
+
 
 export default <Partial<Config>>{
 	mode: 'jit',
@@ -11,7 +13,9 @@ export default <Partial<Config>>{
         './pages/**/*.vue', 
         './plugins/**/*.{js,ts}', 
         './app.vue', 
-        './node_modules/flowbite/**/*.{js,ts}'],
+        './node_modules/flowbite/**/*.{js,ts}',
+        "./node_modules/vue-tailwind-datepicker/**/*.js",
+    ],
 
 	safelist: [{ pattern: /^bg-/ }, { pattern: /^text-/}],
 
@@ -25,6 +29,8 @@ export default <Partial<Config>>{
 		},
 		extend: {
 			colors: {
+                "vtd-primary": colors.sky, // Light mode Datepicker color
+                "vtd-secondary": colors.gray, // Dark mode Datepicker color
                 'violet-primary': {
                     '50': '#edeeff',
                     '100': '#dfdfff',
@@ -142,7 +148,7 @@ export default <Partial<Config>>{
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('flowbite/plugin'),
-
+        require("@tailwindcss/forms"),
 		plugin(function ({ addVariant }) {
 			addVariant('hocus', ['&:hover', '&:focus']);
 		}),

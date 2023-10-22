@@ -7,8 +7,8 @@
 </script>
 
 <template>
-	<section id="events" class="py-4">
-		<UContainer class="space-y-2">
+	<section id="events">
+		<UContainer class="space-y-3">
 			<EventsCard v-if="events.length > 0" v-for="event in events" :key="event.id" :event="event" />
 
 			<div v-else class="text-center">
