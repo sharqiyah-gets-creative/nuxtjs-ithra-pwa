@@ -43,7 +43,14 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 
 	top_reviews.value = getTopReviewsComments(eventInfo.value.reviews, 5);
 
-    current_user_review.value = eventInfo.value.reviews ? eventInfo.value.reviews[user.uid] : null;
+    // check if eventInfo.value has reviews
+    // if yes, check if current user has a review, it should be like (eventInfo.value.reviews[user.uid]) then set it to current_user_review
+    if(eventInfo.value.reviews) {
+        if(eventInfo.value.reviews[user.uid]) {
+            current_user_review.value = eventInfo.value.reviews[user.uid];
+        }
+    }
+    
     if(current_user_review.value) {
         event_rating.value = current_user_review.value.rating;
         event_review.value = current_user_review.value.review || '';
