@@ -27,6 +27,13 @@
 		},
 	});
 
+    const refreshEvents = async () => {
+        await refreshEvents();
+        
+        showSuccessToast('تم تحديث الفعاليات بنجاح');
+        isOpen.value = false;
+    };
+
 	console.log('navs/side.vue', '👍👍👍 isDark', isDark);
 </script>
 
@@ -57,6 +64,8 @@
 					<van-cell v-if="user" @click="signUserOut" :title="$t('settings.logout')" description="" />
 
 					<UserLogin v-else />
+
+                    <van-cell @click="refreshEvents" title="تحديث الفعاليات" description="إضغط هنا لتجديد بيانات الفعاليات عند الحاجة" />
 				</van-cell-group>
 			</div>
 
