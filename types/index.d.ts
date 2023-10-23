@@ -3,15 +3,16 @@ import { z } from 'zod';
 
 declare global {
 	interface IEvent {
-		id: string;
+		id?: string;
 		title: string;
+        description?: string;
 		entity?: string;
 		category?: string;
         start_date: Timestamp;
         end_date: Timestamp;
 		start_time: string;
 		end_time: string;
-		language?: string[];
+		language?: string[] | string;
         reviews?: IReview[];
 		distance?: number;
 		city?: string;
