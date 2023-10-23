@@ -51,7 +51,6 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
                 current_user_review.value = eventInfo.value.reviews[user.uid];
             }
         }
-        
     }
     
     if(current_user_review.value) {
