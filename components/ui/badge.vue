@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 	const props = defineProps(['color', 'label']);
 
-	if (!props.color) props.color = 'blue';
+    const color = ref(props.color);
+    if (!color.value) color.value = 'blue';
 
-	const bg_color = `bg-${props.color}-100`;
-	const text_color = `text-${props.color}-800`;
-	const dark_bg_color = `dark:bg-${props.color}-900`;
-	const dark_text_color = `dark:text-${props.color}-300`;
+	const bg_color = `bg-${color.value}-100`;
+	const text_color = `text-${color.value}-800`;
+	const dark_bg_color = `dark:bg-${color.value}-900`;
+	const dark_text_color = `dark:text-${color.value}-300`;
 
 	const comnbined_classes = `${bg_color} ${text_color} ${dark_bg_color} ${dark_text_color}`;
 </script>

@@ -2,7 +2,7 @@
 import { getPosition } from '~/utils/helpers';
 
 
-const { setAlertDismissed, setPosition, position_alert_dismissed } = useUserStore();
+const { setAlertDismissed, setPosition } = useUserStore();
 
 const closed = () => {
     console.log('closed');
@@ -24,7 +24,7 @@ const promptLocation = async () => {
 
 </script>
 <template>
-	<van-notice-bar @click="promptLocation()" @close="closed()" v-if="!position_alert_dismissed"
+	<van-notice-bar @click="promptLocation()" @close="closed()" 
 		ref="noticeBarRef"
 		mode="closeable"
 		text="لتجربة أفضل، قم بمشاركة موقعك."

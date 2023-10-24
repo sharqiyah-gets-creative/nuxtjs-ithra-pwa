@@ -52,7 +52,7 @@
 <template>
 	<Swipe>
 		<van-config-provider safe-area-inset-bottom safe-area-inset-top :theme="colorMode">
-			<main class="h-screen !font-sans text-violet-primary-900 bg-slate-100 dark:bg-violet-primary-950 dark:text-white">
+			<main class="h-screen !font-sans text-valhalla-900 bg-slate-100 dark:bg-valhalla-950 dark:text-white">
 				<NuxtLayout>
 					<NuxtPage />
 				</NuxtLayout>

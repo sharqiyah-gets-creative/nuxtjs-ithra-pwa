@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-full text-white bg-violet-secondary-500  ">
-    <NavsTop :title="$t('calendar')" :description="$t('calendar_page.description')" additional_classes="bg-violet-secondary-500" />
+  <div class="flex flex-col h-full text-white bg-valhalla-500  ">
+    <NavsTop :title="$t('calendar')" :description="$t('calendar_page.description')" additional_classes="bg-valhalla-500" />
 
     <section id="calendar" class="flex-[1] overflow-auto py-6 flex h-full flex-col justify-center items-center">
       <UContainer class="">

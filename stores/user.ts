@@ -1,4 +1,4 @@
-import { MapPosition } from '~/types';
+import type { MapPosition } from '~/types';
 import { defineStore } from 'pinia';
 import { saveUserInFirestore } from '~/composables/useFirestore';
 

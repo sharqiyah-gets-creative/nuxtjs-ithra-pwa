@@ -6,14 +6,13 @@
 
     const local_marker  = props.marker;
 
-    const markerOptions = {
+    const markerOptions: google.maps.MarkerOptions = {
         clickable: isResponsive.value,
         position: {
             lat: parseFloat(local_marker[0].ll?.split(',')[0]),
             lng: parseFloat(local_marker[0].ll.split(',')[1]),
         },
         
-        anchorPoint: 'CENTER',
     };
 
     let openedMarkerID: any = null;

@@ -1,4 +1,5 @@
-import { FirebaseOptions, initializeApp, getApps, FirebaseApp } from 'firebase/app';
+import type { FirebaseOptions, FirebaseApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 
 export const useFirebase = () => {
 	const { $config } = useNuxtApp();

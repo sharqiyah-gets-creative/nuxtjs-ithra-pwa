@@ -3,9 +3,8 @@
 	const color = ref(props.color || 'blue');
     const outline = ref(props.outline || false);
 
-    // if outline is true, then we need to add outline to the button and bg-transparent
-    // if outline is false, then we need to add bg-color and text-color
     const classes = computed(() => {
+        // if outline is true, then we need to add outline to the button and bg-transparent
         if (outline.value) {
             return `
                 bg-transparent
@@ -14,7 +13,9 @@
                 hover:bg-${color.value}-700
                 hover:${color.value}-900
             `;
-        } else {
+        } 
+        // if outline is false, then we need to add bg-color and text-color
+        else {
             return `
                 text-${color.value}-100
                 bg-${color.value}-700

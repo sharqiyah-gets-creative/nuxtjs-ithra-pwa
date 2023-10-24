@@ -5,6 +5,11 @@
     "editor.quickSuggestions": {
         "strings": true
     },
+    "editor.detectIndentation": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     
     "tailwindCSS.experimental.configFile": "tailwind.config.ts",
     "tailwindCSS.experimental.classRegex": [
@@ -21,12 +26,9 @@
         "ngClass",
         "ui"
     ],
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    
     "nuxtr.defaultPackageManager": "pnpm",
     "nuxtr.vueFiles.style.addStyleTag": false,
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "editor.detectIndentation": false
+    "typescript.tsdk": "node_modules/typescript/lib"
+    
 }

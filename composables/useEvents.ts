@@ -1,5 +1,5 @@
+import type { IGetEvents } from '~/types';
 import { collection, getDocs, doc, setDoc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
-import { IGetEvents } from '~/types';
 
 export const getEvents = async (): Promise<IGetEvents> => {
 	const { firestore } = useFirestore();

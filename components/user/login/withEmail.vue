@@ -4,7 +4,7 @@
     import { showLoadingToast } from 'vant';
 
 
-    const show = ref(false);
+    const showEmailModal = ref(false);
 	const { setUser } = useUserStore();
 	const { registerOrLogin, error } = useAuth();
 
@@ -50,27 +50,14 @@
 	}
 </script>
 <template>
-	<div>
+	<UForm :schema="schema" :state="state" @submit="submit" class="text-xl space-y-2 flex flex-col justify-between h-full">
+            <UFormGroup size="xl" label="البريد الإلكتروني" name="email">
+                <UInput type="email" v-model="state.email" />
+            </UFormGroup>
 
-        <MyButton outline="true" title="سجل دخولك بالبريد الإلكتروني" icon="i-heroicons-envelope" @click="show = true" />
-
-        <van-action-sheet class="!bg-white !dark:bg-slate-900" :theme="$colorMode.preference" v-model:show="show" title="تسجيل الدخول بالبريد الإلكتروني">
-            <div class="p-4 space-y-2 max-w-md mx-auto">
-                <UForm :schema="schema" :state="state" @submit="submit" class="text-xl space-y-2 flex flex-col justify-between h-full">
-				<div>
-					<UFormGroup size="xl" label="البريد الإلكتروني" name="email">
-						<UInput type="email" v-model="state.email" />
-					</UFormGroup>
-
-					<UFormGroup size="xl" label="كلمة المرور" name="password">
-						<UInput type="password" v-model="state.password" />
-					</UFormGroup>
-				</div>
-
-				<UButton type="submit" class="w-full text-center !text-lg">إرسال</UButton>
-			</UForm>
-            </div>
-        </van-action-sheet>
-
-	</div>
+            <UFormGroup size="xl" label="كلمة المرور" name="password">
+                <UInput type="password" v-model="state.password" />
+            </UFormGroup>
+        <UButton type="submit" class="w-full text-center !text-lg">إرسال</UButton>
+    </UForm>
 </template>

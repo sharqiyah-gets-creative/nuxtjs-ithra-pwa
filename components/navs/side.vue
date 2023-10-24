@@ -1,72 +1,43 @@
 <script setup lang="ts">
-	const { signOut } = useAuth();
-	const { user, clearUser } = useUserStore();
+	const { user } = useUserStore();
 	const isOpen = ref(false);
-    const { $colorMode } = useNuxtApp();
 
-	const signUserOut = () => {
-		signOut();
-		clearUser();
-	};
-
-	console.log('side.vue 🌙', $colorMode.preference);
-
-	if (user) {
-		console.log('navs/side.vue', '👍👍👍 user is authenticated', user);
-		console.log('navs/side.vue', 'user image url', user.photoURL!);
-	} else {
-		console.log('navs/side.vue', '👎👎👎 user is not authenticated');
-	}
-
-	const isDark = computed({
-		get() {
-			return $colorMode.value === 'dark';
-		},
-		set() {
-			$colorMode.preference = $colorMode.value === 'dark' ? 'light' : 'dark';
-		},
-	});
-
-    const refreshEvents = async () => {
-        await refreshEvents();
-        
-        showSuccessToast('تم تحديث الفعاليات بنجاح');
-        isOpen.value = false;
+    const avatarUi = {
+        "background": "bg-gray-100 dark:bg-white-800 brightness-75",
+        "text": "font-medium leading-none text-gray-900 dark:text-gray-800 truncate",
+        "size": {
+            "lg": "h-12 w-12 text-xl",
+        },
     };
 
-	console.log('navs/side.vue', '👍👍👍 isDark', isDark);
+    const slideOverUi = {
+        "background": "bg-white dark:bg-indigo-950",
+    }
 </script>
 
 <template>
-	<button v-if="user" class="text-2xl text-slate-700 dark:text-slate-100 cursor-pointer" @click="isOpen = true">
-		<UAvatar size="lg" :src="user.photoURL!" class="cursor-pointer" alt="Avatar" />
+	<button v-if="user" class="cursor-pointer" @click="isOpen = true">
+		<UAvatar :ui="avatarUi" size="lg" :src="user.photoURL!" class="cursor-pointer" alt="Avatar" />
 	</button>
 
 	<button v-else class="text-2xl text-slate-700 dark:text-slate-100 cursor-pointer" @click="isOpen = true">
 		<UIcon name="i-heroicons-ellipsis-vertical" />
 	</button>
 
-	<USlideover safe-area-inset-top :overlay="false" dir="ltr" v-model="isOpen" side="left" class="h-full">
-		<div dir="rtl" class="flex flex-col h-full text-base">
-			<div class="p-3 flex items-center justify-between flex-row-reverse mb-2">
+	<USlideover :ui="slideOverUi" safe-area-inset-top :overlay="false" dir="ltr" v-model="isOpen" side="left" class="h-full">
+		<div safe-area-inset-top dir="rtl" class="flex flex-col h-full text-base">
+			
+            <div safe-area-inset-top class="p-3 flex items-center justify-between flex-row-reverse mb-2">
 				<h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">الإعدادات</h3>
 				<UButton icon="i-heroicons-x-mark-20-solid" color="white" variant="ghost" class="-my-1" @click="isOpen = false" />
 			</div>
 
-			<div class="mb-2 p-3 flex-1">
-				<van-cell-group :theme="$colorMode.preference">
-					<van-cell center :title="$t('settings.darkmode')">
-						<template #right-icon>
-							<van-switch active-color="ffd21e" v-model="isDark" />
-						</template>
-					</van-cell>
-
-					<van-cell v-if="user" @click="signUserOut" :title="$t('settings.logout')" description="" />
-
-					<UserLogin v-else />
-
-                    <van-cell @click="refreshEvents" title="تحديث الفعاليات" description="إضغط هنا لتجديد بيانات الفعاليات عند الحاجة" />
-				</van-cell-group>
+			<div class="flex-1 mb-2 p-3">
+                <ul class="flex flex-col text-xl">
+                    <NavsSettingsNightModeToggle />
+                    <NavsSettingsRefreshActivities />
+                    <NavsSettingsLogin />
+                </ul>
 			</div>
 
 			<div class="p-3">

@@ -145,7 +145,7 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 					<NuxtLink
                         target="_blank"
 						:to="`https://google.com/maps/dir//${eventInfo.ll}`"
-						class="block text-center text-white bg-green-primary-700 rounded py-2 px-4"
+						class="block text-center text-white bg-my-sin-700 rounded py-2 px-4"
 						>توجه إلى هناك</NuxtLink
 					>
 				</UContainer>
