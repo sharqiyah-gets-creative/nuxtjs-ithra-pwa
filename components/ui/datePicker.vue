@@ -5,17 +5,6 @@
 	defineProps(['label']);
 
 	const dateValue = ref<any>('');
-	const datePickerRef = ref<any>(null);
-
-	onMounted(() => {
-		const datePickerElement = datePickerRef.value.$el;
-		console.log('datePickerElement', datePickerElement);
-
-		datePickerElement.addEventListener('click', () => {
-			console.log('datePickerElement clicked');
-			datePickerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		});
-	});
 
 	const setDate = (value: Date) => {
 		dateValue.value = format(value);
@@ -29,26 +18,23 @@
 		return `${month}/${day}/${year}`;
 	};
 
-	const customPosition = () => ({ top: 0, left: 0 });
-
-	const scroll = () => {
-		console.log('scroll');
-		const datePickerElement = datePickerRef.value.$el;
-		console.log('datePickerElement', datePickerElement);
-		datePickerElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-	};
-
 	const emit = defineEmits(['update:dateValue']);
 
 	watch(dateValue, (newVal) => {
 		console.log('dateValue', newVal);
 		emit('update:dateValue', newVal);
 	});
+
+    // min date is october 20
+    const min_date = new Date(2023, 9, 20);
+    // max is april 2024
+    const max_date = new Date(2024, 3, 30);
 </script>
 
 <style lang="scss">
 	.dp-custom-input {
-		@apply rounded-md px-3.5 py-2.5 shadow-sm bg-white text-gray-900  ring-1 ring-inset ring-gray-300;
+		@apply rounded-md py-2 shadow-sm bg-white text-gray-900  ring-1 ring-inset ring-gray-300;
+        padding-inline-start: var(--dp-input-icon-padding);
         &:focus {
             @apply outline-none ring-2 ring-primary-500;
         }
@@ -56,6 +42,17 @@
             @apply text-right;
         }
 	}
+    
+    .dp__month_year_row, .dp__calendar_row, .dp__calendar_header{
+        @apply flex-row-reverse;
+    }
+
+    .dp--tp-wrap{
+        @apply hidden;
+    }
+    .dp__inner_nav .dp__icon{
+        @apply rotate-180;
+    }
 
 	@media (prefers-color-scheme: dark) {
         .dp-custom-input{
@@ -73,9 +70,10 @@
 
 		<VueDatePicker
 			:dark="$colorMode.preference === 'dark'"
-			ref="datePickerRef"
+            week-start="0" 
+            :min-date="min_date"
+            :max-date="max_date"
 			teleport-center
-			vertical
 			:format="format"
 			@update:model-value="setDate"
 			:model-value="dateValue"
