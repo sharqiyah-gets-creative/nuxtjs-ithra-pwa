@@ -12,6 +12,8 @@
 
     const slideOverUi = {
         "background": "bg-white dark:bg-indigo-950",
+        "base": "relative rounded-e-3xl shadow flex-1 flex flex-col w-full focus:outline-none",
+
     }
 </script>
 
@@ -41,9 +43,7 @@
 			</div>
 
 			<div class="p-3 standalone-bottom-padding">
-				<span class="font-thin"
-					>تنفيذ <ULink class="font-normal" to="https://www.6degrees.com.sa/">الدرجات الست لتقنية المعلومات</ULink></span
-				>
+				<span class="font-thin">تنفيذ <NuxtLink target="_blank" class="font-normal" to="https://www.6degrees.com.sa/">الدرجات الست لتقنية المعلومات</NuxtLink></span>
 			</div>
 		</div>
 	</USlideover>

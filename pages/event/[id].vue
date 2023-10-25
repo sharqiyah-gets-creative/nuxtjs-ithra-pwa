@@ -12,7 +12,7 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 	const zoom = ref(11);
     const showLogin = ref(false);
 	const eventInfo = ref<IEvent | any>({} as IEvent);
-	const event_rating = ref(3);
+	const event_rating = ref(4);
 	const event_review = ref<string>('');
     const current_user_review = ref<IReview | null>(null);
 	const average_reviews = ref(0);
