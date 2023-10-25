@@ -1,24 +1,6 @@
-@supports (bottom: env(safe-area-inset-bottom)) {
-    #app {
-        --van-safe-area-bottom: constant(safe-area-inset-bottom);
-        --van-safe-area-bottom: env(safe-area-inset-bottom);
-    }
-}
-
-@supports (top: env(safe-area-inset-top)) {
-    #app {
-        --van-safe-area-top: constant(safe-area-inset-top);
-        --van-safe-area-top: env(safe-area-inset-top);
-    }
-}
-
-html {
-	min-height: calc(100% + env(safe-area-inset-top));
-	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-}
-
-.top-bottom-notch-protection {
-	padding: env(safe-area-inset-top) 0 0 env(safe-area-inset-left);
+:root{
+    --standalone-top-padding: 2rem;
+    --standalone-bottom-padding: 1.8rem;
 }
 
 html,
@@ -29,4 +11,18 @@ body {
 
 main {
 	-webkit-tap-highlight-color: transparent;
+}
+
+@media screen and (display-mode: standalone) {
+    .vtd-datepicker {
+      padding-top: var(--top-padding-default) !important;
+    }
+
+    .standalone-top-padding{
+        padding-top: var(--standalone-top-padding) !important;
+    }
+
+    .standalone-bottom-padding{
+        padding-bottom: var(--standalone-bottom-padding) !important;
+    }
 }

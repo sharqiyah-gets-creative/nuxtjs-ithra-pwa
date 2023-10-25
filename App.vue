@@ -51,17 +51,15 @@
 
 <template>
 	<Swipe>
-		<van-config-provider safe-area-inset-bottom safe-area-inset-top :theme="colorMode">
-			<main class="h-screen !font-sans text-valhalla-900 bg-slate-100 dark:bg-valhalla-950 dark:text-white">
-				<NuxtLayout>
-					<NuxtPage />
-				</NuxtLayout>
+        <main class="standalone-top-padding h-screen !font-sans text-valhalla-900 bg-slate-100 dark:bg-valhalla-950 dark:text-white">
+            <NuxtLayout>
+                <NuxtPage />
+            </NuxtLayout>
 
-				<!-- Splash Screen-->
-				<Transition :duration="300" name="fade">
-					<Splash v-show="showSplash" />
-				</Transition>
-			</main>
-		</van-config-provider>
+            <!-- Splash Screen-->
+            <Transition :duration="300" name="fade">
+                <Splash v-show="showSplash" />
+            </Transition>
+        </main>
 	</Swipe>
 </template>

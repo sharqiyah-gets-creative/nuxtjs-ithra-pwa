@@ -24,10 +24,10 @@
 		<UIcon name="i-heroicons-ellipsis-vertical" />
 	</button>
 
-	<USlideover :ui="slideOverUi" safe-area-inset-top :overlay="false" dir="ltr" v-model="isOpen" side="left" class="h-full">
-		<div safe-area-inset-top dir="rtl" class="flex flex-col h-full text-base">
+	<USlideover :ui="slideOverUi"  :overlay="false" dir="ltr" v-model="isOpen" side="left" class="h-full">
+		<div dir="rtl" class="flex flex-col h-full text-base">
 			
-            <div safe-area-inset-top class="p-3 flex items-center justify-between flex-row-reverse mb-2">
+            <div class="standalone-top-padding p-3 flex items-center justify-between flex-row-reverse mb-2">
 				<h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">الإعدادات</h3>
 				<UButton icon="i-heroicons-x-mark-20-solid" color="white" variant="ghost" class="-my-1" @click="isOpen = false" />
 			</div>
@@ -40,7 +40,7 @@
                 </ul>
 			</div>
 
-			<div class="p-3">
+			<div class="p-3 standalone-bottom-padding">
 				<span class="font-thin"
 					>تنفيذ <ULink class="font-normal" to="https://www.6degrees.com.sa/">الدرجات الست لتقنية المعلومات</ULink></span
 				>

@@ -14,17 +14,10 @@
 
 </script>
 
-<style>
-@media all and (display-mode: standalone) {
-  .vtd-datepicker {
-    padding-top: 2rem;
-  }
-}
-</style>
 <template>
     <div>
         <label for="date-picker" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">{{ label }}</label>
-        
+
         <vue-tailwind-datepicker 
         id="date-picker" 
         dir="ltr" 
