@@ -33,6 +33,11 @@ export default defineNuxtConfig({
 		},
 		pageTransition: { name: 'page', mode: 'out-in' },
 	},
+    
+    build: {
+        transpile: ['@vuepic/vue-datepicker']
+    },
+
 
 	modules: [
 		'@nuxt/ui',
