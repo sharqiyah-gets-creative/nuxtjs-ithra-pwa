@@ -14,15 +14,11 @@ main {
 }
 
 @media screen and (display-mode: standalone) {
-    .vtd-datepicker {
-      padding-top: var(--top-padding-default) !important;
-    }
-
     .standalone-top-padding{
-        padding-top: var(--standalone-top-padding) !important;
+        padding-top: env(safe-area-inset-top) !important;
     }
 
     .standalone-bottom-padding{
-        padding-bottom: var(--standalone-bottom-padding) !important;
+        padding-bottom: env(safe-area-inset-bottom) !important;
     }
 }
