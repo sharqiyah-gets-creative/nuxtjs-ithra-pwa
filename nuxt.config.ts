@@ -34,11 +34,6 @@ export default defineNuxtConfig({
 		pageTransition: { name: 'page', mode: 'out-in' },
 	},
     
-    build: {
-        transpile: ['@vuepic/vue-datepicker']
-    },
-
-
 	modules: [
 		'@nuxt/ui',
 		'@pinia/nuxt',
@@ -47,7 +42,7 @@ export default defineNuxtConfig({
 		'@kevinmarrec/nuxt-pwa',
 		'nuxt-gtag',
 		'@emanuele-em/nuxt-swipe',
-		'@vant/nuxt',
+        'nuxt-rating'
 	],
 
     // ui.nuxt.com
@@ -58,7 +53,8 @@ export default defineNuxtConfig({
 
     // pinia
 	pinia: {},
-	devServer: {
+	
+    devServer: {
 		port: 1523,
 	},
 

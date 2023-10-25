@@ -9,13 +9,13 @@ const closed = () => {
 
 </script>
 <template>
-	<van-notice-bar @close="closed()" v-if="!add_to_home_screen_dismissed"
-		ref="noticeBarRef"
-		mode="closeable"
-        :scrollable="false"
-        wrapable 
-		text="لتجربة أفضل، إضغط زر المشاركة ومن ثم إضافة للرئيسية لتركيب التطبيق"
-		color="#1989fa"
-		background="#ecf9ff"
-		left-icon="info-o" />
+    <UAlert 
+        icon="i-heroicons-bell"
+        :ui="{rounded: 'rounded-none'}"
+        :close-button="{ icon: 'i-heroicons-x-mark-20-solid', padded: false }"
+        color="primary"
+        title="لتجربة أفضل، إضغط زر المشاركة ومن ثم إضافة للرئيسية لتركيب التطبيق!" 
+        v-if="!add_to_home_screen_dismissed"
+        @close="closed()"
+    />
 </template>

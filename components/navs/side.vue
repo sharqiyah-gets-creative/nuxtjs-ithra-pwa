@@ -18,11 +18,11 @@
 </script>
 
 <template>
-	<button v-if="user" class="cursor-pointer" @click="isOpen = true">
+	<button title="menu" v-if="user" class="cursor-pointer" @click="isOpen = true">
 		<UAvatar :ui="avatarUi" size="lg" :src="user.photoURL!" class="cursor-pointer" alt="Avatar" />
 	</button>
 
-	<button v-else class="text-2xl text-slate-700 dark:text-slate-100 cursor-pointer" @click="isOpen = true">
+	<button title="menu" v-else class="text-2xl text-slate-700 dark:text-slate-100 cursor-pointer" @click="isOpen = true">
 		<UIcon name="i-heroicons-ellipsis-vertical" />
 	</button>
 

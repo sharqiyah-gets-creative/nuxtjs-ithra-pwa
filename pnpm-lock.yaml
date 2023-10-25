@@ -23,6 +23,9 @@ dependencies:
   flowbite:
     specifier: ^1.8.1
     version: 1.8.1
+  nuxt-rating:
+    specifier: ^0.0.15
+    version: 0.0.15
   pinia:
     specifier: ^2.1.6
     version: 2.1.7(typescript@4.9.5)(vue@3.3.4)
@@ -70,9 +73,6 @@ devDependencies:
   '@types/node':
     specifier: ^20.8.3
     version: 20.8.7
-  '@vant/nuxt':
-    specifier: ^1.0.3
-    version: 1.0.3(vant@4.7.2)
   nuxt:
     specifier: ^3.7.4
     version: 3.8.0(@types/node@20.8.7)(sass@1.69.4)(typescript@4.9.5)(vite@4.5.0)
@@ -85,9 +85,6 @@ devDependencies:
   typescript:
     specifier: ^4.9.5
     version: 4.9.5
-  vant:
-    specifier: ^4.7.2
-    version: 4.7.2(vue@3.3.4)
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -3156,32 +3153,6 @@ packages:
       vue: 3.3.4
     dev: true
 
-  /@vant/nuxt@1.0.3(vant@4.7.2):
-    resolution: {integrity: sha512-qeAmVkWMDZPlAQ6ejRMZiv8qBsITtAo3QtuW7GYlJPoJia27r4AmppqpcYOX3ftgrl1ejKen3eEU357Fg1FY8w==}
-    peerDependencies:
-      vant: '>=4'
-    dependencies:
-      '@nuxt/kit': 3.8.0
-      magic-string: 0.29.0
-      unplugin: 1.5.0
-      vant: 4.7.2(vue@3.3.4)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /@vant/popperjs@1.3.0:
-    resolution: {integrity: sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==}
-    dev: true
-
-  /@vant/use@1.6.0(vue@3.3.4):
-    resolution: {integrity: sha512-PHHxeAASgiOpSmMjceweIrv2AxDZIkWXyaczksMoWvKV2YAYEhoizRuk/xFnKF+emUIi46TsQ+rvlm/t2BBCfA==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      vue: 3.3.4
-    dev: true
-
   /@vercel/nft@0.24.3:
     resolution: {integrity: sha512-IyBdIxmFAeGZnEfMgt4QrGK7XX4lWazlQj34HEi9dw04/WeDBJ7r1yaOIO5tTf9pbfvwUFodj9b0H+NDGGoOMg==}
     engines: {node: '>=16'}
@@ -5960,7 +5931,6 @@ packages:
 
   /immutable@4.3.4:
     resolution: {integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==}
-    dev: true
 
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -6711,13 +6681,6 @@ packages:
       magic-string: 0.30.5
     dev: true
 
-  /magic-string@0.29.0:
-    resolution: {integrity: sha512-WcfidHrDjMY+eLjlU+8OvwREqHwpgCeKVBUpQ3OhYYuvfaYCUgcbuBzappNzZvg/v8onU3oQj+BYpkOJe9Iw4Q==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.15
-    dev: true
-
   /magic-string@0.30.5:
     resolution: {integrity: sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==}
     engines: {node: '>=12'}
@@ -7424,6 +7387,16 @@ packages:
       - rollup
       - supports-color
     dev: true
+
+  /nuxt-rating@0.0.15:
+    resolution: {integrity: sha512-K/yehNfcXL/GUgvuCv0GZ4Gk8OWt09xUsMcJYjg0d5xBDxWyxrFUnK4YgvFvxkBLzAMkj+BkW8U4nUF0Ed2rgg==}
+    dependencies:
+      '@nuxt/kit': 3.8.0
+      sass: 1.69.4
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: false
 
   /nuxt@3.8.0(@types/node@20.8.7)(sass@1.69.4)(typescript@4.9.5)(vite@4.5.0):
     resolution: {integrity: sha512-ZnisJYx5AcUl7xlw18m6zfINBpNhld+ZF+jdTLRZxkLjKSFZeFMGqKxOR1jNVSmxfIXM/guK0uV9GPm6HK/z7g==}
@@ -8786,7 +8759,6 @@ packages:
       chokidar: 3.5.3
       immutable: 4.3.4
       source-map-js: 1.0.2
-    dev: true
 
   /schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
@@ -9907,17 +9879,6 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       builtins: 5.0.1
-    dev: true
-
-  /vant@4.7.2(vue@3.3.4):
-    resolution: {integrity: sha512-rRVyEA8HwDKaHDLnT8x9pHv2bYfziKO76yH13Us2aUMEhx5AM/rNDJIMz0mn4G4pTKRR/UTkuqk3kVFf1Mn0wA==}
-    peerDependencies:
-      vue: ^3.0.0
-    dependencies:
-      '@vant/popperjs': 1.3.0
-      '@vant/use': 1.6.0(vue@3.3.4)
-      '@vue/shared': 3.3.4
-      vue: 3.3.4
     dev: true
 
   /vary@1.1.2:

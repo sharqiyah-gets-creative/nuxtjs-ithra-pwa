@@ -1,5 +1,4 @@
 <script setup lang="ts">
-	import { initFlowbite } from 'flowbite';
 	import { sleep } from './utils/helpers';
 	const { $bus }: any = useNuxtApp();
 	const { $colorMode } = useNuxtApp();
@@ -35,8 +34,6 @@
 	onMounted(async () => {
 		console.log('app vue mounted');
 
-		initFlowbite();
-
 		await sleep(SPLASH_SCREEN_DURATION);
 		showSplash.value = false;
 	});
@@ -55,6 +52,7 @@
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>
+            <UNotifications />
 
             <!-- Splash Screen-->
             <Transition :duration="300" name="fade">

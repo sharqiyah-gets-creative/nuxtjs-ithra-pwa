@@ -1,10 +1,8 @@
 <script lang="ts" setup>
 	import { z } from 'zod';
+    const toast = useToast()
 	import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
-    import { showLoadingToast } from 'vant';
 
-
-    const showEmailModal = ref(false);
 	const { setUser } = useUserStore();
 	const { registerOrLogin, error } = useAuth();
 
@@ -20,11 +18,7 @@
 
 	async function submit(event: FormSubmitEvent<Schema>) {
         try {
-            showLoadingToast({
-                message: 'جاري التسجيل...',
-                forbidClick: true,
-            });
-
+            toast.add({id:'registering', title: 'جاري التسجيل!' })
 
             // Do something with data
             console.log('user/emailLogin.vue', 'event data', event.data);
@@ -33,31 +27,33 @@
             await setUser(user);
 
             console.log('user/emailLogin.vue', 'user', user, 'error', error);
-            closeToast();
+            toast.remove('registering');
         } catch (error) {
-            closeToast();
+            toast.remove('registering');
             console.log('user/emailLogin.vue', 'error', error);
             console.log(error)
             if(error == "Error: auth/email-already-in-use"){
                 console.log('user/emailLogin.vue', error);
-                showFailToast({ message: 'معلومات تسجيل الدخول خاطئة', wordBreak: 'break-word' });
+                toast.add({ color:'red', title:'خطأ!', description: 'معلومات تسجيل الدخول خاطئة!' })
             }
             else{
-                showFailToast({ message: 'حدث خطأ أثناء تسجيلك', wordBreak: 'break-word' });
+                toast.add({ color:'red', title:'خطأ!', description: 'حدث خطأ أثناء تسجيلك!' })
             }  
         }
 
 	}
+
 </script>
 <template>
-	<UForm :schema="schema" :state="state" @submit="submit" class="text-xl space-y-2 flex flex-col justify-between h-full">
+	<div class="text-3xl space-y-2 pb-4">
+        <UForm :schema="schema" :state="state" @submit="submit" class="space-y-2" >
             <UFormGroup size="xl" label="البريد الإلكتروني" name="email">
-                <UInput type="email" v-model="state.email" />
+                <UInput autocomplete="username" type="email" v-model="state.email" />
             </UFormGroup>
-
             <UFormGroup size="xl" label="كلمة المرور" name="password">
-                <UInput type="password" v-model="state.password" />
+                <UInput type="password" autocomplete="current-password" v-model="state.password" />
             </UFormGroup>
-        <UButton type="submit" class="w-full text-center !text-lg">إرسال</UButton>
-    </UForm>
+            <UButton type="submit" class="w-full text-center !text-lg">إرسال</UButton>
+        </UForm>
+    </div>
 </template>

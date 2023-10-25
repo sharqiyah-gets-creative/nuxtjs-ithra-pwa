@@ -5,8 +5,9 @@ const { refreshEvents } = useEventsStore();
 
 const refreshMyEvents = async () => {
     isLoading.value = true;
+    const toast = useToast();
     await refreshEvents();
-    showSuccessToast('تم تحديث الفعاليات بنجاح');
+    toast.add({ title: 'تم تحديث الفعاليات بنجاح!' })
     isLoading.value = false;
 };
 

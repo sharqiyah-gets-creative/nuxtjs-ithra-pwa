@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 	// Importing things
-	import { showSuccessToast, showFailToast } from 'vant';
+    const toast = useToast()
+
 	import { GoogleMap, MarkerCluster, Marker } from 'vue3-google-map';
+    
 	import mapStyles from '@/assets/maps/styles.json';
 	import { formatDate, formatTime } from '@/utils/helpers';
-import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvents';
+    import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvents';
 	const { getEventById, refreshEvents } = useEventsStore();
 	const { user } = useUserStore();
 
@@ -67,24 +69,25 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 		try {
 			console.log('submitReview', event_rating.value, event_review.value);
             if(event_review.value.length == 0) {
-                showFailToast({ message: 'الرجاء كتابة تقييمك', wordBreak: 'break-word' });
+                toast.add({ color:'red', title:'خطأ!', description: 'الرجاء كتابة تقييمك!' })
             }
 
 			if (event_review.value.length < 10) {
-				showFailToast({ message: 'التقييم أقل من 10 أحرف', wordBreak: 'break-word' });
+                toast.add({ color:'red', title:'خطأ!', description: 'التقييم أقل من 10 أحرف!' })
 				return;
 			}
 
-			showLoadingToast({
-				message: 'جاري إرسال تقييمك...',
-				forbidClick: true,
-			});
+            toast.add({ id:'sending-rating', title:'جاري إرسال تقييمك!' })
+            
+
 			await reviewEvent(eventInfo.value.id, user.uid, event_rating.value, event_review.value);
 			await refreshEvents();
-			showSuccessToast('تم إرسال تقييمك بنجاح');
+            toast.remove('sending-rating');
+            toast.add({ title: 'تم إرسال تقييمك بنجاح!' })
 		} catch (error) {
+            toast.remove('sending-rating');
 			console.log('submitReview', error);
-			showFailToast({ message: 'حدث خطأ أثناء إرسال تقييمك', wordBreak: 'break-word' });
+            toast.add({ color:'red', title:'خطأ!', description: 'حدث خطأ أثناء إرسال تقييمك!' })
 		}
 	};
 
@@ -100,6 +103,11 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 	});
 </script>
 
+<style>
+.average-rating{
+    position: relative;
+}
+</style>
 <template>
 	<div class="flex flex-col h-full">
 		<NavsTop :title="eventInfo.title" :description="`بواسطة ${eventInfo.entity}`" />
@@ -129,7 +137,7 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 							<UiEventTr title="الموقع"> {{ eventInfo.city }} - {{ eventInfo.area }} </UiEventTr>
 
 							<UiEventTr v-if="average_reviews" title="التقييم العام">
-								<van-rate v-model="average_reviews" color="#ffd21e" :size="25" void-icon="star" readonly />
+                                <NuxtRating ratingSize="25px" :readOnly="true" activeColor="#ffd21e" :ratingValue="average_reviews" />
 							</UiEventTr>
 
 							<UiEventTr v-if="top_reviews.length > 0" title="أعلى الآراء">
@@ -145,7 +153,7 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 					<NuxtLink
                         target="_blank"
 						:to="`https://google.com/maps/dir//${eventInfo.ll}`"
-						class="block text-center text-white bg-my-sin-700 rounded py-2 px-4"
+						class="block text-center text-white bg-emerald-600 rounded py-2 px-4"
 						>توجه إلى هناك</NuxtLink
 					>
 				</UContainer>
@@ -177,24 +185,22 @@ import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvent
 					<div class="p-3 bg-white dark:bg-opacity-20 rounded">
 						<h4 class="mb-2">قيم المبادرة إذا قمت بتجربتها</h4>
 
-                        <UserActionSheet>
-                            <UAlert color="orange" variant="solid" @click="showLogin = true" class="mb-2" v-if="!user" icon="i-heroicons-command-line" title="" description="قم بتسجيل الدخول لتقييم المبادرة" />
-                        </UserActionSheet>
+                        <UAlert v-if="!user" color="orange" variant="solid" @click="showLogin = true" class="mb-2"  icon="i-heroicons-command-line" title="" description="قم بتسجيل الدخول لتقييم المبادرة" />
 
-						
+                        <UAlert v-if="current_user_review" color="teal" variant="solid" class="mb-2"  icon="i-heroicons-command-line" title="" description="لقد قمت بتقييم الفعالية من قبل، إذا كنت تريد التعديل، إضغط قيم مرة أخرى" />
 
-                        <UAlert color="teal" variant="solid" class="mb-2" v-if="current_user_review" icon="i-heroicons-command-line" title="" description="لقد قمت بتقييم الفعالية من قبل، إذا كنت تريد التعديل، إضغط قيم مرة أخرى" />
+						<div class="text-center mb-2 py-2">
+                            <NuxtRating ratingSize="25px" v-if="!user" :readOnly="true" activeColor="#333333" :ratingValue="0" />
 
-						<div class="text-center mb-2">
-							<van-rate v-if="!user" v-model="event_rating" :size="25" void-icon="star" disabled />
-							<van-rate
-								v-else="user"
-								@change="onRateChange"
-								v-model="event_rating"
-								:size="25"
-								color="#ffd21e"
-								void-icon="star"
-								void-color="#eeeeee" />
+                            <NuxtRating 
+                                ratingSize="25px"
+                                v-else="user"
+                                :readOnly="true" 
+                                @ratingSelected="onRateChange"
+                                activeColor="#ffd21e" 
+                                :ratingValue="event_rating" 
+                            />
+		
 						</div>
 						<div class="mb-2">
 							<UTextarea :disabled="!user" placeholder="اكتب رأيك هنا بكلمات بسيطة.." size="xl" v-model="event_review" />

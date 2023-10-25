@@ -1,58 +1,76 @@
 <script setup lang="ts">
-    import { isIphone, isStandAlone } from '@/utils/helpers';
-    const { events, getEventsByDistance, getCounters, getEventsGroupedByLocation, getEventsCities } = useEventsStore();
+	import { isIphone, isStandAlone } from '@/utils/helpers';
+	const { events, getEventsByDistance, getCounters, getEventsGroupedByLocation, getEventsCities } = useEventsStore();
 	const { position, position_alert_dismissed, location_enabled } = useUserStore();
-	
-	const events_grouped_by_location = getEventsGroupedByLocation(events);
-	const events_by_distance = ref<IEvent[]>(events);
-    const events_cities: string[] = getEventsCities(events) as string[];
-    const city = ref<string | undefined>(events_cities[0]);
-    const isEventsLoading = ref(false);
 
-    console.log('pages/index.vue', 'loaded');
+	const events_grouped_by_location = getEventsGroupedByLocation(events);
+    const selected_date = ref<any>('');
+    const selected_city = ref<any>('');
+
+	const events_by_distance = ref<IEvent[]>(events);
+	const events_cities: string[] = getEventsCities(events) as string[];
+    // Add "الكل" to the beginning of the array
+    events_cities.unshift('الكل');
+
+	const city = ref<string | undefined>(events_cities[0]);
+	const isEventsLoading = ref(false);
+
+	console.log('pages/index.vue', 'loaded');
 	console.log('pages/index.vue', 'isIphone', isIphone);
-    console.log('pages/index.vue', 'events_cities', events_cities);
+	console.log('pages/index.vue', 'events_cities', events_cities);
 
 	const resetEventsByDistance = () => {
 		events_by_distance.value = getEventsByDistance(position);
 	};
 
-    const dateUpdated = (date: string | [Date, Date]) => {
-        isEventsLoading.value = true;
+	const dateUpdated = (date: string | [Date, Date]) => {
         console.log('dateUpdated', date);
-
-        if(typeof date === 'string' && date !== '') {
-            // filter events by date
-            const dateValue = new Date(date);
-
-            events_by_distance.value = events_by_distance.value.filter((event) => {
-                const eventStartDate = new Date(event.start_date.seconds * 1000);
-                const eventEndDate = new Date(event.end_date.seconds * 1000);
-                return eventStartDate <= dateValue && dateValue <= eventEndDate;
-            });
-        } else {
-            // reset events
-            resetEventsByDistance();
-        }
-        isEventsLoading.value = true;
-    };
+        selected_date.value = date;
+        filterEvents();
+	};
 
 	if (position.lat !== undefined && position.lng !== undefined) {
 		resetEventsByDistance();
 	}
 
+    const filterEvents = () => {
+        console.log('Filtering events');
+        isEventsLoading.value = true;
+        
+        resetEventsByDistance();
+        
+        // Filter by city
+        console.log('checking if city is selected');
+        if (selected_city.value && events_cities.includes(selected_city.value)) {
+            console.log('city is selected', selected_city.value);
+            events_by_distance.value = events_by_distance.value.filter((event) => event.city === selected_city.value);
+        }
+
+        // Filter by date
+        console.log('checking if date is selected');
+        if (selected_date.value) { 
+            console.log('date is selected', selected_date.value);
+            const dateValue = new Date(selected_date.value);
+            events_by_distance.value = events_by_distance.value.filter((event) => {
+                const eventStartDate = new Date(event.start_date.seconds * 1000);
+                const eventEndDate = new Date(event.end_date.seconds * 1000);
+                return eventStartDate <= dateValue && dateValue <= eventEndDate;
+            });
+        }
+
+        console.log('Events filtered');
+        isEventsLoading.value = false;
+    }
+
 	// if selected city is not of index 0, filter events by city
 	watch(city, (newCity) => {
-        isEventsLoading.value = true;
-		resetEventsByDistance();
-        // if new city is not part of event_cities, then return all events
-        if(events_cities.includes(newCity as string)) {
-            events_by_distance.value = events_by_distance.value.filter((event) => event.city === newCity);
+        if(newCity !== 'الكل'){
+            selected_city.value = newCity;
         }
-        isEventsLoading.value = false;
+        filterEvents();
 	});
 
-    onMounted(() => {
+	onMounted(() => {
 		console.log('pages/index.vue', 'mounted');
 	});
 
@@ -75,12 +93,14 @@
 				<UContainer>
 					<div class="grid grid-cols-2 gap-4">
 						<div>
-							<UiSelect placeholder="الكل" label="المدينة" v-model:dateValue="city" :options="events_cities" />    
+                            <label for="city-selector" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">المدينة</label>
+                            <USelect id="city-selector" size="xl" v-model="city" :options="events_cities" />
 						</div>
 						<div>
 							<UiDatePicker label="التاريخ" @update:dateValue="dateUpdated" />
 						</div>
 					</div>
+
 				</UContainer>
 			</section>
 
@@ -88,6 +108,7 @@
 		</div>
 
 		<AlertsAddToHome v-if="isIphone && !isStandAlone" />
+        
 
 		<!-- Bottom Navigation-->
 		<NavsBottom />

@@ -26,12 +26,10 @@
     "@tailwindcss/typography": "^0.5.10",
     "@types/google.maps": "^3.54.4",
     "@types/node": "^20.8.3",
-    "@vant/nuxt": "^1.0.3",
     "nuxt": "^3.7.4",
     "nuxt-gtag": "^1.1.1",
     "sass": "^1.69.4",
     "typescript": "^4.9.5",
-    "vant": "^4.7.2",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
@@ -42,6 +40,7 @@
     "dayjs": "^1.11.10",
     "firebase": "^10.4.0",
     "flowbite": "^1.8.1",
+    "nuxt-rating": "^0.0.15",
     "pinia": "^2.1.6",
     "vue3-google-map": "^0.18.0",
     "zod": "^3.22.4"

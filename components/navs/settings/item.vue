@@ -17,7 +17,9 @@
         </span>
     </div>
 
-    <slot />
+    <div>
+        <slot />
+    </div>
 
     <div class="leading-none">
         <slot name="left-icon" />

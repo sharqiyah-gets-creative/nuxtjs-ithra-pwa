@@ -40,10 +40,9 @@ export const useAuth = () => {
                     
                     if(error.code === 'auth/email-already-exists') {
                         console.log('useAuth.ts', 'Email already exists')
-                        showFailToast({
-                            message: 'البريد الإلكتروني مستخدم من قبل',
-                            forbidClick: true,
-                        });
+                        const toast = useToast()
+                        toast.add({ color:'red', title:'خطأ!', description: 'البريد الإلكتروني مستخدم من!' })
+                        
                         throw new Error('Email already exists');
                         return;
                     }

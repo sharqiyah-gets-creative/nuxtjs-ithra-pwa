@@ -1,10 +1,10 @@
 <script setup lang="ts">
 	import { formatDistance, formatDate, getRandomColorClass, formatTime } from '@/utils/helpers';
 
-    let color = '';
+	let color = '';
 	color = getRandomColorClass(color);
 
-    const average_reviews = ref(0);
+	const average_reviews = ref(0);
 
 	const props = defineProps({
 		event: {
@@ -13,11 +13,10 @@
 		},
 	});
 
-    // Getting Reviews
-    if(props.event.reviews){
-        average_reviews.value = getAverageReviews(props.event.reviews);
-    }
-	
+	// Getting Reviews
+	if (props.event.reviews) {
+		average_reviews.value = getAverageReviews(props.event.reviews);
+	}
 </script>
 
 <template>
@@ -26,25 +25,24 @@
 			<div :class="`${color}`" class="p-2 px-4 text-lg font-bold flex justify-between">
 				<span>{{ event.title }}</span>
 				<div class="badges space-x-1 rtl:space-x-reverse">
-                    <UiBadge color="slate" v-for="(language, index) of event.language" :key="index" :label="language" />
+					<UBadge color="white" variant="solid" v-for="(language, index) of event.language" :key="index" size="xs" :label="language" />
 				</div>
 			</div>
 
 			<div class="p-2 px-4 bg-white">
 				<ul class="font-light text-base">
-                    
-                    <li v-if="average_reviews" class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
-						<van-rate v-model="average_reviews" color="#ffd21e" :size="18" void-icon="star" readonly />
+					<li v-if="average_reviews" class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
+						<NuxtRating ratingSize="18px" :readOnly="true" activeColor="#ffd21e" :ratingValue="average_reviews" />
 					</li>
 
 					<li class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
 						<UIcon name="i-heroicons-clock" />
-						<time :datetime="event.start_time.toString()">{{ formatDate(event.start_date) }}</time> 
-                        <b class="font-bold">إلى</b>
-                         <time :datetime="event.end_time.toString()">{{ formatDate(event.end_date) }}</time>
+						<time :datetime="event.start_time.toString()">{{ formatDate(event.start_date) }}</time>
+						<b class="font-bold">إلى</b>
+						<time :datetime="event.end_time.toString()">{{ formatDate(event.end_date) }}</time>
 					</li>
 
-                    <li class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
+					<li class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
 						<UIcon name="i-heroicons-clock" />
 						<time :datetime="event.start_time.toString()">{{ formatTime(event.start_time) }}</time>
 						<b class="font-bold">إلى</b>
@@ -58,13 +56,13 @@
 					<li class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
 						<UIcon name="i-heroicons-user" />
 						<span>{{ event.category }}</span>
-						<span class="font-bold">{{  $t('events.event.card.by') }}</span>
+						<span class="font-bold">{{ $t('events.event.card.by') }}</span>
 						<span>{{ event.entity }}</span>
 					</li>
 
 					<li v-if="event.distance" class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
 						<UIcon name="i-mdi-car-hatchback" />
-						<span>{{ $t('events.event.card.distance_from_you', {distance: formatDistance(event.distance)}) }}</span>
+						<span>{{ $t('events.event.card.distance_from_you', { distance: formatDistance(event.distance) }) }}</span>
 					</li>
 				</ul>
 			</div>

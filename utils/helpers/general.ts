@@ -4,7 +4,7 @@ const getRandomElement = (arr: string[]) => arr[Math.floor(Math.random() * arr.l
 
 const colorGenerator = () => {
     const shades = ['valhalla', 'my-sin'];
-    const values = ['400', '500', '600', '700','800', '900'];
+    const values = ['500', '600', '700','800', '900'];
 
     const randomShade = getRandomElement(shades);
     const randomValue = values[Math.floor(Math.random() * values.length)];

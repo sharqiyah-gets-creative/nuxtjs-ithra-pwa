@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-
+    import { initFlowbite } from 'flowbite'
+    onMounted(() => {
+        initFlowbite();
+    });
 	const { user, clearUser } = useUserStore();
 
     const { loginWithAuthProvider, signOut } = useAuth();
@@ -18,10 +21,6 @@
 
     const showLogin = ref(false);
 
-    const toggleLogin = () => {
-		console.log('toggling login', showLogin.value, 'to', !showLogin.value);
-		showLogin.value = !showLogin.value;
-	};
 
 </script>
 <template>
@@ -32,34 +31,39 @@
 	</NavsSettingsItem>
 
 	<NavsSettingsItem
-    data-drawer-target="login-drawer" data-drawer-show="login-drawer" aria-controls="login-drawer"
-    v-else class="cursor-pointer" :title="$t('settings.login')" description="سجل دخولك لتقوم بتقييم تجاربك">
-		<template #right-icon>
-			<UIcon name="i-heroicons-user-solid" />
-		</template>
+        data-drawer-target="login-drawer" 
+        data-drawer-show="login-drawer" 
+        data-drawer-placement="bottom"
+        aria-controls="login-drawer"
+        data-drawer-backdrop="false"
+        
+        v-else 
+        class="cursor-pointer" 
+        :title="$t('settings.login')"
+        description="سجل دخولك لتقوم بتقييم تجاربك"
+    >
+        <template #right-icon>
+            <UIcon name="i-heroicons-user-solid" />
+        </template>
 
-        <UiDrawer id="login-drawer" title="login"  @click.stop >
+        <UiDrawer @click.stop :title="$t('settings.login')" id="login-drawer" >
             <div class="p-4 space-y-2 max-w-md mx-auto">
-				<div class="email_auth">
-					<UserLoginWithEmail />
-				</div>
+                <div class="email_auth">
+                    <UserLoginWithEmail  />
+                </div>
 
-				<div class="google_auth">
-					<MyButton outline="true" @click="loginWithAuthProvider('google')" title="سجل دخولك بقوقل" icon="i-mdi-google" />
-				</div>
+                <div class="google_auth">
+                    <UButton size="xl" block @click="loginWithAuthProvider('google')" variant="outline" label="سجل دخولك بقوقل" icon="i-mdi-google" />
+                </div>
 
-				<div class="twitter_auth">
-					<MyButton outline="true" @click="loginWithAuthProvider('twitter')" title="سجل دخولك بتويتر" icon="i-mdi-twitter" />
-				</div>
+                <div class="twitter_auth">
+                    <UButton size="xl" block @click="loginWithAuthProvider('twitter')" variant="outline" label="سجل دخولك بتويتر" icon="i-mdi-twitter" />
+                </div>
 
-				<div class="facebook_auth hidden">
-					<MyButton outline="true" @click="loginWithAuthProvider('facebook')" title="سجل دخولك بفيسبوك" icon="i-mdi-facebook" />
-				</div>
-			</div>
+                <div class="facebook_auth hidden">
+                    <UButton size="xl" block @click="loginWithAuthProvider('facebook')" variant="outline" label="سجل دخولك بفيسبوك" icon="i-mdi-facebook" />
+                </div>
+            </div>
         </UiDrawer>
-
-		<van-action-sheet   title="تسجيل الدخول">
-			
-		</van-action-sheet>
 	</NavsSettingsItem>
 </template>
