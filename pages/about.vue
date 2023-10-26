@@ -21,7 +21,7 @@
 					<div class="bg-valhalla-700 rounded-lg border-0 p-6 col-span-2 text-lg text-white">
 						{{ $t('about_page.description') }}
 					</div>
-                    
+
 					<div class="bg-my-sin-500 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
 						<span>{{ getCounters().events }}</span>
 						<span>{{ $t('activity', 1) }}</span>
@@ -46,14 +46,14 @@
 
                     <div class="col-span-2 grid lg:grid-cols-3 gap-6">
                         <div class="px-6 py-4 rounded-lg text-center bg-sky-600 text-white">
-                            <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.ithra.com/ar/special-programs/alsharqiya-gets-creative">
+                            <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://x.com/epgetscreative/status/1712906138012811379?s=46&t=9IsdSepgiBdHipMU2m-cmg">
                                 <UIcon name="i-simple-icons-twitter" class="me-2 scale-125" />
                                 <span>زورونا في تويتر</span>
                             </NuxtLink>
                         </div>
 
                         <div class="px-6 py-4 rounded-lg text-center bg-gradient-to-bl from-pink-500 via-red-500 to-yellow-500 text-white">
-                            <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.ithra.com/ar/special-programs/alsharqiya-gets-creative">
+                            <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://instagram.com/epgetscreative?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">
                                 <UIcon name="i-simple-icons-instagram" class="me-2 scale-125" />
                                 <span>زورونا في إنستغرام</span>
                             </NuxtLink>
@@ -61,7 +61,7 @@
 
                         <!-- tiktok link -->
                         <div class="px-6 py-4 rounded-lg text-center bg-black text-white">
-                            <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.ithra.com/ar/special-programs/alsharqiya-gets-creative">
+                            <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.tiktok.com/@epgetscreative?_t=8gc6wh7rete&_r=1">
                                 <UIcon name="i-simple-icons-tiktok" class="me-2 scale-125" />
                                 <span>زورونا في تيك توك</span>
                             </NuxtLink>
