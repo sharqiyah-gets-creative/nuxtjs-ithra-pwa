@@ -1,14 +1,13 @@
 <script lang="ts" setup>
 	// Importing things
-    const toast = useToast()
+    import { GoogleMap, MarkerCluster, Marker } from 'vue3-google-map';
 
-	import { GoogleMap, MarkerCluster, Marker } from 'vue3-google-map';
-    
 	import mapStyles from '@/assets/maps/styles.json';
 	import { formatDate, formatTime } from '@/utils/helpers';
     import { getAverageReviews, getTopReviewsComments } from '~/composables/useEvents';
 	const { getEventById, refreshEvents } = useEventsStore();
 	const { user } = useUserStore();
+    const toast = useToast()
 
 	// Variables
 	const zoom = ref(11);
@@ -32,7 +31,6 @@
 
 	// Starting with getting Event
 	eventInfo.value = getEventById(id.toString());
-	console.log('event/id.vue', 'event info', eventInfo.value);
 
 	// Setting the center of the map
 	const center = {
@@ -45,8 +43,7 @@
 
 	top_reviews.value = getTopReviewsComments(eventInfo.value.reviews, 5);
 
-    // check if eventInfo.value has reviews
-    // if yes, check if current user has a review, it should be like (eventInfo.value.reviews[user.uid]) then set it to current_user_review
+    // check if eventInfo.value has reviewsif yes, check if current user has a review then set it to current_user_review
     if(eventInfo.value.reviews) {
         if(user != null){
             if(eventInfo.value.reviews[user.uid]) {
@@ -79,14 +76,13 @@
 
             toast.add({ id:'sending-rating', title:'جاري إرسال تقييمك!' })
             
-
 			await reviewEvent(eventInfo.value.id, user.uid, event_rating.value, event_review.value);
 			await refreshEvents();
+
             toast.remove('sending-rating');
             toast.add({ title: 'تم إرسال تقييمك بنجاح!' })
 		} catch (error) {
             toast.remove('sending-rating');
-			console.log('submitReview', error);
             toast.add({ color:'red', title:'خطأ!', description: 'حدث خطأ أثناء إرسال تقييمك!' })
 		}
 	};
@@ -150,12 +146,8 @@
 
 			<section id="getThere" class="pb-4">
 				<UContainer>
-					<NuxtLink
-                        target="_blank"
-						:to="`https://google.com/maps/dir//${eventInfo.ll}`"
-						class="block text-center text-white bg-emerald-600 rounded py-2 px-4"
-						>توجه إلى هناك</NuxtLink
-					>
+					<NuxtLink target="_blank" :to="`https://google.com/maps/dir//${eventInfo.ll}`"
+						class="block text-center text-white bg-emerald-600 rounded py-2 px-4">توجه إلى هناك</NuxtLink>
 				</UContainer>
 			</section>
 
@@ -190,28 +182,19 @@
                         <UAlert v-if="current_user_review" color="teal" variant="solid" class="mb-2"  icon="i-heroicons-command-line" title="" description="لقد قمت بتقييم الفعالية من قبل، إذا كنت تريد التعديل، إضغط قيم مرة أخرى" />
 
 						<div class="text-center mb-2 py-2">
-                            <NuxtRating ratingSize="25px" v-if="!user" :readOnly="true" activeColor="#333333" :ratingValue="0" />
-
-                            <NuxtRating 
-                                ratingSize="25px"
-                                v-else="user"
-                                :readOnly="true" 
-                                @ratingSelected="onRateChange"
-                                activeColor="#ffd21e" 
-                                :ratingValue="event_rating" 
-                            />
-		
+                            <NuxtRating v-if="!user" :readOnly="true" ratingSize="25px"  activeColor="#333333" :ratingValue="0" />
+                            <NuxtRating v-else="user" ratingSize="29px" @ratingSelected="onRateChange" activeColor="#ffd21e" :ratingValue="event_rating" />
 						</div>
+
 						<div class="mb-2">
 							<UTextarea :disabled="!user" placeholder="اكتب رأيك هنا بكلمات بسيطة.." size="xl" v-model="event_review" />
 						</div>
+                        
 						<div id="rateButton" class="mb-2">
 							<NuxtLink
                                 :class="!user ? 'pointer-events-none !bg-slate-400 !text-white' : ''"
 								@click="submitReview"
-								class="cursor-pointer block text-center text-slate-900 bg-[#ffd21e] rounded py-2 px-4"
-								>قيم</NuxtLink
-							>
+								class="cursor-pointer block text-center text-slate-900 bg-[#ffd21e] rounded py-2 px-4">قيم</NuxtLink>
 						</div>
 					</div>
 				</UContainer>

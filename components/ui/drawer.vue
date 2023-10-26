@@ -9,9 +9,8 @@
 <template>
 	<!-- drawer component -->
     <div
-        
         :id="id"
-        class="flex flex-col
+        class="standalone-bottom-padding flex flex-col
             fixed bottom-0 left-0 right-0 z-50 
             h-auto min-h-content max-w-xl w-full mx-auto  
             rounded-lg shadow

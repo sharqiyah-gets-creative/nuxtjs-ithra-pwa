@@ -1,5 +1,15 @@
 <script setup lang="ts">
 	const { getCounters } = useEventsStore();
+    useHead({
+		title: 'عن المبادرة',
+		meta: [
+			{
+				hid: 'description',
+				name: 'description',
+				content: 'تعرف أكثر على مبادرة الشرقية تبدع 2023',
+			},
+		],
+	});
 </script>
 <template>
 	<div class="flex flex-col h-full">
@@ -31,7 +41,6 @@
 						<NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.ithra.com/ar/special-programs/alsharqiya-gets-creative">
                             <UIcon name="i-heroicons-arrow-top-right-on-square" class="me-2 scale-125" />
                             <span>معلومات أكثر بموقع الشرقية تبدع (إثراء)</span>
-                            
                         </NuxtLink>
 					</div>
 
@@ -59,7 +68,9 @@
                         </div>
                     </div>
 
-                    
+                    <div class="col-span-2 p-6 text-lg">
+				        <span class="font-thin">تنفيذ <NuxtLink target="_blank" class="font-normal" to="https://www.6degrees.com.sa/">الدرجات الست لتقنية المعلومات</NuxtLink></span>
+                    </div>
 				</div>
 			</UContainer>
 		</section>

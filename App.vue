@@ -1,28 +1,10 @@
 <script setup lang="ts">
 	import { sleep } from './utils/helpers';
-	const { $bus }: any = useNuxtApp();
 	const { $colorMode } = useNuxtApp();
-	const routes = ['/', '/about'];
 
 	const SPLASH_SCREEN_DURATION = 1000;
 
     $colorMode.preference = $colorMode.preference === 'dark' ? 'dark' : 'light';
-
-    const colorMode = computed(() => {
-        return $colorMode.preference === 'dark' ? 'dark' : 'light';
-    });
-
-	// * Very Sensitive on mobile
-	// $bus.$on('swipe', (direction: string) => {
-	// 	let indexCurrentRoute = routes.indexOf(useRoute().path);
-
-	// 	console.log('swiped', direction);
-
-	//     indexCurrentRoute += direction === 'right' ? 1 : -1;
-	//     indexCurrentRoute = (indexCurrentRoute + routes.length) % routes.length;  // Loop over
-
-	//     navigateTo(routes[indexCurrentRoute]);
-	// });
 
 	// initial splash screen value
 	const showSplash = ref(true);
@@ -32,8 +14,6 @@
 	// wait 2 seconds then set to false and hide gradually fading out
 
 	onMounted(async () => {
-		console.log('app vue mounted');
-
 		await sleep(SPLASH_SCREEN_DURATION);
 		showSplash.value = false;
 	});
