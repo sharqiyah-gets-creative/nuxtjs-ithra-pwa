@@ -114,6 +114,9 @@
 					<table class="w-full rounded overflow-hidden text-base text-right text-gray-500 dark:text-gray-400">
 						<tbody class="bg-white bg-opacity-60 dark:bg-opacity-60 dark:bg-gray-800 dark:border-gray-700">
 							<!-- loop through eventInfo data, key is teh first td, value is the second -->
+                            <UiEventTr v-if="eventInfo.description" title="وصف الفعالية">
+								{{ eventInfo.description }}
+							</UiEventTr>
 							<UiEventTr title="تصنيف الفعالية">
 								{{ eventInfo.category }}
 							</UiEventTr>
