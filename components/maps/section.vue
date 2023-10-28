@@ -11,8 +11,8 @@
         "divide": "",
         "background": "bg-valhalla-500 dark:bg-white",
         "rounded": "rounded-md",
-		"header": { 
-            "padding": 'p-0 sm:p-0' 
+		"header": {
+            "padding": 'p-0 sm:p-0'
         },
         "body": {
             "padding": "p-3 sm:p-3"
@@ -34,7 +34,7 @@
 					<!--<MapsCounter :title="$t('activity')" :value="counters().events" />
 					<MapsCounter :title="$t('entity')" :value="counters().entities" />
 					<MapsCounter :title="$t('city')" :value="counters().cities" />-->
-                    <h2 class="text-center text-2xl font-bold">إستكشف الشرقية تبدع</h2>
+                    <!-- <h2 class="text-center text-2xl font-bold">  </h2> -->
 				</div>
 			</UCard>
 		</UContainer>

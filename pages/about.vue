@@ -12,11 +12,11 @@
 	});
     const roundToNearest50 = (n:any) => {
         const num = parseInt(n, 10);
-  
+
         if (isNaN(num)) {
-            return n; 
+            return n;
         }
-        
+
         return Math.floor(num / 30) * 30 + "+";
 
     }
@@ -35,7 +35,7 @@
 					</div>
 
                     <div class="bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
-						<span dir="ltr">59</span>
+						<span dir="ltr">4</span>
 						<span>{{ $t('primary_partner') }}</span>
 					</div>
 
@@ -45,16 +45,16 @@
 					</div>
 
 					<div class="bg-my-sin-500 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
-						<span dir="ltr">{{ roundToNearest50(getCounters().events) }}</span>
+						<span dir="ltr">+350</span>
 						<span>{{ $t('activity', 1) }}</span>
 					</div>
 
 					<div class="bg-my-sin-300 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
-						<span dir="ltr">{{ roundToNearest50(getCounters().entities) }}</span>
+						<span dir="ltr">+550</span>
 						<span>{{ $t('entity', 1) }}</span>
 					</div>
 
-					
+
 
 					<div class="col-span-2 px-6 py-4 rounded-lg text-center bg-valhalla-700 text-white">
 						<NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.ithra.com/ar/special-programs/alsharqiya-gets-creative">
