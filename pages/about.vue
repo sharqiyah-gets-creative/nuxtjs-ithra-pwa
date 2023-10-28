@@ -10,6 +10,18 @@
 			},
 		],
 	});
+    const roundToNearest50 = (n:any) => {
+        const num = parseInt(n, 10);
+  
+        if (isNaN(num)) {
+            return n; 
+        }
+        
+        return Math.floor(num / 30) * 30 + "+";
+
+    }
+
+
 </script>
 <template>
 	<div class="flex flex-col h-full">
@@ -22,40 +34,47 @@
 						{{ $t('about_page.description') }}
 					</div>
 
+                    <div class="bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
+						<span dir="ltr">59</span>
+						<span>{{ $t('primary_partner') }}</span>
+					</div>
+
+                    <div class="bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
+						<span dir="ltr">20</span>
+						<span>{{ $t('strategic_partner') }}</span>
+					</div>
+
 					<div class="bg-my-sin-500 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
-						<span>{{ getCounters().events }}</span>
+						<span dir="ltr">{{ roundToNearest50(getCounters().events) }}</span>
 						<span>{{ $t('activity', 1) }}</span>
 					</div>
 
 					<div class="bg-my-sin-300 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
-						<span>{{ getCounters().entities }}</span>
+						<span dir="ltr">{{ roundToNearest50(getCounters().entities) }}</span>
 						<span>{{ $t('entity', 1) }}</span>
 					</div>
 
-					<div class="col-span-2 bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
-						<span>20</span>
-						<span>{{ $t('strategic_partner') }}</span>
-					</div>
+					
 
 					<div class="col-span-2 px-6 py-4 rounded-lg text-center bg-valhalla-700 text-white">
 						<NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.ithra.com/ar/special-programs/alsharqiya-gets-creative">
                             <UIcon name="i-heroicons-arrow-top-right-on-square" class="me-2 scale-125" />
-                            <span>معلومات أكثر بموقع الشرقية تبدع (إثراء)</span>
+                            <span>{{ $t('about_page.visit_website')}}</span>
                         </NuxtLink>
 					</div>
 
-                    <div class="col-span-2 grid lg:grid-cols-3 gap-6">
+                    <div class="col-span-2 grid grid-cols-3 gap-6">
                         <div class="px-6 py-4 rounded-lg text-center bg-sky-600 text-white">
                             <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://x.com/epgetscreative/status/1712906138012811379?s=46&t=9IsdSepgiBdHipMU2m-cmg">
                                 <UIcon name="i-simple-icons-twitter" class="me-2 scale-125" />
-                                <span>زورونا في تويتر</span>
+                                <span class="sr-only">{{ $t('about_page.visit_twitter')}}</span>
                             </NuxtLink>
                         </div>
 
                         <div class="px-6 py-4 rounded-lg text-center bg-gradient-to-bl from-pink-500 via-red-500 to-yellow-500 text-white">
                             <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://instagram.com/epgetscreative?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">
                                 <UIcon name="i-simple-icons-instagram" class="me-2 scale-125" />
-                                <span>زورونا في إنستغرام</span>
+                                <span class="sr-only">{{ $t('about_page.visit_instagram')}}</span>
                             </NuxtLink>
                         </div>
 
@@ -63,13 +82,15 @@
                         <div class="px-6 py-4 rounded-lg text-center bg-black text-white">
                             <NuxtLink class="leading-none flex justify-center" target="_blank" to="https://www.tiktok.com/@epgetscreative?_t=8gc6wh7rete&_r=1">
                                 <UIcon name="i-simple-icons-tiktok" class="me-2 scale-125" />
-                                <span>زورونا في تيك توك</span>
+                                <span class="sr-only">{{ $t('about_page.visit_tiktok')}}</span>
                             </NuxtLink>
                         </div>
                     </div>
 
-                    <div class="col-span-2 p-6 text-lg">
-				        <span class="font-thin">تنفيذ <NuxtLink target="_blank" class="font-normal" to="https://www.6degrees.com.sa/">الدرجات الست لتقنية المعلومات</NuxtLink></span>
+                    <div class="col-span-2 p-6 text-lg text-center">
+                        <NuxtLink to="https://www.6degrees.com.sa/" target="_blank">
+                            {{ $t('done_by') }}
+                        </NuxtLink>
                     </div>
 				</div>
 			</UContainer>

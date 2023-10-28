@@ -30,10 +30,11 @@
 					</div>
 				</template>
 
-				<div class="grid grid-cols-3 divide-x divide-x-reverse">
-					<MapsCounter :title="$t('activity')" :value="counters().events" />
+				<div class="text-center p-2">
+					<!--<MapsCounter :title="$t('activity')" :value="counters().events" />
 					<MapsCounter :title="$t('entity')" :value="counters().entities" />
-					<MapsCounter :title="$t('city')" :value="counters().cities" />
+					<MapsCounter :title="$t('city')" :value="counters().cities" />-->
+                    <h2 class="text-center text-2xl font-bold">إستكشف الشرقية تبدع</h2>
 				</div>
 			</UCard>
 		</UContainer>

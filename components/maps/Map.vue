@@ -19,7 +19,6 @@
 
 	const DEFAULT_ZOOM = ref(9);
 
-	console.log('maps/map.vue', 'center to be set on map', toRaw(center));
 
 	const props = defineProps(['events', 'specialClass', 'responsive']);
     const isResponsive = ref(props.responsive || false);
@@ -29,7 +28,6 @@
         console.log('maps/map.vue', 'boundsChanged');
     }
 
-	console.log('maps/map.vue', 'local_locations', local_events);
 </script>
 <template>
 	<ClientOnly>
