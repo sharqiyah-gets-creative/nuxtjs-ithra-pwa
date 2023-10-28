@@ -22,14 +22,14 @@
 <template>
 	<div class="w-full text-slate-900 rounded-lg overflow-hidden shadow-md">
 		<NuxtLink :to="`/event/${event.id}`" class="w-full">
-			<div :class="`${color}`" class="p-2 px-4 text-lg font-bold flex justify-between">
+			<div :class="`${color}`" class="p-1 px-2 lg:p-2 lg:px-4 text-lg font-bold flex justify-between">
 				<span>{{ event.title }}</span>
-				<div class="badges space-x-1 rtl:space-x-reverse">
+				<div class="badges space-x-1 leading-none rtl:space-x-reverse text-left">
 					<UBadge color="white" variant="solid" v-for="(language, index) of event.language" :key="index" size="xs" :label="language" />
 				</div>
 			</div>
 
-			<div class="p-2 px-4 bg-white">
+			<div class="p-1 px-2 lg:p-2 lg:px-4 bg-white">
 				<ul class="font-light text-base">
 					<li v-if="average_reviews" class="flex justify-start items-center space-x-2 rtl:space-x-reverse">
 						<NuxtRating ratingSize="18px" :readOnly="true" activeColor="#ffd21e" :ratingValue="average_reviews" />
