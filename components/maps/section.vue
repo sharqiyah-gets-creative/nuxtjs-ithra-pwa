@@ -15,7 +15,7 @@
             "padding": 'p-0 sm:p-0'
         },
         "body": {
-            "padding": "p-3 sm:p-3"
+            "padding": "p-0 sm:p-0"
         },
 	};
 </script>
@@ -25,10 +25,11 @@
 		<UContainer>
 			<UCard :ui="mapCardUi">
 				<template #header>
+
+				</template>
 					<div @click="goToMapPage()">
 						<MapsMap :responsive="false" specialClass="w-full h-[20vh] lg:h-[30vh] relative" :events="events_grouped_by_location" />
 					</div>
-				</template>
 
 				<!-- <div class="text-center p-2"> -->
 					<!--<MapsCounter :title="$t('activity')" :value="counters().events" />
