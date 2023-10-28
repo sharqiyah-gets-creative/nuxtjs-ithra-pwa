@@ -30,12 +30,12 @@
 					</div>
 				</template>
 
-				<div class="text-center p-2">
+				<!-- <div class="text-center p-2"> -->
 					<!--<MapsCounter :title="$t('activity')" :value="counters().events" />
 					<MapsCounter :title="$t('entity')" :value="counters().entities" />
 					<MapsCounter :title="$t('city')" :value="counters().cities" />-->
                     <!-- <h2 class="text-center text-2xl font-bold">  </h2> -->
-				</div>
+				<!-- </div> -->
 			</UCard>
 		</UContainer>
 	</section>
