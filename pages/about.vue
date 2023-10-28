@@ -34,22 +34,22 @@
 						{{ $t('about_page.description') }}
 					</div>
 
-                    <div class="bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
+                    <div class="bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center text-center">
 						<span dir="ltr">4</span>
 						<span>{{ $t('primary_partner') }}</span>
 					</div>
 
-                    <div class="bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
+                    <div class="bg-my-sin-400 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center text-center">
 						<span dir="ltr">20</span>
 						<span>{{ $t('strategic_partner') }}</span>
 					</div>
 
-					<div class="bg-my-sin-500 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
+					<div class="bg-my-sin-500 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center text-center">
 						<span dir="ltr">+350</span>
 						<span>{{ $t('activity', 1) }}</span>
 					</div>
 
-					<div class="bg-my-sin-300 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center">
+					<div class="bg-my-sin-300 rounded-lg border-0 p-6 text-3xl text-white flex flex-col items-center text-center">
 						<span dir="ltr">+550</span>
 						<span>{{ $t('entity', 1) }}</span>
 					</div>
