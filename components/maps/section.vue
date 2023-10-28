@@ -7,16 +7,16 @@
 	};
 
 	const mapCardUi = {
-        "base": "overflow-hidden text-white dark:text-gray-800",
-        "divide": "",
-        "background": "bg-valhalla-500 dark:bg-white",
-        "rounded": "rounded-md",
-		"header": {
-            "padding": 'p-0 sm:p-0'
-        },
-        "body": {
-            "padding": "p-0 sm:p-0"
-        },
+		base: 'overflow-hidden text-white dark:text-gray-800',
+		divide: '',
+		background: 'bg-valhalla-500 dark:bg-white',
+		rounded: 'rounded-md',
+		header: {
+			padding: 'p-0 sm:p-0',
+		},
+		body: {
+			padding: 'p-0 sm:p-0',
+		},
 	};
 </script>
 
@@ -24,19 +24,9 @@
 	<section id="map">
 		<UContainer>
 			<UCard :ui="mapCardUi">
-				<template #header>
-
-				</template>
-					<div @click="goToMapPage()">
-						<MapsMap :responsive="false" specialClass="w-full h-[20vh] lg:h-[30vh] relative" :events="events_grouped_by_location" />
-					</div>
-
-				<!-- <div class="text-center p-2"> -->
-					<!--<MapsCounter :title="$t('activity')" :value="counters().events" />
-					<MapsCounter :title="$t('entity')" :value="counters().entities" />
-					<MapsCounter :title="$t('city')" :value="counters().cities" />-->
-                    <!-- <h2 class="text-center text-2xl font-bold">  </h2> -->
-				<!-- </div> -->
+				<div @click="goToMapPage()">
+					<MapsMap :responsive="false" specialClass="w-full h-[20vh] lg:h-[30vh] relative" :events="events_grouped_by_location" />
+				</div>
 			</UCard>
 		</UContainer>
 	</section>
