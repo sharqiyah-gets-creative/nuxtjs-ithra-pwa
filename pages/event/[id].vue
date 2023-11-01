@@ -186,7 +186,7 @@
 
 						<div class="text-center mb-2 py-2">
                             <NuxtRating v-if="!user" :readOnly="true" ratingSize="25px"  activeColor="#333333" :ratingValue="0" />
-                            <NuxtRating v-else="user" ratingSize="29px" @ratingSelected="onRateChange" activeColor="#ffd21e" :ratingValue="event_rating" />
+                            <NuxtRating v-else ratingSize="29px" @ratingSelected="onRateChange" activeColor="#ffd21e" :ratingValue="event_rating" />
 						</div>
 
 						<div class="mb-2">

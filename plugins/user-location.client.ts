@@ -30,7 +30,6 @@ export default defineNuxtPlugin(async () => {
 
     // Check if user has location services enabled and handle scenarios
     async function checkUserLocationSettings() {
-        console.log('user-location.client.ts', '🗺 Checking user location settings')
 
         try {
             const locationEnabled = await isLocationEnabled();
@@ -38,14 +37,12 @@ export default defineNuxtPlugin(async () => {
             
             // If location not enabled
             if (!locationEnabled) {
-                console.log('user-location.client.ts', '🗺 Location not enabled')
                 // set state not enabled
                 useUserStore().setLocationEnabled(false);
 
                 // Handle scenarios where location is disabled
                 await handleLocationDisabled();
             } else {
-                console.log('user-location.client.ts', '🗺 Location enabled', locationEnabled)
                 // set state enabled
                 useUserStore().setLocationEnabled(true);
 
@@ -60,7 +57,6 @@ export default defineNuxtPlugin(async () => {
     // Handle scenarios where location is disabled
     // logic should be moved somewhere else
     async function handleLocationDisabled() {
-        console.log('user-location.cliehnt.ts', '🗺 Handling location disabled')
         // Check local storage if alert dismissed  
         const alertDismissed = position_alert_dismissed;
         // If alert not dismissed
@@ -72,14 +68,12 @@ export default defineNuxtPlugin(async () => {
 
     // Get, set, and periodically update the location in the state  
     async function updateAndWatchLocation() {
-        console.log('user-location.client.ts', '🗺 Updating and watching user location')
 
         const LOCATION_REFRESH_INTERVAL = 300000; // 5 minutes
 
         try {
             // Get the location and set it in local storage
             const location = await getPositionWithHighAccuracy(true);
-            console.log('user-location.client.ts', '🗺 Got', location);
             
             // Set an interval to update location every 5 minutes
             setInterval(async () => {
@@ -99,16 +93,13 @@ export default defineNuxtPlugin(async () => {
 
     async function getPositionWithHighAccuracy(high_accuracy: boolean){
         try {
-            console.log('user-location.client.ts', '🗺 Getting user position with high accuracy', high_accuracy)
             
             const position = await getPosition({ enableHighAccuracy: high_accuracy });
-            console.log('user-location.client.ts', '🗺 Got user position with high accuracy', position)
 
             const lng = position.longitude;
             const lat = position.latitude;
             
             const coords = { lat: lat, lng: lng };
-            console.log('user-location.client.ts', '🗺 Updating user position with high accuracy', coords)
             
             // if user location is more than 100 km from the default center point, set it to the default center point
             const distance = getDistance(coords.lat, coords.lng, DEFAULT_CENTER_POINT.lat, DEFAULT_CENTER_POINT.lng);

@@ -29,10 +29,6 @@ declare global {
 		lat?: number;
 		lng?: number;
 	}
-	interface IGetEvents {
-		events: IEvent[];
-		error: Record<string, unknown> | null;
-	}
 
     type IUser = {
         id: string;

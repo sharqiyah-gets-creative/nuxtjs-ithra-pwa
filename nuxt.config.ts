@@ -42,7 +42,8 @@ export default defineNuxtConfig({
 		'@kevinmarrec/nuxt-pwa',
 		'nuxt-gtag',
 		'@emanuele-em/nuxt-swipe',
-        'nuxt-rating'
+        'nuxt-rating',
+        
 	],
 
     // ui.nuxt.com
@@ -52,7 +53,9 @@ export default defineNuxtConfig({
     },
 
     // pinia
-	pinia: {},
+	pinia: {
+        autoImports: ['defineStore', 'acceptHMRUpdate']
+    },
 	
     devServer: {
 		port: 1523,

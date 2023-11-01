@@ -32,9 +32,12 @@
 
 <template>
 	<div>
-		<label for="date-picker" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">{{ label }}</label>
+		<label for="dp-input-date-picker" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">{{ label }}</label>
 
 		<VueDatePicker
+            uid="date-picker"
+            
+            name="date-picker"
 			:dark="$colorMode.preference === 'dark'"
             week-start="0" 
             :min-date="min_date"

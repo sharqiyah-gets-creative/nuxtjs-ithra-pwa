@@ -1,6 +1,3 @@
-import { defineStore } from 'pinia';
-import { getDistance } from '@/utils/helpers';
-
 export const useEventsStore = defineStore('EVENTS_STORE', {
 	state: () => ({
 		events: [] as IEvent[],
@@ -33,10 +30,13 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 				const distanceToB = getDistance(position.lat, position.lng, parseFloat(b.ll.split(',')[0]), parseFloat(b.ll.split(',')[1]));
 				return distanceToA - distanceToB;
 			});
+
 			events.map((event: IEvent) => {
 				event.distance = getDistance(position.lat, position.lng, parseFloat(event.ll.split(',')[0]), parseFloat(event.ll.split(',')[1]));
 				return event;
 			});
+
+
 
 			return events;
 		},
@@ -97,10 +97,16 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
                 console.log('stores/events.ts', '📪 Updating events from firebase');
 
                 // get events from firebase
-                const { events } = await getEvents();
-
-                this.events = events;
-                this.eventsLastUpdated = new Date().getTime().toString();
+                const events = await getEvents();
+                if(events.length === 0) {
+                    console.log('stores/events.ts', '📪 No events found in firebase');
+                }
+                else{
+                    console.log('stores/events.ts', `📪 ${events.length} events found in firebase`);
+                    this.events = events;
+                    this.eventsLastUpdated = new Date().getTime().toString();
+                }
+                
             } catch (e) {
                 console.error('stores/events.ts', '📪 Error updating Events', e);
             }
@@ -110,16 +116,45 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			try {
 				console.log('stores/events.ts', '💚 Booting Events');
 
+                const A_DAY = 86400000;
+                const isEventsLastUpdatedaDayAgo = this.eventsLastUpdated !== null && new Date().getTime() - parseInt(this.eventsLastUpdated) > A_DAY;
+                const areThereEvents = this.events.length > 0;
 				// if events are not in store or old, get them from firebase
-				if (this.eventsLastUpdated === null || new Date().getTime() - parseInt(this.eventsLastUpdated) > 86400000) {
+				if (!areThereEvents || isEventsLastUpdatedaDayAgo) {
 					console.log('stores/events.ts', '📪 Store empty or old, getting events from firebase');
 
 					// get events from firebase
-					const { events } = await getEvents();
+					let events = await getEvents();
 
-					this.events = events;
+                    if(events.length === 0) {
+                        console.log('stores/events.ts', '📪 No events found in firebase');
+                        return;
+                    }
+
+                    console.log('stores/events.ts', `📪 ${events.length} events found in firebase`);
+                    this.events = events;
+                    console.log("Events from Firebase: ", this.events);
+
                     this.eventsLastUpdated = new Date().getTime().toString();
-				} else {
+
+                    // Get the last event's cursor for next query
+			        let lastEvent = events[events.length - 1];
+
+                    while (true) {
+                        console.log('stores/events.ts', `📪 Getting more events from firebase`);
+                        let newEvents = await getEvents(lastEvent.id);
+                        if (newEvents.length === 0) {
+                            break; // Stop if there are no more events
+                        }
+                        this.events.push(...newEvents); // Add new events to your store
+        
+                        // Update the last cursor
+                        lastEvent = newEvents[newEvents.length - 1];
+                        console.log('stores/events.ts', `📪 ${newEvents.length} events found in firebase`);
+                    }
+        
+				} 
+                else {
 					console.log('stores/events.ts', `💯 Store not empty, ${this.events.length} events found`);
 				}
 			} catch (e) {
@@ -129,3 +164,7 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 	},
 	persist: true,
 });
+
+if(import.meta.hot){
+    import.meta.hot.accept(acceptHMRUpdate(useEventsStore, import.meta.hot));
+}

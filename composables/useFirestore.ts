@@ -11,6 +11,7 @@ export const useFirestore = () => {
 		});
 		isFirestoreInitialized = true;
 	}
+
 	const firestore = getFirestore(firebaseApp);
 
 	return {

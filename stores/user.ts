@@ -1,5 +1,4 @@
 import type { MapPosition } from '~/types';
-import { defineStore } from 'pinia';
 import { saveUserInFirestore } from '~/composables/useFirestore';
 
 export const useUserStore = defineStore('USER_STORE', {
@@ -50,3 +49,7 @@ export const useUserStore = defineStore('USER_STORE', {
 	},
 	persist: true,
 });
+
+if(import.meta.hot){
+    import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));
+}
