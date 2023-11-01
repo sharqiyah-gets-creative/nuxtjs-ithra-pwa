@@ -34,7 +34,6 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@emanuele-em/nuxt-swipe": "^1.0.2",
     "@pinia/nuxt": "^0.4.11",
     "@vuepic/vue-datepicker": "^7.2.0",
     "dayjs": "^1.11.10",

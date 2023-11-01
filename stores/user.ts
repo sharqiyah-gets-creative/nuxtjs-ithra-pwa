@@ -34,7 +34,7 @@ export const useUserStore = defineStore('USER_STORE', {
 			this.position = position;
 		},
 
-		setAlertDismissed(dismissed: boolean) {
+		setPositionAlertDismissed(dismissed: boolean) {
 			this.position_alert_dismissed = dismissed;
 		},
 

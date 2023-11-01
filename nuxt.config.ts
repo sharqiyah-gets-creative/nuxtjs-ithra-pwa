@@ -41,9 +41,7 @@ export default defineNuxtConfig({
 		'@nuxtjs/i18n',
 		'@kevinmarrec/nuxt-pwa',
 		'nuxt-gtag',
-		'@emanuele-em/nuxt-swipe',
         'nuxt-rating',
-        
 	],
 
     // ui.nuxt.com

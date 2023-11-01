@@ -1,5 +1,4 @@
 <script setup lang="ts">
-	const { getCounters } = useEventsStore();
     useHead({
 		title: 'عن المبادرة',
 		meta: [
@@ -10,18 +9,6 @@
 			},
 		],
 	});
-    const roundToNearest50 = (n:any) => {
-        const num = parseInt(n, 10);
-
-        if (isNaN(num)) {
-            return n;
-        }
-
-        return Math.floor(num / 30) * 30 + "+";
-
-    }
-
-
 </script>
 <template>
 	<div class="flex flex-col h-full">

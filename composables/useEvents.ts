@@ -1,4 +1,4 @@
-import { collection, getDocs, doc,  updateDoc , query, orderBy, startAt, startAfter, limit, documentId} from 'firebase/firestore';
+import { collection, getDocs, doc,  updateDoc , query, orderBy, startAfter, limit, documentId} from 'firebase/firestore';
 
 export const getEvents = async (cursor: any = null, page_size: number = 75): Promise<IEvent[]> => {
 	const { firestore } = useFirestore();

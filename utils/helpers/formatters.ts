@@ -30,3 +30,13 @@ export const formatTime = (time: string) => {
 	};
 	return new Intl.DateTimeFormat('ar-SA', options).format(date);
 };
+
+export const roundToNearest50 = (n:any, withPlus:boolean = true) => {
+    const num = parseInt(n, 10);
+
+    if (isNaN(num)) {
+        return n;
+    }
+    return Math.floor(num / 50) * 50 + (withPlus ? "+" : "");
+    //return Math.floor(num / 30) * 30 + "+";
+}

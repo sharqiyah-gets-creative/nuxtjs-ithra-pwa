@@ -20,10 +20,10 @@
         try {
             toast.add({id:'registering', title: 'جاري التسجيل!' })
 
-            // Do something with data
             console.log('user/emailLogin.vue', 'event data', event.data);
 
             const user = await registerOrLogin(event.data.email, event.data.password);
+            
             await setUser(user);
 
             console.log('user/emailLogin.vue', 'user', user, 'error', error);
@@ -40,7 +40,6 @@
                 toast.add({ color:'red', title:'خطأ!', description: 'حدث خطأ أثناء تسجيلك!' })
             }  
         }
-
 	}
 
 </script>

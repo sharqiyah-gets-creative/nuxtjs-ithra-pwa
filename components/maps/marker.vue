@@ -1,6 +1,5 @@
 <script setup lang="ts">
-	import { InfoWindow, Marker } from 'vue3-google-map';
-
+    import { InfoWindow, Marker } from 'vue3-google-map';
 	const props = defineProps(['marker', 'responsive']);
     const isResponsive = ref(props.responsive || false);
 
@@ -29,13 +28,12 @@
 
 <template>
 	<Marker @click="openInfoWindow" :options="markerOptions">
-		<InfoWindow  :options="{}">
+		<InfoWindow :options="{}">
             <div class="p-2 w-full space-y-1 text-slate-900">
                 <span>بواسطة: <b class="font-bold block">{{ local_marker[0].entity }}</b></span>
                 <h2 class="font-bold">الفعاليات: </h2>
-                <b v-for="activity of local_marker" class="flex justify-between"><span>{{ activity.category }}</span> <NuxtLink class="text-blue-600 underline" :to="`/event/${activity.id}`">(تفاصيل)</NuxtLink></b>
+                <b v-for="(activity, index) of local_marker" :key="index" class="flex justify-between"><span>{{ activity.category }}</span> <NuxtLink class="text-blue-600 underline" :to="`/event/${activity.id}`">(تفاصيل)</NuxtLink></b>
             </div>
-			
 		</InfoWindow>
 	</Marker>
 </template>

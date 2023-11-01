@@ -1,6 +1,6 @@
 <script setup lang="ts">
-	import { GoogleMap, MarkerCluster, Marker } from 'vue3-google-map';
-	import mapStyles from '@/assets/maps/styles.json';
+    import { GoogleMap, MarkerCluster, Marker } from 'vue3-google-map';
+    import mapStyles from '@/assets/maps/styles.json';
 	import { DEFAULT_CENTER_POINT } from '~/utils/helpers';
 
 	const {
@@ -28,6 +28,8 @@
         console.log('maps/map.vue', 'boundsChanged');
     }
 
+    const gesture_handline = isResponsive.value ? 'cooperative': 'none';
+
 </script>
 <template>
 	<ClientOnly>
@@ -42,9 +44,10 @@
 			:control-size="20"
 			:street-view-control="false"
 			:map-type-control="false"
-			:gesture-handling="isResponsive ? 'cooperative': 'none'">
+			:gesture-handling="gesture_handline">
+
 			<MarkerCluster >
-				<MapsMarkerList :responsive="isResponsive" v-for="(location, index) in local_events" :marker="location" :key="index" />
+				<MapsMarker :responsive="isResponsive" v-for="(location, index) in local_events" :marker="location" :key="index" />
 			</MarkerCluster>
 		</GoogleMap>
 	</ClientOnly>
