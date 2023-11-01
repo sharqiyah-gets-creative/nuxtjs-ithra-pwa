@@ -24,20 +24,20 @@
 
 </script>
 <template>
-	<NavsSettingsItem v-if="user" @click="signUserOut" class="cursor-pointer" :title="$t('settings.logout')">
+	<NavsSideSettingsItem v-if="user" @click="signUserOut" class="cursor-pointer" :title="$t('settings.logout')">
 		<template #right-icon>
 			<UIcon name="i-heroicons-user-solid" />
 		</template>
-	</NavsSettingsItem>
+	</NavsSideSettingsItem>
 
-	<NavsSettingsItem
+	<NavsSideSettingsItem
+        v-else 
         data-drawer-target="login-drawer" 
         data-drawer-show="login-drawer" 
         data-drawer-placement="bottom"
-        aria-controls="login-drawer"
         data-drawer-backdrop="false"
+        aria-controls="login-drawer"
         
-        v-else 
         class="cursor-pointer" 
         :title="$t('settings.login')"
         description="سجل دخولك لتقوم بتقييم تجاربك"
@@ -65,5 +65,5 @@
                 </div>
             </div>
         </UiDrawer>
-	</NavsSettingsItem>
+	</NavsSideSettingsItem>
 </template>

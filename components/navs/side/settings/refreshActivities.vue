@@ -11,17 +11,16 @@
 	};
 </script>
 <template>
-	<NavsSettingsItem
+	<NavsSideSettingsItem
 		@click="refreshMyEvents"
 		class="cursor-pointer"
 		:title="$t('settings.refreshActivities')"
 		description="إضغط هنا لتجديد بيانات الفعاليات عند الحاجة">
+
+
 		<template #right-icon>
-			<UIcon name="i-heroicons-arrow-path" />
+			<UIcon name="i-heroicons-arrow-path" :class="isLoading ? 'animate-spin': ''" />
 		</template>
 
-		<template #left-icon v-if="isLoading">
-			<UIcon name="i-fa6-solid-spinner" class="animate-spin" />
-		</template>
-	</NavsSettingsItem>
+	</NavsSideSettingsItem>
 </template>

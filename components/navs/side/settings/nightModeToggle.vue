@@ -20,12 +20,12 @@
 	};
 </script>
 <template>
-	<NavsSettingsItem @click="toggleIsDark" :title="$t('settings.darkmode')" class="cursor-pointer">
+	<NavsSideSettingsItem @click="toggleIsDark" :title="$t('settings.darkmode')" class="cursor-pointer">
 		<template #left-icon>
 			<UToggle @click.stop color="my-sin" v-model="isDark" />
 		</template>
 		<template #right-icon>
 			<UIcon name="i-heroicons-moon-20-solid" />
 		</template>
-	</NavsSettingsItem>
+	</NavsSideSettingsItem>
 </template>

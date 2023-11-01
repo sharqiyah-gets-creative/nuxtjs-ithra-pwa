@@ -52,7 +52,7 @@
             <UFormGroup size="xl" label="كلمة المرور" name="password">
                 <UInput type="password" autocomplete="current-password" v-model="state.password" />
             </UFormGroup>
-            <UButton type="submit" class="w-full text-center !text-lg">إرسال</UButton>
+            <UButton type="submit" class="w-full text-center justify-center items-center !text-lg">إرسال</UButton>
         </UForm>
     </div>
 </template>
