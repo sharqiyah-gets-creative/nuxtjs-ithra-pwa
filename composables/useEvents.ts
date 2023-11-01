@@ -1,10 +1,6 @@
 import { collection, getDocs, doc,  updateDoc , query, orderBy, startAt, startAfter, limit, documentId} from 'firebase/firestore';
 
-
-const DEFAULT_PAGE_SIZE = 75;
-const SORT_BY = 'start_date';
-
-export const getEvents = async (cursor: any = null): Promise<IEvent[]> => {
+export const getEvents = async (cursor: any = null, page_size: number = 75): Promise<IEvent[]> => {
 	const { firestore } = useFirestore();
 
 	let events: IEvent[] = [];    
@@ -15,15 +11,16 @@ export const getEvents = async (cursor: any = null): Promise<IEvent[]> => {
         
         if (cursor) {
             console.log('useEvents.ts', 'cursor', cursor)
-            q = query(eventsCollectionRef, orderBy(documentId()), startAfter(cursor), limit(DEFAULT_PAGE_SIZE));
+            q = query(eventsCollectionRef, orderBy(documentId()), startAfter(cursor), limit(page_size));
         }
         else{
             console.log('useEvents.ts', 'no cursor')
-            q = query(eventsCollectionRef, orderBy(documentId()), limit(DEFAULT_PAGE_SIZE));
+            q = query(eventsCollectionRef, orderBy(documentId()), limit(page_size));
             
         }
 
         const documentSnapshots = await getDocs(q);
+
         events = documentSnapshots.docs.map((doc) => {
             return {
                 id: doc.id,
@@ -32,7 +29,8 @@ export const getEvents = async (cursor: any = null): Promise<IEvent[]> => {
         });
 
         return events;
-	} catch (error: any) {
+	} 
+    catch (error: any) {
 		error.value = error;
 		console.error('useEvents.ts', 'Error fetching events:', error);
         throw error; // Propagate the error

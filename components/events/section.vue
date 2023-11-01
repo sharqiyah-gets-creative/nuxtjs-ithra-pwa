@@ -1,9 +1,5 @@
 <script setup lang="ts">
-
-    const props = defineProps(['events', 'loading'])
-
-
-
+    defineProps(['events', 'loading'])
 </script>
 
 <template>

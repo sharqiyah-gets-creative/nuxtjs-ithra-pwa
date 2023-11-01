@@ -1,32 +1,18 @@
 <script setup lang="ts">
 	const { user } = useUserStore();
 	const isOpen = ref(false);
-
-    const avatarUi = {
-        "background": "bg-gray-100 dark:bg-white-800 brightness-75",
-        "text": "font-medium leading-none text-gray-900 dark:text-gray-800 truncate",
-        "size": {
-            "lg": "h-12 w-12 text-xl",
-        },
-    };
-
-    const slideOverUi = {
-        "background": "bg-white dark:bg-indigo-950",
-        "base": "relative rounded-e-3xl shadow flex-1 flex flex-col w-full focus:outline-none",
-
-    }
 </script>
 
 <template>
 	<button title="menu" v-if="user" class="cursor-pointer" @click="isOpen = true">
-		<UAvatar :ui="avatarUi" size="lg" :src="user.photoURL!" class="cursor-pointer" alt="Avatar" />
+		<UAvatar size="lg" :src="user.photoURL" class="cursor-pointer" alt="Avatar" />
 	</button>
 
 	<button title="menu" v-else class="text-2xl text-slate-700 dark:text-slate-100 cursor-pointer" @click="isOpen = true">
 		<UIcon name="i-heroicons-ellipsis-vertical" />
 	</button>
 
-	<USlideover :ui="slideOverUi"  :overlay="false" dir="ltr" v-model="isOpen" side="left" class="h-full">
+	<USlideover :overlay="false" dir="ltr" v-model="isOpen" side="left" class="h-full">
 		<div dir="rtl" class="flex flex-col h-full text-base">
 			
             <div class="standalone-top-padding p-3 flex items-center justify-between flex-row-reverse mb-2">

@@ -20,24 +20,27 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 			}
 		},
 
+        setEvents(events: IEvent[]) {
+            this.events = events;
+            this.eventsLastUpdated = new Date().getTime().toString();
+        },
+
 		setSearchKeywords(keywords: string) {
 			this.searchKeywords = keywords;
 		},
 
 		getEventsByDistance(position: any) {
-			const events = this.events.sort((a: IEvent, b: IEvent) => {
-				const distanceToA = getDistance(position.lat, position.lng, parseFloat(a.ll.split(',')[0]), parseFloat(a.ll.split(',')[1]));
-				const distanceToB = getDistance(position.lat, position.lng, parseFloat(b.ll.split(',')[0]), parseFloat(b.ll.split(',')[1]));
-				return distanceToA - distanceToB;
-			});
 
-			events.map((event: IEvent) => {
-				event.distance = getDistance(position.lat, position.lng, parseFloat(event.ll.split(',')[0]), parseFloat(event.ll.split(',')[1]));
-				return event;
-			});
+            let events = this.events;
+            events.forEach((event: IEvent) => {
+                event.distance = getDistance(position.lat, position.lng, parseFloat(event.ll.split(',')[0]), parseFloat(event.ll.split(',')[1]));
+            });
 
-
-
+              // Sort events based on pre-calculated distance
+            events = [...events].sort((a: IEvent, b: IEvent) => {
+                return a.distance! - b.distance!;
+            });
+            
 			return events;
 		},
 
@@ -96,20 +99,39 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
             try {
                 console.log('stores/events.ts', '📪 Updating events from firebase');
 
-                // get events from firebase
-                const events = await getEvents();
-                if(events.length === 0) {
-                    console.log('stores/events.ts', '📪 No events found in firebase');
-                }
-                else{
-                    console.log('stores/events.ts', `📪 ${events.length} events found in firebase`);
-                    this.events = events;
-                    this.eventsLastUpdated = new Date().getTime().toString();
-                }
+                await this.getEventsBatches(200);
                 
             } catch (e) {
                 console.error('stores/events.ts', '📪 Error updating Events', e);
             }
+        },
+
+        async getEventsBatches(batch_size=75){
+            console.log('stores/events.ts', '📪 Getting events from firebase in batches', 'batch_size', batch_size);
+            
+            let events = await getEvents(null, batch_size);
+
+            console.log('stores/events.ts', `📪 ${events.length} events found in firebase`);
+
+            if(events.length === 0) return;
+
+            this.setEvents(events);
+
+            let lastEvent = events[events.length - 1];
+
+            while (true) {
+                console.log('stores/events.ts', `📪 Getting more events from firebase`);
+                let newEvents = await getEvents(lastEvent.id, batch_size);
+                
+                if (newEvents.length === 0) break;
+
+                Array.prototype.push.apply(this.events, newEvents);
+
+                // Update the last cursor
+                lastEvent = newEvents[newEvents.length - 1];
+                console.log('stores/events.ts', `📪 ${newEvents.length} events found in firebase`);
+            }
+            
         },
 
 		async boot() {
@@ -118,40 +140,14 @@ export const useEventsStore = defineStore('EVENTS_STORE', {
 
                 const A_DAY = 86400000;
                 const isEventsLastUpdatedaDayAgo = this.eventsLastUpdated !== null && new Date().getTime() - parseInt(this.eventsLastUpdated) > A_DAY;
+
                 const areThereEvents = this.events.length > 0;
+
 				// if events are not in store or old, get them from firebase
 				if (!areThereEvents || isEventsLastUpdatedaDayAgo) {
 					console.log('stores/events.ts', '📪 Store empty or old, getting events from firebase');
 
-					// get events from firebase
-					let events = await getEvents();
-
-                    if(events.length === 0) {
-                        console.log('stores/events.ts', '📪 No events found in firebase');
-                        return;
-                    }
-
-                    console.log('stores/events.ts', `📪 ${events.length} events found in firebase`);
-                    this.events = events;
-                    console.log("Events from Firebase: ", this.events);
-
-                    this.eventsLastUpdated = new Date().getTime().toString();
-
-                    // Get the last event's cursor for next query
-			        let lastEvent = events[events.length - 1];
-
-                    while (true) {
-                        console.log('stores/events.ts', `📪 Getting more events from firebase`);
-                        let newEvents = await getEvents(lastEvent.id);
-                        if (newEvents.length === 0) {
-                            break; // Stop if there are no more events
-                        }
-                        this.events.push(...newEvents); // Add new events to your store
-        
-                        // Update the last cursor
-                        lastEvent = newEvents[newEvents.length - 1];
-                        console.log('stores/events.ts', `📪 ${newEvents.length} events found in firebase`);
-                    }
+                    await this.getEventsBatches();
         
 				} 
                 else {

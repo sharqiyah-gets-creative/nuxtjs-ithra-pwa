@@ -9,7 +9,6 @@
 <template>
 	<UAlert
 		icon="i-heroicons-bell"
-		:ui="{ rounded: 'rounded-none' }"
 		:close-button="{ icon: 'i-heroicons-x-mark-20-solid', padded: false }"
 		color="primary"
 		title="لتجربة أفضل، إضغط زر المشاركة ومن ثم إضافة للرئيسية لتركيب التطبيق!"

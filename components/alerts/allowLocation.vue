@@ -23,7 +23,6 @@
 <template>
 	<UAlert
 		icon="i-heroicons-map-pin"
-		:ui="{ rounded: 'rounded-none' }"
 		:close-button="{ icon: 'i-heroicons-x-mark-20-solid', padded: false }"
 		color="primary"
 		title="لتجربة أفضل، قم بمشاركة موقعك!"
