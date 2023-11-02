@@ -21,9 +21,11 @@
 
 
 	const props = defineProps(['events', 'specialClass', 'responsive']);
+    
     const isResponsive = ref(props.responsive || false);
 
 	const local_events: IEvent[] = props.events;
+    
     const boundsChanged = () => {
         console.log('maps/map.vue', 'boundsChanged');
     }

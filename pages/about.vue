@@ -75,15 +75,12 @@
                     </div>
 
                     <div class="col-span-2 p-6 text-lg text-center">
-                        <NuxtLink to="https://www.6degrees.com.sa/" target="_blank">
-                            {{ $t('done_by') }}
-                        </NuxtLink>
+                        <six-degrees-link />
                     </div>
 				</div>
 			</UContainer>
 		</section>
 
-		<!-- Bottom Navigation-->
 		<NavsBottom />
 	</div>
 </template>

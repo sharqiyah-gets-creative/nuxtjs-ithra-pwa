@@ -29,7 +29,7 @@ export default defineNuxtConfig({
 	app: {
         baseURL: '/',
 		head: {
-			viewport: 'initial-scale=1,user-scalable=no, viewport-fit=cover, width=device-width',
+			viewport: 'initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover, width=device-width',
 		},
 		pageTransition: { name: 'page', mode: 'out-in' },
 	},
@@ -81,9 +81,8 @@ export default defineNuxtConfig({
 			name: 'الشرقية تبدع',
 			author: process.env.npm_package_author_name!,
 			title: true,
-			description: process.env.npm_package_description! || 'Ithra - Sharqiya Gets Creative 2023',
+			description: process.env.npm_package_description! || 'روزنامة فعاليات مبادرة الشرقية تبدع 2023',
 			favicon: true,
-
 			mobileApp: true,
 			mobileAppIOS: true,
 			appleStatusBarStyle: 'black-translucent',
@@ -102,10 +101,12 @@ export default defineNuxtConfig({
 		manifest: {
 			name: process.env.npm_package_name! || 'الشرقية تبدع',
 			short_name: 'الشرقية تبدع',
-			description: process.env.npm_package_description! || 'Ithra - Sharqiya Gets Creative 2023',
+			description: process.env.npm_package_description! || 'روزنامة فعاليات مبادرة الشرقية تبدع 2023',
 			lang: 'ar',
+            id: '/?standalone=true',
 			start_url: `/?standalone=true`,
 			background_color: '#2A1B51',
+            orientation: 'portrait',
 			theme_color: '#2A1B51',
 			display: 'standalone',
 		},
