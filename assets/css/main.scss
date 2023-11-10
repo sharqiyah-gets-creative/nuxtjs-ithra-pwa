@@ -35,3 +35,9 @@
         }
     }
 }
+
+.myrating{
+    &::before{
+        position:relative !important;
+    }
+}

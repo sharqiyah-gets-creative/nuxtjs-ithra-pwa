@@ -1,6 +1,13 @@
 <script lang="ts" setup>
 	// Importing things
     import { GoogleMap, MarkerCluster, Marker } from 'vue3-google-map';
+    import { initFlowbite } from 'flowbite'
+
+    onMounted(() => {
+        initFlowbite();
+    });
+
+    const { loginWithAuthProvider, signOut } = useAuth();
 
 	import mapStyles from '@/assets/maps/styles.json';
 	import { formatDate, formatTime } from '@/utils/helpers';
@@ -180,13 +187,42 @@
 					<div class="p-3 bg-white dark:bg-opacity-20 rounded">
 						<h4 class="mb-2">قيم المبادرة إذا قمت بتجربتها</h4>
 
-                        <UAlert v-if="!user" color="orange" variant="solid" @click="showLogin = true" class="mb-2"  icon="i-heroicons-command-line" title="" description="قم بتسجيل الدخول لتقييم المبادرة" />
+                        <UAlert v-if="!user" color="orange" variant="solid" @click="showLogin = true" 
+                        class="mb-2 cursor-pointer" 
+                        data-drawer-target="login-drawer" 
+                        data-drawer-show="login-drawer" 
+                        data-drawer-placement="bottom"
+                        data-drawer-backdrop="false"
+                        aria-controls="login-drawer"
+                        icon="i-heroicons-command-line" title="" description="قم بتسجيل الدخول لتقييم المبادرة" />
 
+                        <UiDrawer v-if="!user" @click.stop :title="$t('settings.login')" id="login-drawer" >
+                            <div class="p-4 space-y-2 max-w-md mx-auto">
+                                <div class="email_auth">
+                                    <UserLoginWithEmail  />
+                                </div>
+
+                                <div class="google_auth">
+                                    <UButton size="xl" block @click="loginWithAuthProvider('google')" variant="outline" label="سجل دخولك بقوقل" icon="i-mdi-google" />
+                                </div>
+
+                                <div class="twitter_auth">
+                                    <UButton size="xl" block @click="loginWithAuthProvider('twitter')" variant="outline" label="سجل دخولك بتويتر" icon="i-mdi-twitter" />
+                                </div>
+
+                                <div class="facebook_auth hidden">
+                                    <UButton size="xl" block @click="loginWithAuthProvider('facebook')" variant="outline" label="سجل دخولك بفيسبوك" icon="i-mdi-facebook" />
+                                </div>
+                            </div>
+                        </UiDrawer>
+                        
                         <UAlert v-if="current_user_review" color="teal" variant="solid" class="mb-2"  icon="i-heroicons-command-line" title="" description="لقد قمت بتقييم الفعالية من قبل، إذا كنت تريد التعديل، إضغط قيم مرة أخرى" />
 
-						<div class="text-center mb-2 py-2">
+						<div class="flex items-start mb-2 py-2 relative">
                             <NuxtRating v-if="!user" :readOnly="true" ratingSize="25px"  activeColor="#333333" :ratingValue="0" />
-                            <NuxtRating v-else ratingSize="29px" @ratingSelected="onRateChange" activeColor="#ffd21e" :ratingValue="event_rating" />
+                            <NuxtRating v-else dir="ltr" 
+                            class="myrating" 
+                            rating-size="29px" :read-only="false" @rating-selected="onRateChange" active-color="#ffd21e" :rating-value="event_rating" />
 						</div>
 
 						<div class="mb-2">
